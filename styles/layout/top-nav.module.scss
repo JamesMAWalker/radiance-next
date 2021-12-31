@@ -1,12 +1,46 @@
+@import '../mixins.scss';
+
 .topNav {
-  height: 10vh;
-  width: 100%;
-  display: flex;
+  height: 15vh;
+  width: calc(100% - (var(--vp-sm) * 2));
+  padding: 0 var(--vp-sm);
+  display: grid;
+  gap: var(--vp-sm);
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(4, 1fr) 7vw repeat(4, 1fr);
   align-items: center;
   justify-content: space-evenly;
   text-transform: uppercase;
 }
 
 .navLink {
+  position: relative;
+  display: flex;
+  font-family: var(--font-title);
+  transition: var(--transition-3-smooth);
+  justify-content: center;
+  &::after {
+    @include pseudoLine(35%, var(--grey-40));
+    transform: translate(-50%, -50%) scaleX(0);
+  }
+  &:hover {
+    color: var(--grey-40);
+    &::after {
+      transform: translate(-50%, -50%) scaleX(1);
+    }
+  }
+}
 
+.logoWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  path {
+    transition: var(--transition-3-smooth);
+  }
+  &:hover {
+    path {
+      fill: var(--text-color);
+    }
+  }
 }

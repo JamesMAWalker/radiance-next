@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { TopNav } from '../components/top-nav'
+import { Hero } from '../components/home/01-hero'
 
 export default function Home() {
   return (
@@ -13,9 +13,8 @@ export default function Home() {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <TopNav />
       <main>
-        Content
+        <Hero />
       </main>
       <footer>FOOT</footer>
     </div>

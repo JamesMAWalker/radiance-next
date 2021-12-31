@@ -5,29 +5,16 @@ export default function Document() {
     <Html>
       <Head>
         <link
-          rel='preload'
-          href='/fonts/MPLUSCodeLatin-Bold.ttf'
-          as='font'
-          crossOrigin='true'
-        />
-        <link
-          rel='preload'
-          href='/fonts/MPLUSCodeLatin-SemiBold.ttf'
-          as='font'
-          crossOrigin='true'
-        />
-        <link rel='icon' href='/favicon.ico' />
-        <link
           rel='preconnect'
           href='https://fonts.googleapis.com'
         />
         <link
           rel='preconnect'
           href='https://fonts.gstatic.com'
-          crossOrigin='true'
+          crossorigin
         />
         <link
-          href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap'
+          href='https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap'
           rel='stylesheet'
         ></link>
       </Head>
