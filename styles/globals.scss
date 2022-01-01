@@ -57,6 +57,7 @@
   --space-xs: 2px;
   --space-sm: 4px;
   --space-md: 8px;
+  --space-ml: 12px;
   --space-lg: 16px;
   --space-xl: 20px;
   --space-2xl: 24px;
@@ -67,7 +68,7 @@
   /* viewport-spacing */
   --vp-sm: 2.5vmin;
   --vp-ms: 3.5vmin;
-  --vp-md: 5vmin; 
+  --vp-md: 5vmin;
   --vp-ml: 7vmin;
   --vp-lg: 9vmin;
   --vp-xl: 11vmin;
@@ -81,10 +82,10 @@
   --loose: 2;
 
   /* letter-spacing */
-  --loose: 0.25em;
-  --even: 0.15em;
-  --open: 0.08em;
-  --tracked: 0.02em;
+  --push-xl: 0.25em;
+  --push-lg: 0.15em;
+  --push-md: 0.08em;
+  --push-sm: 0.02em;
   --tight: -0.015em;
 
   /* font-weight */
@@ -112,6 +113,21 @@
   --text-10xl: 144px;
   --text-11xl: 156px;
 
+  
+    /* bezier curves */
+    --smooth: cubic-bezier(0.115, 0.905, 0.32, 1);
+    --punchitchewy: cubic-bezier(1, 0, 0.115, 0.995);
+  
+    /* transitions */
+    --transition-1: all 1s var(--punchitchewy);
+    --transition-2: all 0.6s var(--punchitchewy);
+    --transition-3: all 0.3s var(--punchitchewy);
+    --transition-4: all 0.1s var(--punchitchewy);
+    --transition-1-smooth: all 1.25s var(--smooth);
+    --transition-2-smooth: all 0.6s var(--smooth);
+    --transition-3-smooth: all 0.3s var(--smooth);
+    --transition-4-smooth: all 0.1s var(--smooth);
+
   // * role-based tokens * //
 
   /* colors */
@@ -120,20 +136,16 @@
   --primary-muter: var(--ocean-blue);
   --background: var(--white);
   --text-color: var(--black);
+  --text-accent: var(--grey-40);
 
-  /* bezier curves */
-  --smooth: cubic-bezier(0.115, 0.905, 0.32, 1);
-  --punchitchewy: cubic-bezier(1, 0, 0.115, 0.995);
+  /* text size */
+  --text-hero: var(--text-10xl);
+  --text-display: var(--text-7xl);
+  --text-header: var(--text-4xl);
+  --text-prose: var(--text-2xl);
 
   /* transitions */
-  --transition-1: all 1s var(--punchitchewy);
-  --transition-2: all 0.6s var(--punchitchewy);
-  --transition-3: all 0.3s var(--punchitchewy);
-  --transition-4: all 0.1s var(--punchitchewy);
-  --transition-1-smooth: all 1.25s var(--smooth);
-  --transition-2-smooth: all 0.6s var(--smooth);
-  --transition-3-smooth: all 0.3s var(--smooth);
-  --transition-4-smooth: all 0.1s var(--smooth);
+  --transition-primary: var(--transition-1-smooth);
 }
 
 html,
@@ -144,7 +156,7 @@ body {
   font-family: var(--font-body);
   font-family: 'Urbanist', sans-serif;
   font-family: 'Noto Sans JP', sans-serif;
-  letter-spacing: var(--open);
+  letter-spacing: var(--push-sm);
   margin: 0;
   padding: 0;
   display: flex;
@@ -181,6 +193,17 @@ p {
   color: inherit;
 }
 
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+button {
+  cursor: pointer;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -193,7 +216,7 @@ p {
   font-family: var(--font-title);
   font-size: var(--text-3xl);
   text-transform: uppercase;
-  color: var(--grey-40);
+  color: var(--text-accent);
   &:hover {
     color: var(--text-color);
     &::after {
@@ -202,12 +225,7 @@ p {
     }
   }
   &::after {
-    @include pseudoLine(25%, var(--grey-40));
+    @include pseudoLine(25%, var(--text-accent));
     will-change: width;
   }
-}
-
-.blurb-text {
-  font-size: var(--text-lg);
-  font-family: var(--font-body);
 }

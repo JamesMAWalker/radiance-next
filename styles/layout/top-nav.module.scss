@@ -17,7 +17,7 @@
   position: relative;
   display: flex;
   font-family: var(--font-title);
-  transition: var(--transition-3-smooth);
+  transition: var(--transition-primary);
   justify-content: center;
   &::after {
     @include pseudoLine(35%, var(--grey-40));
@@ -36,7 +36,7 @@
   align-items: center;
   justify-content: center;
   path {
-    transition: var(--transition-3-smooth);
+    transition: var(--transition-primary);
   }
   &:hover {
     path {

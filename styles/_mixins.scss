@@ -3,6 +3,7 @@
 @mixin homeSection {
   position: relative;
   width: 100%;
+  margin-bottom: var(--vp-3xl);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +23,7 @@
   width: $width;
   background-color: $color;
   transform-origin: center;
-  transition: var(--transition-3-smooth);
+  transition: var(--transition-primary);
 }
 
 
@@ -39,8 +40,8 @@
 
 @mixin blurbText {
   font-family: var(--font-body);
-  font-size: var(--text-2xl);
-  font-weight: var(--semibold);
+  font-size: var(--text-prose);
+  font-weight: var(--med);
   text-transform: uppercase;
   letter-spacing: var(--open);
   text-align: center;
