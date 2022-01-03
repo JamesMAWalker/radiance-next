@@ -1,0 +1,84 @@
+@import '../mixins.scss';
+
+.gallerySection {
+  @include homeSection;
+  position: relative;
+  height: 90vh;
+  justify-content: flex-start;
+}
+
+.title {
+  @include titleText(var(--text-header));
+  margin-bottom: var(--vp-sm);
+}
+
+.description {
+  @include blurbText;
+  margin-bottom: var(--vp-lg);
+}
+
+.slideBase {
+  position: relative;
+  height: 60vh;
+  width: 80vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-x: visible;
+}
+
+.slideContainer {
+  position: absolute;
+  top: 0;
+  left: -10vw;
+  padding: 0 10vw;
+  width: 100vw !important;
+  height: 100%;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.gallerySlider {
+  width: auto;
+  height: 100%;
+  display: grid;
+  gap: var(--space-3xl);
+  justify-content: flex-start;
+  align-items: flex-start;
+  grid-template-rows: 100%;
+}
+
+.galleryImg {
+  height: 100%;
+  width: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.galleryCursor {
+  pointer-events: none;
+  z-index: var(--level-top);
+  mix-blend-mode: difference;
+  position: fixed;
+  top: 10vh;
+  left: 10vh;
+  opacity: 0;
+  transition: var(--transition-primary);
+  svg {
+    animation: 20s infinite rotate;
+    height: 20vh;
+    width: 20vh;
+  }
+  path {
+    fill: var(--white);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { IconMark } from './iconmark'
+import { IconMark } from './svg/iconmark'
 
 import {
   topNav,

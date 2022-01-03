@@ -128,6 +128,7 @@
     --transition-3-smooth: all 0.3s var(--smooth);
     --transition-4-smooth: all 0.1s var(--smooth);
 
+
   // * role-based tokens * //
 
   /* colors */
@@ -146,6 +147,7 @@
 
   /* transitions */
   --transition-primary: var(--transition-1-smooth);
+  --transition-faster: var(--transition-3-smooth);
 }
 
 html,
@@ -154,8 +156,6 @@ body {
   max-width: 100vw !important;
   background-color: var(--background) !important;
   font-family: var(--font-body);
-  font-family: 'Urbanist', sans-serif;
-  font-family: 'Noto Sans JP', sans-serif;
   letter-spacing: var(--push-sm);
   margin: 0;
   padding: 0;

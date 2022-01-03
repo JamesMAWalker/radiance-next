@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { AnimateSharedLayout, motion } from 'framer-motion'
+import {
+  AnimateSharedLayout,
+  AnimatePresence,
+  motion,
+} from 'framer-motion'
+import { v4 as uuid } from 'uuid'
 
 import {
   serviceSection,
@@ -23,16 +28,22 @@ const BASE_IMG_URL =
 const servicesList = [
   {
     title: 'Wedding',
+    photoUrls: [
+      'wedding-left_hmlvo6',
+      'wedding-right_yntqaz',
+    ],
     blurb:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et metus arcu.',
   },
   {
     title: 'Event',
+    photoUrls: ['event-left_bpofcn', 'event-right_izf8sw'],
     blurb:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et metus arcu.',
   },
   {
     title: 'Studio',
+    photoUrls: ['HS-right_dbwbqe', 'HS-left_oilynm'],
     blurb:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et metus arcu.',
   },
@@ -49,18 +60,42 @@ const infoAnimation = {
   },
 }
 
+const imgAnimation = {
+  visible: {
+    opacity: 1,
+  },
+  hidden: {
+    opacity: 0,
+  },
+}
+
+/*
+  Figure out a good way of fade animating between the images.
+*/
+
 export const Services = () => {
   const [activeOption, setActiveOption] = useState(0)
 
   return (
     <section className={serviceSection}>
       <div className={`${serviceImg} ${left}`}>
-        <img
-          src={`${BASE_IMG_URL}wedding-left_hmlvo6.png`}
-          alt='bride with crown'
-        />
+          {servicesList.map((srvc, idx) => {
+            if (idx === activeOption) {
+              return (
+                <motion.img
+                  key={uuid()}
+                  variants={imgAnimation}
+                  initial='hidden'
+                  animate='visible'
+                  exit='hidden'
+                  src={`${BASE_IMG_URL}${srvc.photoUrls[0]}.png`}
+                  alt={srvc.title}
+                />
+              )
+            }
+          })}
       </div>
-      <AnimateSharedLayout>
+      <AnimatePresence>
         <ul className={servicesCol}>
           {servicesList.map((srvc, idx) => {
             return (
@@ -69,7 +104,11 @@ export const Services = () => {
                 className={option}
                 onClick={() => setActiveOption(idx)}
               >
-                <motion.h4 className={title} layout transition={{ duration: .2 }}>
+                <motion.h4
+                  className={title}
+                  layout
+                  transition={{ duration: 0.2 }}
+                >
                   <span>+</span>
                   {srvc.title}
                 </motion.h4>
@@ -109,12 +148,23 @@ export const Services = () => {
             )
           })}
         </ul>
-      </AnimateSharedLayout>
+      </AnimatePresence>
       <div className={`${serviceImg} ${right}`}>
-        <img
-          src={`${BASE_IMG_URL}wedding-right_yntqaz.png`}
-          alt='tall wedding cake'
-        />
+          {servicesList.map((srvc, idx) => {
+            if (idx === activeOption) {
+              return (
+                <motion.img
+                  key={uuid()}
+                  variants={imgAnimation}
+                  initial='hidden'
+                  animate='visible'
+                  exit='hidden'
+                  src={`${BASE_IMG_URL}${srvc.photoUrls[1]}.png`}
+                  alt={srvc.title}
+                />
+              )
+            }
+          })}
       </div>
     </section>
   )
