@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { v4 as uuid } from 'uuid'
 
 import {
   gallerySection,
@@ -10,9 +11,6 @@ import {
   galleryImg,
   galleryCursor,
   point,
-  cursorBound,
-  cbLeft,
-  cbRight,
 } from '../../styles/home/03-gallery.module.scss'
 import { CircleText } from '../svg/circle-text'
 
@@ -34,17 +32,12 @@ const galleryImgUrls = [
   'Photo_Oct_16_6_37_08_AM_el3mji.jpg',
 ]
 
-/*
-  TODO: 
-  Remove cursorBound blocks and trigger cursor element opacity with 
-  pageX bounds.
-*/
-
 export const Gallery = () => {
-  const sliderRef = useRef(null)
-
+  
   // custom cursor logic
+  const sliderRef = useRef(null)
   const cursorRef = useRef(null)
+
   const [cursorVisible, setCursorVisible] = useState(false)
 
   useEffect(() => {
@@ -61,7 +54,7 @@ export const Gallery = () => {
 
     const onMouse = (e) => {
       const { clientX, clientY } = e
-      const mouseX = clientX - cursorRef.current.clientWidth
+      const mouseX = clientX - cursorRef?.current?.clientWidth
       const mouseY =
         clientY - cursorRef.current.clientHeight
       cursorRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
@@ -100,6 +93,7 @@ export const Gallery = () => {
             {galleryImgUrls.map((url) => {
               return (
                 <img
+                  key={uuid()}
                   className={galleryImg}
                   src={`${BASE_URL}/${url}`}
                   alt='radiance photography selected work'

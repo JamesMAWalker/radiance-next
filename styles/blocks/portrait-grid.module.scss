@@ -1,0 +1,38 @@
+.gridContainer {
+  width: calc(100% - 20vw);
+  margin: 0 10vw;
+  height: auto;
+  display: grid;
+  gap: var(--grid-space);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.imgCell {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--studio-color);
+  background-color: var(--grey-10);
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.loadMoreBlock {
+  grid-column: 1 / -1;
+  height: 50%;
+  width: 100%;
+  border: var(--stnd-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    transition: var(--transition-primary);
+    &::after {
+      display: none;
+    }
+  }
+}

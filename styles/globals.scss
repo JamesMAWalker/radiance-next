@@ -30,6 +30,9 @@
   --blue: hsl(197, 100%, 50%);
   --french-blue: hsl(197, 35%, 43%);
   --ocean-blue: hsl(198, 27%, 29%);
+  --rose-clay: #f2d0b6;
+  --red-dress: #c90707;
+  --the-good-silver: hsl(0, 0%, 63%);
 
   /* z-indeces */
   --base-two: -200;
@@ -107,37 +110,41 @@
   --text-4xl: 48px;
   --text-5xl: 56px;
   --text-6xl: 64px;
-  --text-7xl: 85px;
+  --text-7xl: 78px;
   --text-8xl: 96px;
   --text-9xl: 118px;
   --text-10xl: 144px;
   --text-11xl: 156px;
 
-  
-    /* bezier curves */
-    --smooth: cubic-bezier(0.115, 0.905, 0.32, 1);
-    --punchitchewy: cubic-bezier(1, 0, 0.115, 0.995);
-  
-    /* transitions */
-    --transition-1: all 1s var(--punchitchewy);
-    --transition-2: all 0.6s var(--punchitchewy);
-    --transition-3: all 0.3s var(--punchitchewy);
-    --transition-4: all 0.1s var(--punchitchewy);
-    --transition-1-smooth: all 1.25s var(--smooth);
-    --transition-2-smooth: all 0.6s var(--smooth);
-    --transition-3-smooth: all 0.3s var(--smooth);
-    --transition-4-smooth: all 0.1s var(--smooth);
+  /* bezier curves */
+  --smooth: cubic-bezier(0.115, 0.905, 0.32, 1);
+  --punchitchewy: cubic-bezier(1, 0, 0.115, 0.995);
 
+  /* transitions */
+  --transition-1: all 1s var(--punchitchewy);
+  --transition-2: all 0.6s var(--punchitchewy);
+  --transition-3: all 0.3s var(--punchitchewy);
+  --transition-4: all 0.1s var(--punchitchewy);
+  --transition-1-smooth: all 1.25s var(--smooth);
+  --transition-2-smooth: all 0.6s var(--smooth);
+  --transition-3-smooth: all 0.3s var(--smooth);
+  --transition-4-smooth: all 0.1s var(--smooth);
 
   // * role-based tokens * //
 
+  /* borders */
+  --stnd-border: 1px solid var(--text-color);
+
   /* colors */
-  --primary: var(--blue);
-  --primary-mute: var(--french-blue);
-  --primary-muter: var(--ocean-blue);
   --background: var(--white);
+  --home-color: var(--the-good-silver);
+  --wedding-color: var(--rose-clay);
+  --studio-color: var(--red-dress);
+
   --text-color: var(--black);
-  --text-accent: var(--grey-40);
+  --text-accent: var(--the-good-silver);
+  --primary: var(--text-color);
+  --primary-accent: var(--the-good-silver);
 
   /* text size */
   --text-hero: var(--text-10xl);
@@ -148,6 +155,9 @@
   /* transitions */
   --transition-primary: var(--transition-1-smooth);
   --transition-faster: var(--transition-3-smooth);
+
+  /* spacing */
+  --grid-space: var(--vp-xl);
 }
 
 html,

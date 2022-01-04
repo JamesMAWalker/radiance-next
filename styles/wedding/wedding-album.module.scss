@@ -1,0 +1,59 @@
+@import '../mixins';
+
+.albumPage {
+  @include homeSection;
+}
+
+.masonryGallery {
+  width: 100%;
+  display: grid;
+  gap: var(--grid-space);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(7, 65vh);
+}
+
+.galleryImg {
+  &.quart {
+    grid-column: span 1;
+  }
+  &.half {
+    grid-column: 1 / -1;
+  }
+  &.full {
+    grid-column: 1 / -1;
+    grid-row: span 2;
+  }
+}
+
+.albumNavCard {
+  border: var(--stnd-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+  }
+  .photoWrap {
+    border: var(--stnd-border);
+    overflow: hidden;
+    img {
+      height: 100%;
+      width: 100%;
+      transition: var(--transition-primary);
+    }
+  }
+
+  .cardTitle {
+    @include titleText(var(--text-3xl));
+    margin-bottom: 0;
+  }
+  .prev {
+
+  }
+  .next {
+
+  }
+}

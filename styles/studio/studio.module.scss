@@ -1,0 +1,32 @@
+@import '../mixins';
+
+.studioPage {
+  @include homeSection;
+  main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.photoSelectors {
+  position: relative;
+  width: 80%;
+  height: var(--vp-xl);
+  display: grid;
+  gap: 5%;
+  grid-template-columns: repeat(3, 30%);
+  margin-bottom: var(--vp-lg);
+  &::after {
+    @include pseudoLine(5vw, var(--grey-40));
+    top: var(--vp-2xl);
+    left: 15%;
+  }
+  button {
+    &::after {
+      display: none;
+    }
+  }
+}

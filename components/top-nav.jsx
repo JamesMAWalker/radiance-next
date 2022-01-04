@@ -31,7 +31,7 @@ export const TopNav = () => {
           <IconMark />
         </a>
       </Link>
-      <Link href='#'>
+      <Link href='/wedding'>
         <a className={`${navLink}`}>Wedding</a>
       </Link>
       <Link href='#'>
@@ -40,8 +40,8 @@ export const TopNav = () => {
       <Link href='#'>
         <a className={`${navLink}`}>Mitzvah</a>
       </Link>
-      <Link href='#'>
-        <a className={`${navLink}`}>Headshots</a>
+      <Link href='/studio'>
+        <a className={`${navLink}`}>Studio</a>
       </Link>
     </nav>
   )

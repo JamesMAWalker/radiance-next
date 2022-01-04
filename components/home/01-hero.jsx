@@ -37,13 +37,13 @@ export const Hero = () => {
   return (
     <section className={hero}>
       <HeroImg
-        imageUrlFrag={'Photo_Jan_21_4_07_44_PM_gtn6iz.jpg'}
+        imageUrlFrag={'hero_yegtig'}
         altText={'radiant wedding couple'}
       />
       <div className={logoWrap}>
         <WordMark />
       </div>
-      <Blurb 
+      <Blurb
         blurbTitle={heroBlurb.title}
         blurbText={heroBlurb.text}
         blurbBtn={heroBlurb.button}

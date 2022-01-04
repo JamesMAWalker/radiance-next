@@ -1,0 +1,35 @@
+@import '../mixins';
+
+.album {
+  min-height: 85vh;
+  width: 80%;
+  border: var(--stnd-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--vp-2xl);
+  button {
+    margin-top: 0;
+    margin-bottom: var(--vp-ml);
+  }
+}
+
+.title {
+  @include titleText(var(--text-5xl));
+  // margin: var(--vp-md) 0;
+  margin-bottom: var(--vp-ms);
+}
+
+.photoPair {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-rows: 1fr;
+  grid-template-columns: 50vh 50vh;
+  margin-bottom: var(--vp-xl);
+}
+
+.photo {
+  height: 100%;
+  width: 100%;
+}
