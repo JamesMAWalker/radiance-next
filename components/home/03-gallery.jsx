@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 import { v4 as uuid } from 'uuid'
 
 import {
@@ -33,10 +34,11 @@ const galleryImgUrls = [
 ]
 
 export const Gallery = () => {
-  
   // custom cursor logic
   const sliderRef = useRef(null)
   const cursorRef = useRef(null)
+
+  const { ref: galleryRef, inView: galleryInView } = useInView()
 
   const [cursorVisible, setCursorVisible] = useState(false)
 
@@ -49,15 +51,16 @@ export const Gallery = () => {
       const showCursor =
         (positionQuotient < 0.15 && showCursorAtLeft) ||
         positionQuotient > 0.85
-      return showCursor
+      return showCursor && galleryInView
     }
 
     const onMouse = (e) => {
       const { clientX, clientY } = e
-      const mouseX = clientX - cursorRef?.current?.clientWidth
+      const mouseX =
+        clientX - cursorRef?.current?.clientWidth
       const mouseY =
-        clientY - cursorRef.current.clientHeight
-      cursorRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
+        clientY - cursorRef?.current?.clientHeight
+      cursorRef?.current?.style?.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
       setCursorVisible(detectCursorAtPageMargin(clientX))
     }
 
@@ -65,10 +68,10 @@ export const Gallery = () => {
     return () => {
       document.removeEventListener('mousemove', onMouse)
     }
-  }, [cursorRef])
+  }, [cursorRef, galleryInView])
 
   return (
-    <section className={gallerySection}>
+    <section className={gallerySection} ref={galleryRef}>
       <h2 className={title}>Gallery</h2>
       <p className={description}>
         Lorem ipsum dolor sit amet, consectetur adipiscing

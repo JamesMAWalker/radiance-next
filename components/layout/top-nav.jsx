@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { IconMark } from './svg/iconmark'
+import { IconMark } from '../svg/iconmark'
 
 import {
   topNav,
@@ -9,7 +9,7 @@ import {
   right,
   navLink,
   logoWrap,
-} from '../styles/layout/top-nav.module.scss'
+} from '../../styles/layout/top-nav.module.scss'
 
 export const TopNav = () => {
   return (

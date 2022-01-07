@@ -1,0 +1,65 @@
+@import '../mixins';
+
+.footer {
+  height: 65vh;
+  width: 100vw;
+  margin-top: var(--vp-2xl);
+  background-color: var(--grey-05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: var(--font-title);
+  color: var(--grey-50);
+}
+
+.logoWrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  path {
+    fill: currentColor;
+  }
+}
+
+.linksContainer {
+  width: 50vw;
+  padding-top: var(--vp-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  .footerLink {
+    position: relative;
+    text-transform: uppercase;
+    transition: var(--transition-primary);
+    &:hover {
+      color: var(--text-color);
+      &::after {
+        opacity: 1;
+        width: 45%;
+      }
+    }
+    &::after {
+      @include pseudoLine(0%, var(--text-color));
+      opacity: 0;
+    }
+  }
+}
+
+.businessInfo {
+  width: 65vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(8vh);
+  .email {
+
+  }
+  .address {
+
+  }
+  .phone {
+
+  }
+}

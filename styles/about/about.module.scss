@@ -1,0 +1,29 @@
+@import '../mixins';
+
+.aboutPage {
+  @include homeSection;
+  main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.aboutGrid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &::after {
+    position: absolute;
+    content: '';
+    top: -1%;
+    left: 50%;
+    width: 1px;
+    height: 99%;
+    background-color: var(--text-color);
+  }
+}

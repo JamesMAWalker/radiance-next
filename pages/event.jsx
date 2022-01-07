@@ -3,19 +3,18 @@ import Head from 'next/head'
 import { v4 as uuid } from 'uuid'
 import { AnimatePresence } from 'framer-motion'
 
+import { HeroImg } from '../components/blocks/hero-img'
 import { Blurb } from '../components/blocks/blurb'
-import { BannerBlock } from '../components/blocks/banner-block'
 import { PortraitGrid } from '../components/blocks/portrait-grid'
 
 import {
-  studioPage,
+  eventPage,
   photoSelectors,
-  center,
   right,
-} from '../styles/studio/studio.module.scss'
+} from '../styles/event/event.module.scss'
 
-const studioBlurb = {
-  title: `Studio Photography`,
+const eventBlurb = {
+  title: `Event Photography`,
   text: (
     <>
       Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -30,18 +29,14 @@ const studioBlurb = {
       elit. Nullam et metus arcu.
     </>
   ),
-  button: 'Book Your Shoot',
+  button: 'Book Your Event',
 }
 
-const studioImages = {
-  hero: 'HS-right_dbwbqe.png',
+const eventImages = {
+  hero: 'engagement_i0ov0f',
   categories: [
     {
-      title: (
-        <>
-          Acting & <br /> Modeling
-        </>
-      ),
+      title: <>Mitzvah</>,
       photos: [
         'studio-photo005_bkfunf.png',
         'studio-photo010_jkryvh.png',
@@ -54,11 +49,7 @@ const studioImages = {
       ],
     },
     {
-      title: (
-        <>
-          Business & <br /> Corporate
-        </>
-      ),
+      title: <>Engagement</>,
       photos: [
         'studio-photo004_a7r6oa.png',
         'studio-photo010_jkryvh.png',
@@ -68,29 +59,12 @@ const studioImages = {
         'studio-photo005_bkfunf.png',
         'studio-photo002_f44eib.png',
         'studio-photo009_oauenb.png',
-      ],
-    },
-    {
-      title: (
-        <>
-          Personal & <br /> Family
-        </>
-      ),
-      photos: [
-        'studio-photo002_f44eib.png',
-        'studio-photo004_a7r6oa.png',
-        'studio-photo005_bkfunf.png',
-        'studio-photo010_jkryvh.png',
-        'studio-photo009_oauenb.png',
-        'studio-photo007_aody40.png',
-        'studio-photo003_vqeer0.png',
-        'studio-photo003_vjsse5.png',
       ],
     },
   ],
 }
 
-const Studio = () => {
+const Event = () => {
   const [photoSet, setPhotoSet] = useState(0)
 
   const handleLoadMorePhotos = () => {
@@ -98,15 +72,13 @@ const Studio = () => {
   }
 
   const addLinePosClass = (photoSetIdx) => {
-    if (photoSetIdx === 0) return ''
-
-    return photoSetIdx === 1 ? center : right
+    return photoSetIdx === 1 ? right : ''
   }
 
   return (
-    <div className={studioPage}>
+    <div className={eventPage}>
       <Head>
-        <title>Radiance | Studio Photography</title>
+        <title>Radiance | Event Photography</title>
         <meta
           name='description'
           content='Wedding photography gallery'
@@ -114,11 +86,14 @@ const Studio = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <BannerBlock imgUrlFrag={studioImages.hero} />
+        <HeroImg
+          imageUrlFrag={eventImages.hero}
+          altText={'engagement couple at waters edge'}
+        />
         <Blurb
-          blurbTitle={studioBlurb.title}
-          blurbText={studioBlurb.text}
-          blurbBtn={studioBlurb.button}
+          blurbTitle={eventBlurb.title}
+          blurbText={eventBlurb.text}
+          blurbBtn={eventBlurb.button}
           singleLineTitle
         />
         <div
@@ -126,7 +101,7 @@ const Studio = () => {
             photoSet
           )}`}
         >
-          {studioImages.categories.map((cat, idx) => {
+          {eventImages.categories.map((cat, idx) => {
             return (
               <button
                 key={uuid()}
@@ -138,7 +113,7 @@ const Studio = () => {
             )
           })}
         </div>
-        {studioImages.categories.map((cat, idx) => {
+        {eventImages.categories.map((cat, idx) => {
           if (idx === photoSet) {
             return (
               <AnimatePresence>
@@ -155,4 +130,4 @@ const Studio = () => {
   )
 }
 
-export default Studio
+export default Event

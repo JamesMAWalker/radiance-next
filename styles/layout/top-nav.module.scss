@@ -20,11 +20,11 @@
   transition: var(--transition-primary);
   justify-content: center;
   &::after {
-    @include pseudoLine(35%, var(--grey-40));
+    @include pseudoLine(35%, var(--primary-accent));
     transform: translate(-50%, -50%) scaleX(0);
   }
   &:hover {
-    color: var(--grey-40);
+    color: var(--primary-accent);
     &::after {
       transform: translate(-50%, -50%) scaleX(1);
     }
@@ -40,7 +40,7 @@
   }
   &:hover {
     path {
-      fill: var(--text-color);
+      fill: var(--primary-accent);
     }
   }
 }

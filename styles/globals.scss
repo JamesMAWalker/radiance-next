@@ -11,28 +11,29 @@
   --font-body: 'Futura PT', sans-serif;
 
   /* palette */
-  --full-black: rgb(0, 0, 0);
-  --black: rgb(59, 59, 59);
+  --full-black: #000000;
+  --black: #3b3b3b;
   --black-fade-5: hsla(0, 0%, 0%, 0.05);
   --black-fade-10: hsla(0, 0%, 0%, 0.1);
   --black-fade-20: hsla(0, 0%, 0%, 0.2);
   --black-fade-40: hsla(0, 0%, 0%, 0.4);
   --black-fade-80: hsla(0, 0%, 0%, 0.8);
-  --grey-90: hsl(255, 11%, 15%);
-  --grey-90: rgb(54, 54, 54);
-  --grey-50: hsl(276, 2%, 47%);
-  --grey-40: hsl(270, 2%, 60%);
-  --grey-10: hsl(270, 2%, 90%);
+  --grey-90: #24222a;
+  --grey-90: #363636;
+  --grey-50: #78757a;
+  --grey-40: #99979b;
+  --grey-10: #e6e5e6;
+  --grey-05: #F6F6F6;
   --grey-fade-20: hsla(276, 2%, 47%, 0.2);
-  --off-white: hsl(0, 0%, 98%);
-  --white: hsl(0, 0%, 100%);
+  --off-white: #fafafa;
+  --white: #ffffff;
   --white-fade-20: hsla(0, 0%, 100%, 0.2);
-  --blue: hsl(197, 100%, 50%);
-  --french-blue: hsl(197, 35%, 43%);
-  --ocean-blue: hsl(198, 27%, 29%);
+  --blue: #00b7ff;
+  --french-blue: #477e94;
+  --ocean-blue: #36525e;
   --rose-clay: #f2d0b6;
   --red-dress: #c90707;
-  --the-good-silver: hsl(0, 0%, 63%);
+  --the-good-silver: #a1a1a1;
 
   /* z-indeces */
   --base-two: -200;
@@ -228,9 +229,9 @@ button {
   text-transform: uppercase;
   color: var(--text-accent);
   &:hover {
-    color: var(--text-color);
+    color: var(--primary-accent);
     &::after {
-      background-color: var(--text-color);
+      background-color: var(--primary-accent);
       width: 45%;
     }
   }
