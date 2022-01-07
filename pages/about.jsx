@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Head from 'next/head'
 
 import { AboutBlock } from '../components/blocks/about-block'
@@ -155,7 +155,12 @@ const About = () => {
             const reverse = !(idx % 2 === 0)
 
             return (
-              <AboutBlock member={mmbr} reverse={reverse} />
+              <Fragment key={mmbr.imgUrlFrag}>
+                <AboutBlock
+                  member={mmbr}
+                  reverse={reverse}
+                />
+              </Fragment>
             )
           })}
         </section>

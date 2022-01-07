@@ -1,5 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
+import { v4 as uuid } from 'uuid'
+
 import { HeroImg } from '../components/blocks/hero-img'
 import { Blurb } from '../components/blocks/blurb'
 
@@ -99,6 +101,7 @@ const WeddingAlbum = () => {
           {albumPhotos.map((photo) => {
             return (
               <div
+                key={uuid()}
                 className={`${galleryImg} ${photo.gridSpace}`}
               >
                 <img

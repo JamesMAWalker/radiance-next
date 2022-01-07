@@ -14,10 +14,10 @@ import {
 export const TopNav = () => {
   return (
     <nav className={topNav}>
-      <Link href='#'>
+      <Link href='/'>
         <a className={`${navLink}`}>Home</a>
       </Link>
-      <Link href='#'>
+      <Link href='/about'>
         <a className={`${navLink}`}>About</a>
       </Link>
       <Link href='#'>

@@ -60,7 +60,7 @@ export const Gallery = () => {
         clientX - cursorRef?.current?.clientWidth
       const mouseY =
         clientY - cursorRef?.current?.clientHeight
-      cursorRef?.current?.style?.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
+      cursorRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
       setCursorVisible(detectCursorAtPageMargin(clientX))
     }
 
