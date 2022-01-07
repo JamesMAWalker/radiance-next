@@ -28,7 +28,7 @@ export const PortraitGrid = ({ imageContents, loadMore }) => {
   // set number of rows whenever imageContents changes
   useEffect(() => {
     setNumRows(getNumRows(imageContents?.length, (loadMore && true)))
-  }, [imageContents])
+  }, [imageContents, loadMore])
 
   return (
     <motion.section
