@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import React from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { IconMark } from '../svg/iconmark'
 
@@ -12,6 +13,8 @@ import {
 } from '../../styles/layout/top-nav.module.scss'
 
 export const TopNav = () => {
+  const router = useRouter()
+
   return (
     <nav className={topNav}>
       <Link href='/'>
@@ -34,10 +37,22 @@ export const TopNav = () => {
       <Link href='/wedding'>
         <a className={`${navLink}`}>Wedding</a>
       </Link>
-      <Link href='#'>
+      <Link
+        href={{
+          pathname: `/event`,
+          query: { photoSetParam: 1 },
+        }}
+        as={`/event`}
+      >
         <a className={`${navLink}`}>Engagement</a>
       </Link>
-      <Link href='#'>
+      <Link
+        href={{
+          pathname: `/event`,
+          query: { photoSetParam: 0 },
+        }}
+        as={`/event`}
+      >
         <a className={`${navLink}`}>Mitzvah</a>
       </Link>
       <Link href='/studio'>

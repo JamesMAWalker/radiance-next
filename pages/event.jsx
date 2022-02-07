@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Head from 'next/head'
-import { v4 as uuid } from 'uuid'
+import { useRouter } from 'next/router'
 import { AnimatePresence } from 'framer-motion'
 
 import { HeroImg } from '../components/blocks/hero-img'
@@ -65,7 +65,25 @@ const eventImages = {
 }
 
 const Event = () => {
+  const {
+    query: { photoSetParam },
+  } = useRouter()
+
   const [photoSet, setPhotoSet] = useState(0)
+  const [initialPhotoSet, setInitialPhotoSet] = useState(0)
+
+  // set correct photoset based on query params
+  useEffect(() => {
+    setInitialPhotoSet(photoSetParam)
+  }, [])
+  useEffect(() => {
+    setPhotoSet(initialPhotoSet)
+  }, [initialPhotoSet])
+
+  useEffect(() => {
+    initialPhotoSet
+    console.log('initialPhotoSet: ', initialPhotoSet);
+  }, [])
 
   const handleLoadMorePhotos = () => {
     alert('More photos loaded!')
@@ -104,7 +122,7 @@ const Event = () => {
           {eventImages.categories.map((cat, idx) => {
             return (
               <button
-                key={uuid()}
+                key={`${cat.title}${idx}`}
                 className='text-btn'
                 onClick={() => setPhotoSet(idx)}
               >
@@ -113,18 +131,14 @@ const Event = () => {
             )
           })}
         </div>
-        {eventImages.categories.map((cat, idx) => {
-          if (idx === photoSet) {
-            return (
-              <AnimatePresence>
-                <PortraitGrid
-                  imageContents={cat.photos}
-                  loadMore={handleLoadMorePhotos}
-                />
-              </AnimatePresence>
-            )
-          }
-        })}
+        <AnimatePresence>
+            <PortraitGrid
+              imageContents={
+                eventImages.categories[photoSet ? photoSet : 0]?.photos
+              }
+              loadMore={handleLoadMorePhotos}
+            />
+        </AnimatePresence>
       </main>
     </div>
   )

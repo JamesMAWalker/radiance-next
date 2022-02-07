@@ -1,7 +1,10 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 import { WordMark } from '../svg/wordmark'
 import { Blurb } from '../blocks/blurb'
+
+import { fadeUp } from '../../animations/fade';
 
 import {
   hero,
@@ -30,8 +33,10 @@ const heroBlurb = {
       elit. Nullam et metus arcu.
     </>
   ),
-  button: 'Learn More'
+  button: 'Learn More',
 }
+
+
 
 export const Hero = () => {
   return (
@@ -40,9 +45,16 @@ export const Hero = () => {
         imageUrlFrag={'hero_yegtig'}
         altText={'radiant wedding couple'}
       />
-      <div className={logoWrap}>
+      <motion.div
+        className={logoWrap}
+        variants={fadeUp}
+        initial='hidden'
+        animate='visible'
+        exit='hidden'
+        transition={{ duration: 1.5 }}
+      >
         <WordMark />
-      </div>
+      </motion.div>
       <Blurb
         blurbTitle={heroBlurb.title}
         blurbText={heroBlurb.text}
