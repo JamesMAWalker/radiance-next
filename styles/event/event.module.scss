@@ -10,36 +10,3 @@
     justify-content: center;
   }
 }
-
-.photoSelectors {
-  position: relative;
-  width: 50%;
-  margin-left: 25%;
-  height: var(--vp-xl);
-  display: grid;
-  gap: 5%;
-  grid-template-columns: repeat(2, 45%);
-  margin-bottom: var(--vp-lg);
-  transition: var(--transition-primary);
-  &::after {
-    @include pseudoLine(5vw, var(--text-accent));
-    top: var(--vp-lg);
-    left: 22.5%;
-  }
-  &.right {
-    &::after {
-      left: 73%;
-    }
-  }
-  button {
-    font-size: var(--text-2xl);
-    color: var(--text-accent);
-    transition: var(--transition-primary);
-    &:hover {
-      color: var(--text-color);
-    }
-    &::after {
-      display: none;
-    }
-  }
-}

@@ -1,6 +1,6 @@
-@import '../mixins.scss';
+@import "../mixins.scss";
 
-.topNav {
+.navigation {
   height: 15vh;
   width: calc(100% - (var(--vp-sm) * 2));
   padding: 0 var(--vp-sm);
@@ -11,6 +11,18 @@
   align-items: center;
   justify-content: space-evenly;
   text-transform: uppercase;
+  @media (max-width: 1024px) {
+    z-index: var(--level-top);
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 10vh;
+    padding: 0;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .navLink {
@@ -43,4 +55,17 @@
       fill: var(--primary-accent);
     }
   }
+}
+
+.mobileBtn {
+  z-index: var(--level-top);
+  height: 100%;
+  width: 100%;
+  border-top: 1px solid var(--text-color);
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-size: var(--text-2xl);
 }

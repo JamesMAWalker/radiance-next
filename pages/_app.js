@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
+import { Navigation } from '../components/layout/nav'
 import { Footer } from '../components/layout/footer'
-import { TopNav } from '../components/layout/top-nav'
 
 import '../styles/globals.scss'
 import { layout } from '../styles/layout/layout.module.scss'
 
 export default function MyApp({ Component, pageProps }) {
   const { asPath } = useRouter()
+  const [isMobile, setIsMobile] = useState(false);
 
   // check path and set theme color accordingly
   useEffect(() => {
@@ -31,9 +32,15 @@ export default function MyApp({ Component, pageProps }) {
     )
   }, [asPath])
 
+  // set mobile breakpoint for JS
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 1024)
+  }, []);
+  
+
   return (
     <div className={layout}>
-      <TopNav />
+      <Navigation isMobile={isMobile} />
       <Component {...pageProps} />
       <Footer />
     </div>

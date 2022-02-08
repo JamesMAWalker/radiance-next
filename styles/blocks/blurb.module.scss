@@ -25,5 +25,14 @@
   .text {
     @include blurbText;
     width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    span {
+      &:nth-child(2) {
+        margin-top: var(--);
+      } 
+    }
   }
 }

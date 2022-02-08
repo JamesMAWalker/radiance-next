@@ -141,7 +141,7 @@ const About = () => {
       </Head>
       <main>
         <HeroImg
-          imageUrlFrag={'about_xdlhic.png'}
+          imageUrlFrag={'about_xdlhic'}
           alt='radiance photography team photo'
         />
         <Blurb

@@ -1,6 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
+import { baseUrlPng } from '../../utils/baseUrl';
+
 import { fadeIn } from '../../animations/fade';
 import { zoomOut } from '../../animations/zoom';
 
@@ -18,7 +20,7 @@ export const HeroImg = ({ imageUrlFrag, altText }) => {
       transition={{ duration: 1.5 }}
     >
       <motion.img
-        src={`https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:best/v1640932197/wedding/dev/${imageUrlFrag}`}
+        src={baseUrlPng(imageUrlFrag)}
         alt={altText}
         variants={zoomOut}
         initial='hidden'

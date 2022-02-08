@@ -7,9 +7,7 @@ import { Services } from '../components/home/02-services'
 import { Gallery } from '../components/home/03-gallery'
 import { Contact } from '../components/home/04-contact'
 
-export const getStaticProps = async (context) => {
-  const { id } = context.params
-
+export const getStaticProps = async () => {
   const res = await fetch(`${server}/events.json`)
 
   if (res.status !== 200) {
@@ -19,12 +17,12 @@ export const getStaticProps = async (context) => {
   }
 
   const data = await res.json()
-  const pageData = data.filter((d) => d.title === id)[0]
 
   return {
-    props: { event: pageData },
+    props: { events: data },
   }
 }
+
 
 
 
