@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { v4 as uuid } from 'uuid'
+import { motion, useAnimation } from 'framer-motion'
+
+import { fadeUp } from '../../animations/fade'
 
 import {
   gallerySection,
@@ -34,6 +36,8 @@ const galleryImgUrls = [
 ]
 
 export const Gallery = () => {
+  const controls = useAnimation()
+
   // custom cursor logic
   const sliderRef = useRef(null)
   const cursorRef = useRef(null)
@@ -70,8 +74,21 @@ export const Gallery = () => {
     }
   }, [cursorRef, galleryInView])
 
+    useEffect(() => {
+      if (galleryInView) {
+        controls.start('visible')
+      }
+    }, [controls, galleryInView])
+
   return (
-    <section className={gallerySection} ref={galleryRef}>
+    <motion.section
+      className={gallerySection}
+      ref={galleryRef}
+      variants={fadeUp}
+      initial='hidden'
+      animate={controls}
+      transition={{ duration: 1.5 }}
+    >
       <h2 className={title}>Gallery</h2>
       <p className={description}>
         Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -93,20 +110,20 @@ export const Gallery = () => {
               gridTemplateColumns: `repeat(${galleryImgUrls.length}, 25vw)`,
             }}
           >
-            {galleryImgUrls.map((url) => {
+            {galleryImgUrls.map((url, idx) => {
               return (
                 <img
-                  key={uuid()}
+                  key={`${url}${idx}`}
                   className={galleryImg}
                   src={`${BASE_URL}/${url}`}
                   alt='radiance photography selected work'
-                  loading='eager'
+                  loading={idx < 3 ? 'eager' : 'lazy'}
                 />
               )
             })}
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

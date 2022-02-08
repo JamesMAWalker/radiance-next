@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import {
-  AnimateSharedLayout,
-  AnimatePresence,
+  useAnimation,
   motion,
+  AnimatePresence,
+  AnimateSharedLayout,
 } from 'framer-motion'
-import { v4 as uuid } from 'uuid'
 
 import {
   serviceSection,
   servicesCol,
   option,
   active,
-  inactive,
   info,
+  infoContainer,
   title,
   binaryBtn,
   btnSegment,
@@ -49,29 +49,6 @@ const servicesList = [
   },
 ]
 
-const infoAnimation = {
-  visible: {
-    opacity: 1,
-    height: 'unset',
-  },
-  hidden: {
-    opacity: 0,
-    height: 0,
-  },
-}
-
-const imgAnimation = {
-  visible: {
-    opacity: 1,
-  },
-  hidden: {
-    opacity: 0,
-  },
-}
-
-/*
-  Figure out a good way of fade animating between the images.
-*/
 
 export const Services = () => {
   const [activeOption, setActiveOption] = useState(0)
@@ -79,61 +56,42 @@ export const Services = () => {
   return (
     <section className={serviceSection}>
       <div className={`${serviceImg} ${left}`}>
-          {servicesList.map((srvc, idx) => {
-            if (idx === activeOption) {
-              return (
-                <motion.img
-                  key={uuid()}
-                  variants={imgAnimation}
-                  initial='hidden'
-                  animate='visible'
-                  exit='hidden'
-                  src={`${BASE_IMG_URL}${srvc.photoUrls[0]}.png`}
-                  alt={srvc.title}
-                />
-              )
-            }
-          })}
+        <motion.img
+          src={`${BASE_IMG_URL}${servicesList[activeOption].photoUrls[0]}.png`}
+        />
       </div>
-      <AnimatePresence>
-        <ul className={servicesCol}>
-          {servicesList.map((srvc, idx) => {
-            return (
-              <li
-                key={srvc.title}
-                className={option}
-                onClick={() => setActiveOption(idx)}
-              >
-                <motion.h4
-                  className={title}
-                  layout
-                  transition={{ duration: 0.2 }}
-                >
-                  <span>+</span>
-                  {srvc.title}
-                </motion.h4>
+      <ul className={servicesCol}>
+        {servicesList.map((srvc, idx) => {
+          return (
+            <motion.li
+              key={srvc.title}
+              className={option}
+              // layout
+              onClick={() => setActiveOption(idx)}
+            >
+              <motion.h4 layout className={title}>
+                <span>+</span>
+                {srvc.title}
+              </motion.h4>
+              <AnimatePresence>
                 {idx === activeOption && (
-                  <>
-                    <motion.p
-                      layout
-                      className={info}
-                      variants={infoAnimation}
-                      initial='hidden'
-                      animate='visible'
-                      exit='hidden'
-                      transition={{ duration: 0.3 }}
-                    >
-                      {srvc.blurb}
-                    </motion.p>
-                    <motion.button
-                      className={binaryBtn}
-                      layout
-                      variants={infoAnimation}
-                      initial='hidden'
-                      animate='visible'
-                      exit='hidden'
-                      transition={{ duration: 0.4 }}
-                    >
+                  <motion.div
+                    className={infoContainer}
+                    key='info'
+                    variants={{
+                      expanded: {
+                        opacity: 1,
+                        height: 'auto',
+                      },
+                      collapsed: { opacity: 0, height: 0 },
+                    }}
+                    initial='expanded'
+                    animate='expanded'
+                    exit='collapsed'
+                    transition={{ duration: .1 }}
+                  >
+                    <p className={info}>{srvc.blurb}</p>
+                    <button className={binaryBtn}>
                       <div className={btnSegment}>
                         Book Now
                       </div>
@@ -141,30 +99,18 @@ export const Services = () => {
                       <div className={btnSegment}>
                         View Gallery
                       </div>
-                    </motion.button>
-                  </>
+                    </button>
+                  </motion.div>
                 )}
-              </li>
-            )
-          })}
-        </ul>
-      </AnimatePresence>
+              </AnimatePresence>
+            </motion.li>
+          )
+        })}
+      </ul>
       <div className={`${serviceImg} ${right}`}>
-          {servicesList.map((srvc, idx) => {
-            if (idx === activeOption) {
-              return (
-                <motion.img
-                  key={uuid()}
-                  variants={imgAnimation}
-                  initial='hidden'
-                  animate='visible'
-                  exit='hidden'
-                  src={`${BASE_IMG_URL}${srvc.photoUrls[1]}.png`}
-                  alt={srvc.title}
-                />
-              )
-            }
-          })}
+        <motion.img
+          src={`${BASE_IMG_URL}${servicesList[activeOption].photoUrls[1]}.png`}
+        />
       </div>
     </section>
   )

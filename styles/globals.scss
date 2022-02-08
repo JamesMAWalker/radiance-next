@@ -159,6 +159,16 @@
 
   /* spacing */
   --grid-space: var(--vp-xl);
+
+  // Container
+  --content-width: 70vw;
+  --content-margin-width: calc((100vw - var(--content-width)) / 2);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --content-width: 80vw;
+  }
 }
 
 html,

@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import { v4 as uuid } from 'uuid'
 
 import { HeroImg } from '../components/blocks/hero-img'
 import { Blurb } from '../components/blocks/blurb'
@@ -82,7 +81,7 @@ const Wedding = () => {
         {albumsList.map(albm => {
           return (
             <AlbumPair
-              key={uuid()}
+              key={albm.title}
               coupleNames={albm.title}
               imgUrlFrags={albm.photos}
             />

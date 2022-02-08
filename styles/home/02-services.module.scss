@@ -1,4 +1,4 @@
-@import '../mixins.scss';
+@import "../mixins.scss";
 
 .serviceSection {
   @include homeSection;
@@ -22,12 +22,12 @@
 }
 
 .option {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   .title {
-    cursor: pointer;
     margin: 0;
     font-family: var(--font-title);
     font-size: var(--text-3xl);
@@ -39,6 +39,14 @@
       padding-bottom: var(--space-ml);
       padding-right: var(--space-ml);
     }
+  }
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 2s;
   }
   .info {
     @include blurbText;

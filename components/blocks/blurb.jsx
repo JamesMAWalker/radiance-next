@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 
 import { fadeUp } from '../../animations/fade';
 

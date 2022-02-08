@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import { v4 as uuid } from 'uuid'
 import { AnimatePresence } from 'framer-motion'
 
 import { Blurb } from '../components/blocks/blurb'
@@ -37,6 +36,7 @@ const studioImages = {
   hero: 'HS-right_dbwbqe.png',
   categories: [
     {
+      id: 'acting-modeling',
       title: (
         <>
           Acting & <br /> Modeling
@@ -54,6 +54,7 @@ const studioImages = {
       ],
     },
     {
+      id: 'business-corporate',
       title: (
         <>
           Business & <br /> Corporate
@@ -129,7 +130,7 @@ const Studio = () => {
           {studioImages.categories.map((cat, idx) => {
             return (
               <button
-                key={uuid()}
+                key={cat.id}
                 className='text-btn'
                 onClick={() => setPhotoSet(idx)}
               >

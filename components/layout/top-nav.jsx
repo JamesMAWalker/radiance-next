@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { IconMark } from '../svg/iconmark'
 
@@ -12,52 +11,75 @@ import {
   logoWrap,
 } from '../../styles/layout/top-nav.module.scss'
 
+const pageLinks = [
+  {
+    path: '/',
+    text: 'Home' 
+  },
+  {
+    path: '/about',
+    text: 'About' 
+  },
+  {
+    path: '/',
+    text: 'Packages' 
+  },
+  {
+    path: '/',
+    text: 'Contact' 
+  },
+  {
+    path: '/',
+    text: 'Wedding' 
+  },
+  {
+    path: '/event',
+    text: 'Engagement'
+  },
+  {
+    path: '/event',
+    text: 'Mitzvah' 
+  },
+  {
+    path: '/studio',
+    text: 'Studio' 
+  },
+]
+
 export const TopNav = () => {
-  const router = useRouter()
 
   return (
     <nav className={topNav}>
-      <Link href='/'>
-        <a className={`${navLink}`}>Home</a>
-      </Link>
-      <Link href='/about'>
-        <a className={`${navLink}`}>About</a>
-      </Link>
-      <Link href='#'>
-        <a className={`${navLink}`}>Packages</a>
-      </Link>
-      <Link href='#'>
-        <a className={`${navLink}`}>Contact</a>
-      </Link>
+      {pageLinks.slice(0, 4).map((lnk) => {
+        return (
+          <Fragment key={lnk.text}>
+            <Link href={`${lnk.path}`}>
+              <a className={`${navLink}`}>{lnk.text}</a>
+            </Link>
+          </Fragment>
+        )
+      })}
       <Link href='#'>
         <a className={logoWrap}>
           <IconMark />
         </a>
       </Link>
-      <Link href='/wedding'>
-        <a className={`${navLink}`}>Wedding</a>
-      </Link>
-      <Link
-        href={{
-          pathname: `/event`,
-          query: { photoSetParam: 1 },
-        }}
-        as={`/event`}
-      >
-        <a className={`${navLink}`}>Engagement</a>
-      </Link>
-      <Link
-        href={{
-          pathname: `/event`,
-          query: { photoSetParam: 0 },
-        }}
-        as={`/event`}
-      >
-        <a className={`${navLink}`}>Mitzvah</a>
-      </Link>
-      <Link href='/studio'>
-        <a className={`${navLink}`}>Studio</a>
-      </Link>
+      {pageLinks.slice(4, 8).map((lnk, idx) => {
+        const hRef = ( idx === 1 || idx === 2 )
+          ? {
+            pathname: lnk.name,
+            query: { photosetParam: `${idx - 1}` }
+          }
+          : lnk.name
+        
+        return (
+          <Fragment key={lnk.name}>
+            <Link href={`${lnk.path}`}>
+              <a className={`${navLink}`}>{lnk.text}</a>
+            </Link>
+          </Fragment>
+        )
+      })}
     </nav>
   )
 }

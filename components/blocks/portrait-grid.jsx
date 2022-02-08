@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { v4 as uuid } from 'uuid'
 import { motion } from 'framer-motion'
 
 import { gridContainer, imgCell, loadMoreBlock } from '../../styles/blocks/portrait-grid.module.scss'
@@ -42,9 +41,9 @@ export const PortraitGrid = ({ imageContents, loadMore }) => {
         gridTemplateRows: `repeat(${numRows}, 90vh)`,
       }}
     >
-      {imageContents.map((image) => {
+      {imageContents.map((image, idx) => {
         return (
-          <div key={uuid()} className={imgCell}>
+          <div key={`${image}${idx}`} className={imgCell}>
             <img
               src={`${BASE_IMG_URL}/${image}`}
               alt='studio-photography'
