@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Head from 'next/head'
 
 import { HeroImg } from '../components/blocks/hero-img'
@@ -56,7 +56,7 @@ const albumsList = [
 
 const Wedding = () => {
   return (
-    <div>
+    <Fragment>
       <Head>
         <title>Radiance | Wedding Photography</title>
         <meta
@@ -67,7 +67,8 @@ const Wedding = () => {
       </Head>
       <main className={weddingPage}>
         <HeroImg
-          imageUrlFrag={'wedding_tohrlj.png'}
+          imageUrlFrag={'wedding_tohrlj'}
+          quality={'best'}
           altText={
             'bridesmaids & groomsmen surround wedding couple'
           }
@@ -78,7 +79,7 @@ const Wedding = () => {
           blurbBtn={weddingBlurb.button}
           singleLineTitle
         />
-        {albumsList.map(albm => {
+        {albumsList.map((albm) => {
           return (
             <AlbumPair
               key={albm.title}
@@ -88,7 +89,7 @@ const Wedding = () => {
           )
         })}
       </main>
-    </div>
+    </Fragment>
   )
 }
 

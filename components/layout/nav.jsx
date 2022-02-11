@@ -16,34 +16,42 @@ import { AnimatePresence } from 'framer-motion'
 
 const pageLinks = [
   {
+    mmOrder: 6,
     path: '/',
     text: 'Home' 
   },
   {
+    mmOrder: 7,
     path: '/about',
     text: 'About' 
   },
   {
+    mmOrder: 5,
     path: '/',
     text: 'Packages' 
   },
   {
+    mmOrder: 8,
     path: '/',
     text: 'Contact' 
   },
   {
-    path: '/',
+    mmOrder: 1,
+    path: '/wedding',
     text: 'Wedding' 
   },
   {
+    mmOrder: 3,
     path: '/events/engagement',
     text: 'Engagement'
   },
   {
+    mmOrder: 4,
     path: '/events/mitzvah',
     text: 'Mitzvah' 
   },
   {
+    mmOrder: 2,
     path: '/studio',
     text: 'Studio' 
   },
@@ -103,7 +111,7 @@ export const Navigation = ({ isMobile }) => {
           </div>
           <AnimatePresence>
             {menuOpen && (
-              <MobileMenu pageLinks={pageLinks} />
+              <MobileMenu pageLinks={pageLinks} closeMenu={() => setMenuOpen(false)}/>
             )}
           </AnimatePresence>
         </>

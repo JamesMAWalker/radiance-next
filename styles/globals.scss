@@ -22,6 +22,7 @@
   --grey-90: #363636;
   --grey-50: #78757a;
   --grey-40: #99979b;
+  --grey-20: #c0c0c0;
   --grey-10: #e6e5e6;
   --grey-05: #F6F6F6;
   --grey-fade-20: hsla(276, 2%, 47%, 0.2);
@@ -106,6 +107,7 @@
   --text-lg: 18px;
   --text-xl: 20px;
   --text-2xl: 24px;
+  --text-2xl-plus: 28px;
   --text-3xl: 32px;
   --text-3xl-plus: 40px;
   --text-4xl: 48px;
@@ -160,14 +162,22 @@
   /* spacing */
   --grid-space: var(--vp-xl);
 
-  // Container
+  /* Container */
+  --layout-width: 86vw;
   --content-width: 70vw;
   --content-margin-width: calc((100vw - var(--content-width)) / 2);
 }
 
 @media (max-width: 1024px) {
   :root {
-    --content-width: 80vw;
+    /* Containers */
+    --content-width: 90vw;
+
+     /* text size */
+  --text-hero: var(--text-10xl);
+  --text-display: var(--text-7xl);
+  --text-header: var(--text-3xl);
+  --text-prose: var(--text-xl);
   }
 }
 
@@ -248,6 +258,9 @@ button {
   &::after {
     @include pseudoLine(25%, var(--text-accent));
     will-change: width;
+  }
+  @media (max-width: 1024px) {
+    font-size: var(--text-xl);
   }
 }
 

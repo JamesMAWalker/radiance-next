@@ -4,8 +4,12 @@
   overflow: hidden;
   img {
     width: 100%;
-    height: unset !important;
+    // height: unset !important;
     object-fit: cover;
     object-position: center;
+  }
+  @media (max-width: 1024px) {
+    height: 40vh;
+    margin-top: 2.5vh;
   }
 }

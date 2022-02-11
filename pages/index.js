@@ -28,7 +28,7 @@ export const getStaticProps = async () => {
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Head>
         <title>Radiance Photography</title>
         <meta
@@ -43,6 +43,6 @@ export default function Home() {
         <Gallery />
         <Contact />
       </main>
-    </div>
+    </>
   )
 }

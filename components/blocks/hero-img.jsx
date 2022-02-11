@@ -9,7 +9,7 @@ import { zoomOut } from '../../animations/zoom';
 import { heroImg } from '../../styles/blocks/hero-img.module.scss'
 
 
-export const HeroImg = ({ imageUrlFrag, altText }) => {
+export const HeroImg = ({ imageUrlFrag, quality = 'good', altText }) => {
   return (
     <motion.div
       className={heroImg}
@@ -20,7 +20,7 @@ export const HeroImg = ({ imageUrlFrag, altText }) => {
       transition={{ duration: 1.5 }}
     >
       <motion.img
-        src={baseUrlPng(imageUrlFrag)}
+        src={baseUrlPng(imageUrlFrag, quality)}
         alt={altText}
         variants={zoomOut}
         initial='hidden'

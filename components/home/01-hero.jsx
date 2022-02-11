@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import { WordMark } from '../svg/wordmark'
@@ -39,6 +39,13 @@ const heroBlurb = {
 
 
 export const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+    // set mobile breakpoint for JS
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 1024)
+  }, []);
+
   return (
     <section className={hero}>
       <HeroImg

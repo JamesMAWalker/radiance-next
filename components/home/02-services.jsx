@@ -9,6 +9,11 @@ import {
 import {
   serviceSection,
   servicesCol,
+  mobileServicesNav,
+  arrow,
+  indicatorBullets,
+  bullet,
+  activeBulletStyle,
   option,
   active,
   info,
@@ -33,13 +38,13 @@ const servicesList = [
       'wedding-right_yntqaz',
     ],
     blurb:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et metus arcu.',
+      ' Nullam et metus arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   },
   {
     title: 'Event',
     photoUrls: ['event-left_bpofcn', 'event-right_izf8sw'],
     blurb:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et metus arcu.',
+      'Consectetur adipiscing elit, lorem ipsum dolor sit amet. Nullam et metus arcu.',
   },
   {
     title: 'Studio',
@@ -49,10 +54,32 @@ const servicesList = [
   },
 ]
 
-
 export const Services = () => {
   const [activeOption, setActiveOption] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const [translatePosition, setTranslatePosition] = useState(activeOption)
 
+  const handleOptionNav = (crement) => {
+    if (activeOption <= 0 & crement < 1) return
+    if (activeOption >= 2 & crement > 0) return
+    setActiveOption(activeOption + crement)
+  }
+
+  // set mobile breakpoint for JS
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 1024)
+  }, [])
+
+  // translate services column container based on current index
+  useEffect(() => {
+    const positions = {
+      0: `translateX(0)`,
+      1: `translateX(-95vw)`,
+      2: `translateX(-190vw)`,
+    }
+    setTranslatePosition({ transform: positions[activeOption]})
+  }, [activeOption])
+    
   return (
     <section className={serviceSection}>
       <div className={`${serviceImg} ${left}`}>
@@ -60,13 +87,15 @@ export const Services = () => {
           src={`${BASE_IMG_URL}${servicesList[activeOption].photoUrls[0]}.png`}
         />
       </div>
-      <ul className={servicesCol}>
+      <ul
+        className={servicesCol}
+        style={isMobile ? translatePosition : null}
+      >
         {servicesList.map((srvc, idx) => {
           return (
             <motion.li
               key={srvc.title}
               className={option}
-              // layout
               onClick={() => setActiveOption(idx)}
             >
               <motion.h4 layout className={title}>
@@ -74,7 +103,8 @@ export const Services = () => {
                 {srvc.title}
               </motion.h4>
               <AnimatePresence>
-                {idx === activeOption && (
+                {/* desk: display only active | mobile: display all */}
+                {(idx === activeOption || isMobile) && (
                   <motion.div
                     className={infoContainer}
                     key='info'
@@ -83,12 +113,15 @@ export const Services = () => {
                         opacity: 1,
                         height: 'auto',
                       },
-                      collapsed: { opacity: 0, height: 0 },
+                      collapsed: {
+                        opacity: 0,
+                        height: 0,
+                      },
                     }}
                     initial='expanded'
                     animate='expanded'
                     exit='collapsed'
-                    transition={{ duration: .1 }}
+                    transition={{ duration: 0.1 }}
                   >
                     <p className={info}>{srvc.blurb}</p>
                     <button className={binaryBtn}>
@@ -107,6 +140,35 @@ export const Services = () => {
           )
         })}
       </ul>
+      {isMobile && (
+        <div className={mobileServicesNav}>
+          <span
+            className={arrow}
+            onClick={() => handleOptionNav(-1)}
+          >
+            ◀
+          </span>
+          <div className={indicatorBullets}>
+            {servicesList.map((_, idx) => {
+              const activeBullet =
+                idx === activeOption
+                  ? activeBulletStyle
+                  : null
+              return (
+                <span
+                  className={`${bullet} ${activeBullet}`}
+                />
+              )
+            })}
+          </div>
+          <span
+            className={arrow}
+            onClick={() => handleOptionNav(1)}
+          >
+            ▶
+          </span>
+        </div>
+      )}
       <div className={`${serviceImg} ${right}`}>
         <motion.img
           src={`${BASE_IMG_URL}${servicesList[activeOption].photoUrls[1]}.png`}
