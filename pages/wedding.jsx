@@ -29,7 +29,7 @@ const weddingBlurb = {
 const albumsList = [
   {
     title: `Frank & Estelle`,
-    photos: ['pair-1_wmwf6h.png', 'pair-2_jfoyvz.png'],
+    photos: ['pair-2_jfoyvz.png', 'pair-1_wmwf6h.png'],
   },
   {
     title: `Fouad & Elaine`,

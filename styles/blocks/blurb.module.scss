@@ -21,8 +21,11 @@
     &.lgTitleText {
       white-space: nowrap;
       margin: var(--vp-sm) 0;
-      font-size: var(--text-7xl) !important;
+      font-size: var(--text-header-lg) !important;
       letter-spacing: var(--push-md);
+      @media (max-width: 1024px) {
+        white-space: unset;
+      }
     }
   }
   .text {

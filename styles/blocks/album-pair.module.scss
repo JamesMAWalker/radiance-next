@@ -13,6 +13,11 @@
     margin-top: 0;
     margin-bottom: var(--vp-ml);
   }
+  @media (max-width: 1024px) {
+    width: 100%;
+    min-height: unset;
+    height: auto;
+  }
 }
 
 .title {
@@ -27,9 +32,20 @@
   grid-template-rows: 1fr;
   grid-template-columns: 50vh 50vh;
   margin-bottom: var(--vp-xl);
+  @media (max-width: 1024px) {
+    margin-top: var(--vp-lg);
+    margin-bottom: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 }
 
 .photo {
   height: 100%;
   width: 100%;
+  &:last-child {
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
 }

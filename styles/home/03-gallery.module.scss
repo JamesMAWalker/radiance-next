@@ -5,6 +5,9 @@
   position: relative;
   height: 90vh;
   justify-content: flex-start;
+  @media (max-width: 1024px) {
+    margin: 20vh 0 0 0;
+  }
 }
 
 .title {
@@ -25,6 +28,9 @@
   align-items: flex-start;
   justify-content: flex-start;
   overflow-x: visible;
+  @media (max-width: 1024px) {
+    height: 50vh;
+  }
 }
 
 .slideContainer {
@@ -46,6 +52,11 @@
   justify-content: flex-start;
   align-items: flex-start;
   grid-template-rows: 100%;
+  @media (max-width: 1024px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .galleryImg {
@@ -53,6 +64,10 @@
   width: 100%;
   object-position: center;
   object-fit: cover;
+  @media (max-width: 1024px) {
+    flex-shrink: 0;
+    width: 70vw;
+  }
 }
 
 .galleryCursor {
@@ -64,6 +79,9 @@
   left: 10vh;
   opacity: 0;
   transition: var(--transition-primary);
+  @media (max-width: 1024px) {
+    display: none;
+  }
   svg {
     animation: 20s infinite rotate;
     height: 20vh;

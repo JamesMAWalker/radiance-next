@@ -42,10 +42,12 @@ export const Gallery = () => {
   const sliderRef = useRef(null)
   const cursorRef = useRef(null)
 
-  const { ref: galleryRef, inView: galleryInView } = useInView()
+  const { ref: galleryRef, inView: galleryInView } =
+    useInView()
 
   const [cursorVisible, setCursorVisible] = useState(false)
 
+  // detect cursor position and show if at edges of viewport
   useEffect(() => {
     const detectCursorAtPageMargin = (cursorPos) => {
       const showCursorAtLeft =
@@ -74,11 +76,11 @@ export const Gallery = () => {
     }
   }, [cursorRef, galleryInView])
 
-    useEffect(() => {
-      if (galleryInView) {
-        controls.start('visible')
-      }
-    }, [controls, galleryInView])
+  useEffect(() => {
+    if (galleryInView) {
+      controls.start('visible')
+    }
+  }, [controls, galleryInView])
 
   return (
     <motion.section

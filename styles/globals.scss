@@ -1,14 +1,14 @@
-@import './mixins.scss';
+@import "./mixins.scss";
 
 @font-face {
-  font-family: 'Futura PT';
-  src: url('/fonts/FuturaPTLight.otf');
+  font-family: "Futura PT";
+  src: url("/fonts/FuturaPTLight.otf");
 }
 
 :root {
   /* font-family */
-  --font-title: 'Cormorant', serif;
-  --font-body: 'Futura PT', sans-serif;
+  --font-title: "Cormorant", serif;
+  --font-body: "Futura PT", sans-serif;
 
   /* palette */
   --full-black: #000000;
@@ -24,7 +24,7 @@
   --grey-40: #99979b;
   --grey-20: #c0c0c0;
   --grey-10: #e6e5e6;
-  --grey-05: #F6F6F6;
+  --grey-05: #f6f6f6;
   --grey-fade-20: hsla(276, 2%, 47%, 0.2);
   --off-white: #fafafa;
   --white: #ffffff;
@@ -153,6 +153,7 @@
   --text-hero: var(--text-10xl);
   --text-display: var(--text-7xl);
   --text-header: var(--text-4xl);
+  --text-header-lg: var(--text-7xl);
   --text-prose: var(--text-2xl);
 
   /* transitions */
@@ -173,11 +174,12 @@
     /* Containers */
     --content-width: 90vw;
 
-     /* text size */
-  --text-hero: var(--text-10xl);
-  --text-display: var(--text-7xl);
-  --text-header: var(--text-3xl);
-  --text-prose: var(--text-xl);
+    /* text size */
+    --text-hero: var(--text-10xl);
+    --text-display: var(--text-7xl);
+    --text-header: var(--text-3xl);
+    --text-header-lg: var(--text-3xl-plus);
+    --text-prose: var(--text-xl);
   }
 }
 
