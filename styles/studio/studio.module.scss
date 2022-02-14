@@ -20,10 +20,24 @@
   grid-template-columns: repeat(3, 30%);
   margin-bottom: var(--vp-lg);
   transition: var(--transition-primary);
+  @media (max-width: 1024px) {
+    height: auto;
+    margin-bottom: var(--vp-2xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    div {
+      bottom: -8vmin;
+    }
+  }
   &::after {
     @include pseudoLine(5vw, var(--text-accent));
     top: var(--vp-2xl);
     left: 15%;
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
   &.center {
     &::after {
@@ -38,6 +52,9 @@
   button {
     color: var(--text-accent);
     transition: var(--transition-primary);
+    @media (max-width: 1024px) {
+      color: var(--text-color);
+    }
     &:hover {
       color: var(--text-color);
     }

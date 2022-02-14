@@ -26,6 +26,7 @@ import {
   left,
   right,
 } from '../../styles/home/02-services.module.scss'
+import { ArrowNav } from '../blocks/arrow-nav'
 
 const BASE_IMG_URL =
   'https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:good/v1640932169/wedding/dev/'
@@ -141,33 +142,7 @@ export const Services = () => {
         })}
       </ul>
       {isMobile && (
-        <div className={mobileServicesNav}>
-          <span
-            className={arrow}
-            onClick={() => handleOptionNav(-1)}
-          >
-            ◀
-          </span>
-          <div className={indicatorBullets}>
-            {servicesList.map((_, idx) => {
-              const activeBullet =
-                idx === activeOption
-                  ? activeBulletStyle
-                  : null
-              return (
-                <span
-                  className={`${bullet} ${activeBullet}`}
-                />
-              )
-            })}
-          </div>
-          <span
-            className={arrow}
-            onClick={() => handleOptionNav(1)}
-          >
-            ▶
-          </span>
-        </div>
+        <ArrowNav handleArrow={handleOptionNav} list={servicesList} activeOption={activeOption}/>
       )}
       <div className={`${serviceImg} ${right}`}>
         <motion.img

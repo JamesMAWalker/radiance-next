@@ -15,7 +15,7 @@ const fadeIn = {
 }
 
 
-export const PortraitGrid = ({ imageContents, loadMore }) => {
+export const PortraitGrid = ({ imageContents, loadMore, isMobile }) => {
   const [numRows, setNumRows] = useState(4)
   
   const getNumRows = (numImages) => {
@@ -38,7 +38,7 @@ export const PortraitGrid = ({ imageContents, loadMore }) => {
       animate='visible'
       exit='hidden'
       style={{
-        gridTemplateRows: `repeat(${numRows}, 90vh)`,
+        gridTemplateRows: `repeat(${numRows}, ${isMobile ? '25vh' : '90vh'})`,
       }}
     >
       {imageContents.map((image, idx) => {

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { Blurb } from '../components/blocks/blurb'
 import { BannerBlock } from '../components/blocks/banner-block'
@@ -12,6 +12,7 @@ import {
   center,
   right,
 } from '../styles/studio/studio.module.scss'
+import { ArrowNav } from '../components/blocks/arrow-nav'
 
 const studioBlurb = {
   title: `Studio Photography`,
@@ -93,15 +94,29 @@ const studioImages = {
 
 const Studio = () => {
   const [photoSet, setPhotoSet] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // set mobile breakpoint for JS
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 1024)
+  }, [])
 
   const handleLoadMorePhotos = () => {
     alert('More photos loaded!')
   }
 
+  // indicate currently active category title
   const addLinePosClass = (photoSetIdx) => {
     if (photoSetIdx === 0) return ''
 
     return photoSetIdx === 1 ? center : right
+  }
+
+  // arrow navigation for mobile
+  const handleOptionNav = (crement) => {
+    if ((photoSet <= 0) & (crement < 1)) return
+    if ((photoSet >= 2) & (crement > 0)) return
+    setPhotoSet(photoSet + crement)
   }
 
   return (
@@ -127,17 +142,41 @@ const Studio = () => {
             photoSet
           )}`}
         >
-          {studioImages.categories.map((cat, idx) => {
-            return (
-              <button
-                key={cat.id}
-                className='text-btn'
-                onClick={() => setPhotoSet(idx)}
-              >
-                {cat.title}
-              </button>
-            )
-          })}
+          <AnimatePresence>
+            {!isMobile ? (
+              <>
+                {studioImages.categories.map((cat, idx) => {
+                  return (
+                    <button
+                      key={cat.id}
+                      className='text-btn'
+                      onClick={() => setPhotoSet(idx)}
+                    >
+                      {cat.title}
+                    </button>
+                  )
+                })}
+              </>
+            ) : (
+              <>
+                <motion.button
+                  className='text-btn'
+                  initial={{ x: 0 }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '-100vw' }}
+                  transition={{ duration: .5 }}
+                  onClick={() => setPhotoSet(idx)}
+                >
+                  {studioImages.categories[photoSet].title}
+                </motion.button>
+                <ArrowNav
+                  list={studioImages.categories}
+                  handleArrow={handleOptionNav}
+                  activeOption={photoSet}
+                />
+              </>
+            )}
+          </AnimatePresence>
         </div>
         {studioImages.categories.map((cat, idx) => {
           if (idx === photoSet) {
@@ -146,6 +185,7 @@ const Studio = () => {
                 <PortraitGrid
                   imageContents={cat.photos}
                   loadMore={handleLoadMorePhotos}
+                  isMobile={isMobile}
                 />
               </AnimatePresence>
             )
