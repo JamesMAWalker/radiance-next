@@ -46,6 +46,11 @@ export const Hero = () => {
     setIsMobile(window.innerWidth < 1024)
   }, []);
 
+  // set modal form state
+  const book = (params) => {
+    
+  }
+
   return (
     <section className={hero}>
       <HeroImg

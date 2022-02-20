@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   useAnimation,
   motion,
   AnimatePresence,
   AnimateSharedLayout,
 } from 'framer-motion'
+
+import { ContactContext } from '../../contexts/contact-context'
 
 import {
   serviceSection,
@@ -27,6 +29,7 @@ import {
   right,
 } from '../../styles/home/02-services.module.scss'
 import { ArrowNav } from '../blocks/arrow-nav'
+
 
 const BASE_IMG_URL =
   'https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:good/v1640932169/wedding/dev/'
@@ -59,8 +62,9 @@ export const Services = () => {
   const [activeOption, setActiveOption] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [translatePosition, setTranslatePosition] = useState(activeOption)
+  const { setModalOpen } = useContext(ContactContext)
 
-  const handleOptionNav = (crement) => {
+  const handleServiceNav = (crement) => {
     if (activeOption <= 0 & crement < 1) return
     if (activeOption >= 2 & crement > 0) return
     setActiveOption(activeOption + crement)
@@ -81,6 +85,8 @@ export const Services = () => {
     setTranslatePosition({ transform: positions[activeOption]})
   }, [activeOption])
     
+  
+
   return (
     <section className={serviceSection}>
       <div className={`${serviceImg} ${left}`}>
@@ -126,7 +132,7 @@ export const Services = () => {
                   >
                     <p className={info}>{srvc.blurb}</p>
                     <button className={binaryBtn}>
-                      <div className={btnSegment}>
+                      <div className={btnSegment} onClick={() => setModalOpen(true)}>
                         Book Now
                       </div>
                       <span className={divider} />
@@ -142,7 +148,7 @@ export const Services = () => {
         })}
       </ul>
       {isMobile && (
-        <ArrowNav handleArrow={handleOptionNav} list={servicesList} activeOption={activeOption}/>
+        <ArrowNav handleArrow={handleServiceNav} list={servicesList} activeOption={activeOption}/>
       )}
       <div className={`${serviceImg} ${right}`}>
         <motion.img
