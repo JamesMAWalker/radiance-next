@@ -11,7 +11,7 @@
   }
 }
 
-.aboutGrid {
+.aboutContainer {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -25,5 +25,8 @@
     width: 1px;
     height: 99%;
     background-color: var(--text-color);
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
 }

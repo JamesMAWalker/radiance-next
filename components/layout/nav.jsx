@@ -37,7 +37,7 @@ const pageLinks = [
   },
   {
     mmOrder: 1,
-    path: '/wedding',
+    path: '/wedding-albums',
     text: 'Wedding' 
   },
   {
@@ -76,7 +76,7 @@ export const Navigation = ({ isMobile }) => {
           {pageLinks.slice(0, 4).map((lnk) => {
             return (
               <Fragment key={lnk.text}>
-                <Link href={`${lnk.path}`}>
+                <Link href={`${lnk.path}`} key={lnk.name}>
                   <a className={`${navLink}`}>{lnk.text}</a>
                 </Link>
               </Fragment>
@@ -90,7 +90,7 @@ export const Navigation = ({ isMobile }) => {
           {pageLinks.slice(4, 8).map((lnk, idx) => {
             return (
               <Fragment key={lnk.name}>
-                <Link href={`${lnk.path}`}>
+                <Link href={`${lnk.path}`} key={lnk.name}>
                   <a className={`${navLink}`}>{lnk.text}</a>
                 </Link>
               </Fragment>

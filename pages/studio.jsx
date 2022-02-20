@@ -164,7 +164,7 @@ const Studio = () => {
                   initial={{ x: 0 }}
                   animate={{ x: 0 }}
                   exit={{ x: '-100vw' }}
-                  transition={{ duration: .5 }}
+                  transition={{ duration: 0.5 }}
                   onClick={() => setPhotoSet(idx)}
                 >
                   {studioImages.categories[photoSet].title}
@@ -185,7 +185,6 @@ const Studio = () => {
                 <PortraitGrid
                   imageContents={cat.photos}
                   loadMore={handleLoadMorePhotos}
-                  isMobile={isMobile}
                 />
               </AnimatePresence>
             )

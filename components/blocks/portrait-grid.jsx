@@ -15,8 +15,14 @@ const fadeIn = {
 }
 
 
-export const PortraitGrid = ({ imageContents, loadMore, isMobile }) => {
+export const PortraitGrid = ({ imageContents, loadMore }) => {
   const [numRows, setNumRows] = useState(4)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // set mobile breakpoint for JS
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 1024)
+  }, [])
   
   const getNumRows = (numImages) => {
     const rowQuotient = Math.ceil(numImages / 2) || 4

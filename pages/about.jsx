@@ -7,7 +7,7 @@ import { Blurb } from '../components/blocks/blurb'
 
 import {
   aboutPage,
-  aboutGrid,
+  aboutContainer,
 } from '../styles/about/about.module.scss'
 
 const aboutBlurb = {
@@ -150,7 +150,7 @@ const About = () => {
           blurbBtn={aboutBlurb.button}
           singleLineTitle
         />
-        <section className={aboutGrid}>
+        <section className={aboutContainer}>
           {teamMembers.map((mmbr, idx) => {
             const reverse = !(idx % 2 === 0)
 

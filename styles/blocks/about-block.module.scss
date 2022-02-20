@@ -1,17 +1,36 @@
 @import '../mixins';
 
 .block {
-  height: 75vh;
+  min-height: 75vh;
   width: 80%;
   display: grid;
   gap: var(--grid-space);
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas: "img desc";
   margin-bottom: var(--vp-2xl);
+  @media (max-width: 1024px) {
+    height: auto;
+    margin-bottom: var(--vp-3xl);
+    grid-template-rows: 40vh auto;
+    grid-template-columns: 100%;
+    grid-template-areas: 
+      "img"
+      "desc"
+    ;
+  }
   &.reversedBlock {
     grid-template-areas: "desc img";
+    @media (max-width: 1024px) {
+      grid-template-areas: 
+      "img"
+      "desc"
+    ;
+    }
     .descContainer {
-      transform: translateX(4vw);
+      transform: translateX(2vw);
+      @media (max-width: 1024px) {
+        transform: unset;
+      }
     }
   }
 }
@@ -31,6 +50,9 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  @media (max-width: 1024px) {
+    height: auto;
+  }
 }
 
 .memberName {
@@ -45,6 +67,9 @@
     margin-bottom: -2vh;
     font-size: var(--text-7xl);
     color: var(--studio-color);
+    @media (max-width: 1024px) {
+      font-size: var(--text-5xl);
+    }
   }
   .blk {
     font-size: var(--text-6xl);
@@ -64,6 +89,9 @@
   @include blurbText;
   width: 60%;
   text-align: left;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 }
 
 .aboutBtn {

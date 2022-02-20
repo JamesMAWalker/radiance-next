@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react'
 import Head from 'next/head'
 
-import { HeroImg } from '../components/blocks/hero-img'
-import { Blurb } from '../components/blocks/blurb'
-import { AlbumPair } from '../components/blocks/album-pair'
+import { HeroImg } from '../../components/blocks/hero-img'
+import { Blurb } from '../../components/blocks/blurb'
+import { AlbumPair } from '../../components/blocks/album-pair'
 
-import { weddingPage } from '../styles/wedding/wedding.module.scss'
+import { server } from '../../config/index';
+
+import { weddingPage } from '../../styles/wedding/wedding.module.scss'
 
 const weddingBlurb = {
   title: `Wedding Photography`,
@@ -54,7 +56,24 @@ const albumsList = [
   },
 ]
 
-const Wedding = () => {
+export const getStaticProps = async () => {
+  const res = await fetch(`${server}/albums.json`)
+
+  if (res.status !== 200) {
+    throw new Error(
+      `There was an error! Status code is ${res.status}`
+    )
+  }
+
+  const data = await res.json()
+
+  return {
+    props: { albums: data },
+  }
+}
+
+const Wedding = ({ albums }) => {
+  console.log('props from wedding index page: ', albums)
   return (
     <Fragment>
       <Head>
@@ -79,12 +98,13 @@ const Wedding = () => {
           blurbBtn={weddingBlurb.button}
           singleLineTitle
         />
-        {albumsList.map((albm) => {
+        {albums.map((albm) => {
           return (
             <AlbumPair
               key={albm.title}
               coupleNames={albm.title}
-              imgUrlFrags={albm.photos}
+              imgUrlFrags={albm.pairPhotoUrls}
+              path={albm.path}
             />
           )
         })}

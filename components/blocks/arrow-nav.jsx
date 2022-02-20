@@ -20,11 +20,11 @@ export const ArrowNav = ({
         ◀
       </span>
       <div className={indicatorBullets}>
-        {list.map((_, idx) => {
+        {list.map((itm, idx) => {
           const activeBullet =
             idx === activeOption ? activeBulletStyle : null
           return (
-            <span className={`${bullet} ${activeBullet}`} />
+            <span key={idx} className={`${bullet} ${activeBullet}`} />
           )
         })}
       </div>

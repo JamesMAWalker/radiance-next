@@ -81,8 +81,8 @@ const Event = ({ event: evt }) => {
         />
         <Blurb
           blurbTitle={evt.header}
-          blurbText={evt.blurbs.map((txt) => (
-            <span>{txt}</span>
+          blurbText={evt.blurbs.map((txt, idx) => (
+            <span key={idx}>{txt}</span>
           ))}
           blurbBtn={evt.button}
           singleLineTitle
