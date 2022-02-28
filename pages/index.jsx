@@ -50,7 +50,7 @@ export const getStaticProps = async () => {
       gallery: images,
       nextCursor: nextCursor || false,
     },
-  // }
+  }
 }
 
 export default function Home({ gallery, nextCursor }) {
