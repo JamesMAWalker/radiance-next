@@ -57,7 +57,7 @@ const albumsList = [
 ]
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${server}/api/albums`)
+  const res = await fetch(`${server}/api/w-albums`)
 
   if (res.status !== 200) {
     throw new Error(
