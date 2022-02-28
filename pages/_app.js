@@ -21,12 +21,6 @@ export default function MyApp({ Component, pageProps }) {
   const [isMobile, setIsMobile] = useState(false)
   const { modalOpen } = useContext(ContactContext)
 
-  useEffect(() => {
-    
-    console.log('modalOpen changed: ', modalOpen);
-  }, [modalOpen])
-  
-
   // check path and set theme color accordingly
   useEffect(() => {
     let themeColor = `var(--the-good-silver)`

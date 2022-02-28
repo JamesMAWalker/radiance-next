@@ -1,10 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import {
   useAnimation,
   motion,
   AnimatePresence,
   AnimateSharedLayout,
 } from 'framer-motion'
+import Link from 'next/link'
 
 import { ContactContext } from '../../contexts/contact-context'
 
@@ -29,44 +34,68 @@ import {
   right,
 } from '../../styles/home/02-services.module.scss'
 import { ArrowNav } from '../blocks/arrow-nav'
-
-
-const BASE_IMG_URL =
-  'https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:good/v1640932169/wedding/dev/'
+import { baseUrlPng } from '../../utils/baseUrl'
 
 const servicesList = [
   {
     title: 'Wedding',
+    path: '/wedding-albums',
     photoUrls: [
-      'wedding-left_hmlvo6',
-      'wedding-right_yntqaz',
+      'wedding-pair/wedding-left_hmlvo6',
+      'wedding-pair/wedding-right_yntqaz',
     ],
-    blurb:
-      ' Nullam et metus arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    blurb: (
+      <>
+        Let us help you curate and capture your special day.
+        {/* Nullam et metus arcu. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. */}
+      </>
+    ),
   },
   {
     title: 'Event',
-    photoUrls: ['event-left_bpofcn', 'event-right_izf8sw'],
-    blurb:
-      'Consectetur adipiscing elit, lorem ipsum dolor sit amet. Nullam et metus arcu.',
+    path: 'events',
+    photoUrls: [
+      'event-pair/  event-left_bpofcn',
+      'event-pair/event-right_izf8sw',
+    ],
+    blurb: (
+      <>
+        For those special days other than weddings that you
+        cherish all the same.
+        {/* Nullam et metus arcu. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. */}
+      </>
+    ),
   },
   {
     title: 'Studio',
-    photoUrls: ['HS-right_dbwbqe', 'HS-left_oilynm'],
-    blurb:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et metus arcu.',
+    path: 'studio',
+    photoUrls: [
+      'headshots-pair/Gallery_Image-2_da0mrv',
+      'headshots-pair/Gallery_Image-3_dztesw',
+    ],
+    blurb: (
+      <>
+        In house photography for professional headshots, as
+        well as family portraits.
+        {/* Nullam et metus arcu. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. */}
+      </>
+    ),
   },
 ]
 
 export const Services = () => {
   const [activeOption, setActiveOption] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
-  const [translatePosition, setTranslatePosition] = useState(activeOption)
+  const [translatePosition, setTranslatePosition] =
+    useState(activeOption)
   const { setModalOpen } = useContext(ContactContext)
 
   const handleServiceNav = (crement) => {
-    if (activeOption <= 0 & crement < 1) return
-    if (activeOption >= 2 & crement > 0) return
+    if ((activeOption <= 0) & (crement < 1)) return
+    if ((activeOption >= 2) & (crement > 0)) return
     setActiveOption(activeOption + crement)
   }
 
@@ -82,16 +111,18 @@ export const Services = () => {
       1: `translateX(-95vw)`,
       2: `translateX(-190vw)`,
     }
-    setTranslatePosition({ transform: positions[activeOption]})
+    setTranslatePosition({
+      transform: positions[activeOption],
+    })
   }, [activeOption])
-    
-  
 
   return (
     <section className={serviceSection}>
       <div className={`${serviceImg} ${left}`}>
         <motion.img
-          src={`${BASE_IMG_URL}${servicesList[activeOption].photoUrls[0]}.png`}
+          src={baseUrlPng(
+            `index/${servicesList[activeOption].photoUrls[0]}`
+          )}
         />
       </div>
       <ul
@@ -132,13 +163,18 @@ export const Services = () => {
                   >
                     <p className={info}>{srvc.blurb}</p>
                     <button className={binaryBtn}>
-                      <div className={btnSegment} onClick={() => setModalOpen(true)}>
+                      <div
+                        className={btnSegment}
+                        onClick={() => setModalOpen(true)}
+                      >
                         Book Now
                       </div>
                       <span className={divider} />
-                      <div className={btnSegment}>
-                        View Gallery
-                      </div>
+                      <Link href={`/${srvc.path}`}>
+                        <a className={btnSegment}>
+                          View Gallery
+                        </a>
+                      </Link>
                     </button>
                   </motion.div>
                 )}
@@ -148,11 +184,17 @@ export const Services = () => {
         })}
       </ul>
       {isMobile && (
-        <ArrowNav handleArrow={handleServiceNav} list={servicesList} activeOption={activeOption}/>
+        <ArrowNav
+          handleArrow={handleServiceNav}
+          list={servicesList}
+          activeOption={activeOption}
+        />
       )}
       <div className={`${serviceImg} ${right}`}>
         <motion.img
-          src={`${BASE_IMG_URL}${servicesList[activeOption].photoUrls[1]}.png`}
+          src={baseUrlPng(
+            `index/${servicesList[activeOption].photoUrls[1]}`
+          )}
         />
       </div>
     </section>

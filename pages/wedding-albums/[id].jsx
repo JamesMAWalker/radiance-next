@@ -83,16 +83,17 @@ const sizeMatrix = {
 }
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${server}/albums.json`)
+  const res = await fetch(`${server}/api/w-albums`)
 
   if (res.status !== 200) {
-    console.log('res from GSP in [id]: ', res)
+    console.log('res from GSP in [id] of weddings: ', res)
     throw new Error(
       `There was an error! Status code is ${res.status}`
     )
   }
 
   const data = await res.json()
+  console.log('data from gsPaths in [id] of weddings: ', data);
 
   const eventPaths = data.map((alb) => {
     return {
@@ -143,7 +144,6 @@ export const getStaticProps = async (context) => {
 }
 
 const WeddingAlbum = (props) => {
-  console.log('props: ', props)
   const { album: alb, next: nxt, prev: prv } = props
 
   return (

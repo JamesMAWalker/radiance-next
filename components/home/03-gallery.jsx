@@ -1,8 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { motion, useAnimation } from 'framer-motion'
+import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
-import { fadeUp } from '../../animations/fade'
+import {
+  search,
+  mapImageResources,
+} from '../../lib/cloudinary'
+
+import { fadeIn, fadeUp } from '../../animations/fade'
 
 import {
   gallerySection,
@@ -14,8 +19,10 @@ import {
   galleryImg,
   galleryCursor,
   point,
+  loadMore,
 } from '../../styles/home/03-gallery.module.scss'
 import { CircleText } from '../svg/circle-text'
+import { baseUrlPng } from '../../utils/baseUrl'
 
 const BASE_URL =
   'https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:good/v1640679114/wedding'
@@ -35,8 +42,30 @@ const galleryImgUrls = [
   'Photo_Oct_16_6_37_08_AM_el3mji.jpg',
 ]
 
-export const Gallery = () => {
+export const Gallery = ({ images: defaultImages, nextCursor: defaultNextCursor }) => {
+  
+  const [images, setImages] = useState(defaultImages)
+  const [nextCursor, setNextCursor] = useState(defaultNextCursor)
   const controls = useAnimation()
+
+  const handleLoadMore = async (e) => {
+    e.preventDefault()
+
+    const results = await fetch('api/search', {
+      method: 'POST',
+      body: JSON.stringify({ nextCursor, expression: 'folder=index/_gallery' }),
+    }).then((r) => r.json())
+
+    const { resources, next_cursor: updatedNextCursor } = results
+
+    const images = mapImageResources(resources)
+
+    setImages((prv) => {
+      
+      return [...prv, ...images]
+    })
+    setNextCursor(updatedNextCursor)
+  }
 
   // custom cursor logic
   const sliderRef = useRef(null)
@@ -109,20 +138,39 @@ export const Gallery = () => {
           <div
             className={gallerySlider}
             style={{
-              gridTemplateColumns: `repeat(${galleryImgUrls.length}, 25vw)`,
+              gridTemplateColumns: `repeat(${
+                images.length + 1
+              }, 25vw)`,
             }}
           >
-            {galleryImgUrls.map((url, idx) => {
-              return (
-                <img
-                  key={`${url}${idx}`}
-                  className={galleryImg}
-                  src={`${BASE_URL}/${url}`}
-                  alt='radiance photography selected work'
-                  loading={idx < 3 ? 'eager' : 'lazy'}
-                />
-              )
-            })}
+            <AnimatePresence>
+              {images.map((url, idx) => {
+                return (
+                  <motion.img
+                    key={`${url}${idx}`}
+                    className={galleryImg}
+                    src={baseUrlPng(url)}
+                    alt='radiance photography selected work'
+                    variants={fadeIn}
+                    initial='hidden'
+                    animate='visible'
+                    exit='hidden'
+                    transition={{
+                      duration: 2,
+                      ease: [0.115, 0.905, 0.32, 1],
+                    }}
+                  />
+                )
+              })}
+            </AnimatePresence>
+            <span
+              className={loadMore}
+              onClick={handleLoadMore}
+            >
+              <button className='text-btn'>
+                Load More
+              </button>
+            </span>
           </div>
         </div>
       </div>

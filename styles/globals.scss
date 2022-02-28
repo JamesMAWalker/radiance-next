@@ -152,6 +152,7 @@
   /* text size */
   --text-hero: var(--text-10xl);
   --text-display: var(--text-7xl);
+  --text-header-sm: var(--text-3xl-plus);
   --text-header: var(--text-4xl);
   --text-header-lg: var(--text-7xl);
   --text-prose: var(--text-2xl);
@@ -200,6 +201,7 @@ body {
   justify-content: center;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  caret-color: transparent;
   ::-webkit-scrollbar {
     display: none !important;
   }

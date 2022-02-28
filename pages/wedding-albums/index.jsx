@@ -57,7 +57,7 @@ const albumsList = [
 ]
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${server}/albums.json`)
+  const res = await fetch(`${server}/api/albums`)
 
   if (res.status !== 200) {
     throw new Error(
@@ -73,7 +73,6 @@ export const getStaticProps = async () => {
 }
 
 const Wedding = ({ albums }) => {
-  console.log('props from wedding index page: ', albums)
   return (
     <Fragment>
       <Head>
