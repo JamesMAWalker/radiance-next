@@ -15,7 +15,7 @@ import { useEffect } from 'react'
 export const getStaticProps = async () => {
   const res1 = await fetch(`${server}/api/events`)
 
-  if (res.status !== 200) {
+  if (res1.status !== 200) {
     console.log('res from GSPaths in [id] of events: ', res1)
     throw new Error(
       `There was an error! Status code is ${res1.status}`
@@ -23,7 +23,7 @@ export const getStaticProps = async () => {
   }
   const res2 = await fetch(`${server}/api/events`)
 
-  if (res.status !== 200) {
+  if (res2.status !== 200) {
     console.log('res from GSPaths in [id] of events: ', res2)
     throw new Error(
       `There was an error! Status code is ${res1.status}`
