@@ -13,17 +13,26 @@ import { Contact } from '../components/home/04-contact'
 import { useEffect } from 'react'
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${server}/api/events`)
+  const res1 = await fetch(`${server}/api/events`)
 
   if (res.status !== 200) {
-    console.log('res from GSPaths in [id] of events: ', res)
+    console.log('res from GSPaths in [id] of events: ', res1)
     throw new Error(
-      `There was an error! Status code is ${res.status}`
+      `There was an error! Status code is ${res1.status}`
+    )
+  }
+  const res2 = await fetch(`${server}/api/events`)
+
+  if (res.status !== 200) {
+    console.log('res from GSPaths in [id] of events: ', res2)
+    throw new Error(
+      `There was an error! Status code is ${res1.status}`
     )
   }
 
-  const data = await res.json()
-  console.log('data from gsPaths in [id] of events: ', data)
+  const evtData = await res1.json()
+  const albData = await res2.json()
+  console.log('data from gsPaths in [id] of events: ', evtData)
 
   const { resources, next_cursor: nextCursor } =
     await search({ expression: 'folder=index/_gallery' })
@@ -32,7 +41,8 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      events: data,
+      events: evtData,
+      albums: albData,
       gallery: images,
       nextCursor: nextCursor || false,
     },
