@@ -113,7 +113,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const { id } = context.params
 
-  const res = await fetch(`${server}/albums.json`)
+  const res = await fetch(`${server}/api/w-albums`)
 
   if (res.status !== 200) {
     throw new Error(
@@ -226,4 +226,3 @@ const WeddingAlbum = (props) => {
 }
 
 export default WeddingAlbum
-  

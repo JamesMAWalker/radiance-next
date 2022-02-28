@@ -53,7 +53,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const { id } = context.params
 
-  const res = await fetch(`${server}/events.json`)
+  const res = await fetch(`${server}/api/events`)
 
   if (res.status !== 200) {
     throw new Error(

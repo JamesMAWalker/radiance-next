@@ -60,7 +60,7 @@ export const ContactModal = () => {
     window.addEventListener('keydown', close)
     return () =>
       window.removeEventListener('keydown', close)
-  }, [modalOpen])
+  }, [modalOpen, setModalOpen])
 
   const handleCloseModal = () => {
     setModalOpen(false)
