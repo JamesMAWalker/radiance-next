@@ -21,14 +21,12 @@ export const AlbumPair = ({ coupleNames, imgUrlFrags, path }) => {
       <div className={photoPair}>
         <div className={photo}>
           <img
-            // src={`${BASE_IMG_URL}/${imgUrlFrags[0]}`}
             src={baseUrlPng(imgUrlFrags[0])}
             alt={coupleNames}
           />
         </div>
         <div className={photo}>
           <img
-            // src={`${BASE_IMG_URL}/${imgUrlFrags[1]}`}
             src={baseUrlPng(imgUrlFrags[1])}
             alt={coupleNames}
           />

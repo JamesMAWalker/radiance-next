@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { baseUrlPng } from '../../utils/baseUrl'
+
 import {
   bannerContainer,
   bannerImg,
@@ -11,14 +13,13 @@ import {
   flexWrapper,
 } from '../../styles/blocks/banner-block.module.scss'
 
-const BASE_IMG_URL = `https://res.cloudinary.com/radiance-photography-studio/image/upload/v1641282231/wedding/dev`
 
 export const BannerBlock = ({ imgUrlFrag }) => {
   return (
     <div className={bannerContainer}>
       <div className={bannerImg}>
         <img
-          src={`${BASE_IMG_URL}/${imgUrlFrag}`}
+          src={baseUrlPng(imgUrlFrag)}
           alt='studio photography'
         />
       </div>

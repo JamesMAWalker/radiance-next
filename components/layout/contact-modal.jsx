@@ -66,10 +66,6 @@ export const ContactModal = () => {
     setModalOpen(false)
   }
 
-  useEffect(() => {
-    // console.log('modalContent changed: ', modalContent)
-  }, [modalContent])
-
   const handleSetModalContent = (selection) => {
     if (selection === 'studio') {
       setModalContent(studioQuestions[modalPageNum])

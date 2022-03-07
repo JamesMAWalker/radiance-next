@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { AnimatePresence, motion } from 'framer-motion'
 
+import {
+  search,
+  mapImageResources,
+} from '../lib/cloudinary'
+
 import { Blurb } from '../components/blocks/blurb'
 import { BannerBlock } from '../components/blocks/banner-block'
 import { PortraitGrid } from '../components/blocks/portrait-grid'
@@ -14,6 +19,43 @@ import {
 } from '../styles/studio/studio.module.scss'
 import { ArrowNav } from '../components/blocks/arrow-nav'
 
+export const getStaticProps = async () => {
+  // eventually replace folderNames with a request that gets all desired folder names
+  const folderNames = [
+    'acting-modeling',
+    'corporate',
+    'personal-family',
+  ]
+  const foldersWithData = await Promise.all(
+    folderNames.map(async (fld) => {
+      const { resources, next_cursor: nextCursor } =
+        await search({
+          expression: `folder=headshots/${fld}`,
+          max_results: 10,
+        })
+      const imgUrls = mapImageResources(resources)
+      return {
+        title: fld,
+        imgUrls,
+        nextCursor: nextCursor || false,
+      }
+    })
+  )
+
+  const { resources, next_cursor: nextCursor } =
+    await search({
+      expression: 'folder:headshots/*',
+      max_results: 10,
+    })
+
+  return {
+    props: {
+      folders: foldersWithData,
+    },
+  }
+}
+
+// Page data
 const studioBlurb = {
   title: `Studio Photography`,
   text: (
@@ -32,9 +74,8 @@ const studioBlurb = {
   ),
   button: 'Book Your Shoot',
 }
-
 const studioImages = {
-  hero: 'HS-right_dbwbqe.png',
+  hero: 'headshots/hero-01_ex5hqd',
   categories: [
     {
       id: 'acting-modeling',
@@ -43,16 +84,6 @@ const studioImages = {
           Acting & <br /> Modeling
         </>
       ),
-      photos: [
-        'studio-photo005_bkfunf.png',
-        'studio-photo010_jkryvh.png',
-        'studio-photo009_oauenb.png',
-        'studio-photo004_a7r6oa.png',
-        'studio-photo003_vjsse5.png',
-        'studio-photo003_vqeer0.png',
-        'studio-photo007_aody40.png',
-        'studio-photo002_f44eib.png',
-      ],
     },
     {
       id: 'business-corporate',
@@ -61,16 +92,6 @@ const studioImages = {
           Business & <br /> Corporate
         </>
       ),
-      photos: [
-        'studio-photo004_a7r6oa.png',
-        'studio-photo010_jkryvh.png',
-        'studio-photo007_aody40.png',
-        'studio-photo003_vjsse5.png',
-        'studio-photo003_vqeer0.png',
-        'studio-photo005_bkfunf.png',
-        'studio-photo002_f44eib.png',
-        'studio-photo009_oauenb.png',
-      ],
     },
     {
       title: (
@@ -78,32 +99,48 @@ const studioImages = {
           Personal & <br /> Family
         </>
       ),
-      photos: [
-        'studio-photo002_f44eib.png',
-        'studio-photo004_a7r6oa.png',
-        'studio-photo005_bkfunf.png',
-        'studio-photo010_jkryvh.png',
-        'studio-photo009_oauenb.png',
-        'studio-photo007_aody40.png',
-        'studio-photo003_vqeer0.png',
-        'studio-photo003_vjsse5.png',
-      ],
     },
   ],
 }
 
-const Studio = () => {
-  const [photoSet, setPhotoSet] = useState(0)
+const Studio = ({ folders }) => {
+  const [photoSet, setPhotoSet] = useState(2)
   const [isMobile, setIsMobile] = useState(false)
+
+  const [images, setImages] = useState(
+    folders[photoSet].imgUrls
+  )
+  const [nextCursor, setNextCursor] = useState(
+    folders[photoSet].nextCursor
+  )
+
+  const handleLoadMorePhotos = async (e) => {
+    e.preventDefault()
+
+    const results = await fetch('api/search', {
+      method: 'POST',
+      body: JSON.stringify({
+        nextCursor: folders[photoSet].nextCursor,
+        expression: `folder:headshots/${folders[photoSet].title}`,
+        max_results: 5,
+      }),
+    }).then((r) => r.json())
+
+    const { resources, next_cursor: updatedNextCursor } =
+      results
+
+    const images = mapImageResources(resources)
+
+    setImages((prv) => {
+      return [...prv, ...images]
+    })
+    setNextCursor(updatedNextCursor)
+  }
 
   // set mobile breakpoint for JS
   useEffect(() => {
     setIsMobile(window.innerWidth < 1024)
   }, [])
-
-  const handleLoadMorePhotos = () => {
-    alert('More photos loaded!')
-  }
 
   // indicate currently active category title
   const addLinePosClass = (photoSetIdx) => {
@@ -118,6 +155,13 @@ const Studio = () => {
     if ((photoSet >= 2) & (crement > 0)) return
     setPhotoSet(photoSet + crement)
   }
+
+  // set images when photoSet changes
+  useEffect(() => {
+    console.log('images changed in STUDIO: ', images)
+    setImages(folders[photoSet].imgUrls)
+    setNextCursor(folders[photoSet].nextCursor)
+  }, [photoSet])
 
   return (
     <div className={studioPage}>
@@ -183,7 +227,8 @@ const Studio = () => {
             return (
               <AnimatePresence>
                 <PortraitGrid
-                  imageContents={cat.photos}
+                  imageContents={images}
+                  altTag={folders[photoSet].title}
                   loadMore={handleLoadMorePhotos}
                 />
               </AnimatePresence>

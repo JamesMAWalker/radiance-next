@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import { gridContainer, imgCell, loadMoreBlock } from '../../styles/blocks/portrait-grid.module.scss'
+import { baseUrlPng } from '../../utils/baseUrl'
+import { ExpandableImage } from './exp-image'
 
 const BASE_IMG_URL = `https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:good/v1641289269/wedding/dev`
 
@@ -15,8 +17,7 @@ const fadeIn = {
 }
 
 
-export const PortraitGrid = ({ imageContents, loadMore }) => {
-  const [numRows, setNumRows] = useState(4)
+export const PortraitGrid = ({ imageContents, loadMore, altTag }) => {
   const [isMobile, setIsMobile] = useState(false)
 
   // set mobile breakpoint for JS
@@ -24,16 +25,6 @@ export const PortraitGrid = ({ imageContents, loadMore }) => {
     setIsMobile(window.innerWidth < 1024)
   }, [])
   
-  const getNumRows = (numImages) => {
-    const rowQuotient = Math.ceil(numImages / 2) || 4
-    // add 1 row for loadMore button
-    return rowQuotient + 1
-  }
-
-  // set number of rows whenever imageContents changes
-  useEffect(() => {
-    setNumRows(getNumRows(imageContents?.length, (loadMore && true)))
-  }, [imageContents, loadMore])
 
   return (
     <motion.section
@@ -43,18 +34,32 @@ export const PortraitGrid = ({ imageContents, loadMore }) => {
       initial='hidden'
       animate='visible'
       exit='hidden'
-      style={{
-        gridTemplateRows: `repeat(${numRows}, ${isMobile ? '25vh' : '90vh'})`,
-      }}
     >
       {imageContents.map((image, idx) => {
         return (
-          <div key={`${image}${idx}`} className={imgCell}>
-            <img
-              src={`${BASE_IMG_URL}/${image}`}
-              alt='studio-photography'
+          <motion.div
+            key={`${image}${idx}`}
+            className={imgCell}
+          > 
+            <ExpandableImage 
+              urlFrag={image}
+              altTag={altTag}
             />
-          </div>
+            {/* <motion.img
+              src={baseUrlPng(image, 'eco')}
+              alt={altTag}
+              loading='eager'
+              variants={fadeIn}
+              transition={{
+                type: 'tween',
+                ease: 'easeOut',
+                duration: 0.8,
+              }}
+              initial='hidden'
+              animate='visible'
+              exit='hidden'
+            /> */}
+          </motion.div>
         )
       })}
       <div className={loadMoreBlock}>

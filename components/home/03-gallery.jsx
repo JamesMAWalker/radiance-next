@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { AnimatePresence, motion, useAnimation } from 'framer-motion'
+import {
+  AnimatePresence,
+  motion,
+  useAnimation,
+} from 'framer-motion'
 
 import {
   search,
@@ -23,6 +27,7 @@ import {
 } from '../../styles/home/03-gallery.module.scss'
 import { CircleText } from '../svg/circle-text'
 import { baseUrlPng } from '../../utils/baseUrl'
+import { ExpandableImage } from '../blocks/exp-image'
 
 const BASE_URL =
   'https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:good/v1640679114/wedding'
@@ -42,10 +47,14 @@ const galleryImgUrls = [
   'Photo_Oct_16_6_37_08_AM_el3mji.jpg',
 ]
 
-export const Gallery = ({ images: defaultImages, nextCursor: defaultNextCursor }) => {
-  
+export const Gallery = ({
+  images: defaultImages,
+  nextCursor: defaultNextCursor,
+}) => {
   const [images, setImages] = useState(defaultImages)
-  const [nextCursor, setNextCursor] = useState(defaultNextCursor)
+  const [nextCursor, setNextCursor] = useState(
+    defaultNextCursor
+  )
   const controls = useAnimation()
 
   const handleLoadMore = async (e) => {
@@ -53,15 +62,20 @@ export const Gallery = ({ images: defaultImages, nextCursor: defaultNextCursor }
 
     const results = await fetch('api/search', {
       method: 'POST',
-      body: JSON.stringify({ nextCursor, expression: 'folder=index/_gallery' }),
+      body: JSON.stringify({
+        nextCursor,
+        expression: 'folder=index/_gallery',
+        // expression: 'folder:headshots/*',
+        max_results: 5,
+      }),
     }).then((r) => r.json())
 
-    const { resources, next_cursor: updatedNextCursor } = results
+    const { resources, next_cursor: updatedNextCursor } =
+      results
 
     const images = mapImageResources(resources)
 
     setImages((prv) => {
-      
       return [...prv, ...images]
     })
     setNextCursor(updatedNextCursor)
@@ -146,20 +160,24 @@ export const Gallery = ({ images: defaultImages, nextCursor: defaultNextCursor }
             <AnimatePresence>
               {images.map((url, idx) => {
                 return (
-                  <motion.img
-                    key={`${url}${idx}`}
-                    className={galleryImg}
-                    src={baseUrlPng(url)}
-                    alt='radiance photography selected work'
-                    variants={fadeIn}
-                    initial='hidden'
-                    animate='visible'
-                    exit='hidden'
-                    transition={{
-                      duration: 2,
-                      ease: [0.115, 0.905, 0.32, 1],
-                    }}
+                  <ExpandableImage 
+                    urlFrag={url}
+                    altTag={'gallery image'}
                   />
+                  // <motion.img
+                  //   key={`${url}${idx}`}
+                  //   className={galleryImg}
+                  //   src={baseUrlPng(url)}
+                  //   alt='radiance photography selected work'
+                  //   variants={fadeIn}
+                  //   initial='hidden'
+                  //   animate='visible'
+                  //   exit='hidden'
+                  //   transition={{
+                  //     duration: 2,
+                  //     ease: [0.115, 0.905, 0.32, 1],
+                  //   }}
+                  // />
                 )
               })}
             </AnimatePresence>

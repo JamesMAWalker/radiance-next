@@ -11,15 +11,18 @@ import {
   ContactContext,
   ContactProvider,
 } from '../contexts/contact-context'
+import { FSPhotoContext, FSPhotoProvider } from '../contexts/fsphoto-context'
 
 import '../styles/globals.scss'
 import { layout } from '../styles/layout/layout.module.scss'
 import { ContactModal } from '../components/layout/contact-modal'
+import { PhotoModal } from '../components/blocks/photo-modal'
 
 export default function MyApp({ Component, pageProps }) {
   const { asPath } = useRouter()
   const [isMobile, setIsMobile] = useState(false)
   const { modalOpen } = useContext(ContactContext)
+  const { photoModalOpen } = useContext(FSPhotoContext)
 
   // check path and set theme color accordingly
   useEffect(() => {
@@ -48,14 +51,17 @@ export default function MyApp({ Component, pageProps }) {
   }, [])
 
   return (
-    <ContactProvider>
-      <div className={layout}>
-        <Navigation isMobile={isMobile} />
-        <Component {...pageProps} />
-        {/* {modalOpen && <ContactModal />} */}
-        <ContactModal />
-        <Footer />
-      </div>
-    </ContactProvider>
+    <FSPhotoProvider>
+      <ContactProvider>
+        <div className={layout}>
+          <Navigation isMobile={isMobile} />
+          <Component {...pageProps} />
+          {/* {modalOpen && <ContactModal />} */}
+          <ContactModal />
+          <PhotoModal />
+          <Footer />
+        </div>
+      </ContactProvider>
+    </FSPhotoProvider>
   )
 }

@@ -6,6 +6,11 @@ import { Blurb } from '../../components/blocks/blurb'
 import { AlbumPair } from '../../components/blocks/album-pair'
 
 import { server } from '../../config/index'
+import {
+  mapResourcesToAlbumPreviews,
+  genPathsFromResources,
+  search,
+} from '../../lib/cloudinary'
 
 import { weddingPage } from '../../styles/wedding/wedding.module.scss'
 
@@ -57,18 +62,22 @@ const albumsList = [
 ]
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${server}/api/w-albums`)
+  const { resources, next_cursor: nextCursor } =
+    await search({
+      expression: 'folder:wedding/albums/*',
+    })
+  // const paths = genPathsFromResources(
+  //   resources,
+  //   'wedding/albums/'
+  // )
 
-  if (res.status !== 200) {
-    throw new Error(
-      `There was an error! Status code is ${res.status}`
-    )
-  }
-
-  const data = await res.json()
+  const albumPreviews = mapResourcesToAlbumPreviews(
+    resources,
+    'wedding/albums/'
+  )
 
   return {
-    props: { albums: data },
+    props: { albums: albumPreviews },
   }
 }
 
@@ -85,11 +94,9 @@ const Wedding = ({ albums }) => {
       </Head>
       <main className={weddingPage}>
         <HeroImg
-          imageUrlFrag={'wedding_tohrlj'}
+          imageUrlFrag={'wedding/wedell-367_iggt8e'}
           quality={'best'}
-          altText={
-            'bridesmaids & groomsmen surround wedding couple'
-          }
+          altText={'bridesmaids'}
         />
         <Blurb
           blurbTitle={weddingBlurb.title}
@@ -102,7 +109,7 @@ const Wedding = ({ albums }) => {
             <AlbumPair
               key={albm.title}
               coupleNames={albm.title}
-              imgUrlFrags={albm.pairPhotoUrls}
+              imgUrlFrags={albm.pair}
               path={albm.path}
             />
           )

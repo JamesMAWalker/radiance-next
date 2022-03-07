@@ -74,7 +74,9 @@
     @include titleText(var(--text-3xl));
     margin-bottom: 0;
     @media (max-width: 1024px) {
-      font-size: var(--text-lg);
+      display: flex;
+      flex-direction: column;
+      font-size: var(--text-xl);
       margin-top: 0;
     }
   }
