@@ -28,6 +28,7 @@ import {
 import { CircleText } from '../svg/circle-text'
 import { baseUrlPng } from '../../utils/baseUrl'
 import { ExpandableImage } from '../blocks/exp-image'
+import { Fragment } from 'react/cjs/react.production.min'
 
 const BASE_URL =
   'https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:good/v1640679114/wedding'
@@ -160,24 +161,12 @@ export const Gallery = ({
             <AnimatePresence>
               {images.map((url, idx) => {
                 return (
-                  <ExpandableImage 
-                    urlFrag={url}
-                    altTag={'gallery image'}
-                  />
-                  // <motion.img
-                  //   key={`${url}${idx}`}
-                  //   className={galleryImg}
-                  //   src={baseUrlPng(url)}
-                  //   alt='radiance photography selected work'
-                  //   variants={fadeIn}
-                  //   initial='hidden'
-                  //   animate='visible'
-                  //   exit='hidden'
-                  //   transition={{
-                  //     duration: 2,
-                  //     ease: [0.115, 0.905, 0.32, 1],
-                  //   }}
-                  // />
+                  <Fragment key={`${url}${idx}`}>
+                    <ExpandableImage
+                      urlFrag={url}
+                      altTag={'gallery image'}
+                    />
+                  </Fragment>
                 )
               })}
             </AnimatePresence>

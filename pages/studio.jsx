@@ -158,10 +158,9 @@ const Studio = ({ folders }) => {
 
   // set images when photoSet changes
   useEffect(() => {
-    console.log('images changed in STUDIO: ', images)
     setImages(folders[photoSet].imgUrls)
     setNextCursor(folders[photoSet].nextCursor)
-  }, [photoSet])
+  }, [photoSet, folders, setImages, setNextCursor])
 
   return (
     <div className={studioPage}>
