@@ -1,4 +1,4 @@
-@import '../mixins';
+@import "../mixins";
 
 .album {
   min-height: 85vh;
@@ -24,6 +24,10 @@
   @include titleText(var(--text-5xl));
   // margin: var(--vp-md) 0;
   margin-bottom: var(--vp-ms);
+  @media (max-width: 1024px) {
+    font-size: var(--text-3xl);
+    padding: var(--vp-sm) var(--vp-md);
+  }
 }
 
 .photoPair {
@@ -35,6 +39,7 @@
   align-items: center;
   justify-content: center;
   @media (max-width: 1024px) {
+    width: 100%;
     margin-top: var(--vp-lg);
     margin-bottom: 0;
     grid-template-columns: 1fr;
@@ -45,6 +50,13 @@
 .photo {
   height: 100%;
   width: 100%;
+  @media (max-width: 1024px) {
+    height: 30vh;
+    border-top: 1px solid var(--text-color);
+    img {
+      width: 100% !important;
+    }
+  }
   &:last-child {
     @media (max-width: 1024px) {
       display: none;

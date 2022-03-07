@@ -9,9 +9,9 @@
   display: grid;
   gap: var(--grid-space);
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(6, 65vh);
+  grid-auto-rows: 65vh;
   @media (max-width: 1024px) {
-    grid-template-rows: repeat(6, 30vh);
+    grid-auto-rows: 30vh;
   }
 }
 

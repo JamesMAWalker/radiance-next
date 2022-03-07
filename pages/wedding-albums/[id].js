@@ -29,8 +29,7 @@ import {
   viewAll,
 } from '../../styles/wedding/wedding-album.module.scss'
 import { baseUrlPng } from '../../utils/baseUrl'
-
-
+import { ExpandableImage } from '../../components/blocks/exp-image'
 
 const sizeMatrix = {
   q: quart,
@@ -83,8 +82,6 @@ export const getStaticProps = async (context) => {
       : idx === pageIdx - 1
   })[0]
 
-  console.log('nextPageData: ', nextPageData)
-  console.log('prevPageData: ', prevPageData)
   return {
     props: {
       album: pageData,
@@ -104,7 +101,6 @@ const WeddingAlbum = (props) => {
       setNeedsEven(true)
     }
   }, [setNeedsEven])
-  
 
   return (
     <div>
@@ -141,14 +137,18 @@ const WeddingAlbum = (props) => {
                   sizeMatrix[photo.gridSpace]
                 }`}
               >
-                <img
+                <ExpandableImage 
+                  urlFrag={photo}
+                  alt={`${alb.path} wedding photo`}
+                />
+                {/* <img
                   src={baseUrlPng(photo, 'eco')}
                   alt='wedding album photo'
-                />
+                /> */}
               </div>
             )
           })}
-          {needsEven && <span>{' '}</span>}
+          {needsEven && <span> </span>}
           <Link href={`/wedding-albums/${prv.path}`}>
             <a
               className={`${albumNavCard} ${prev} ${quart}`}

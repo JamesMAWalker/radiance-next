@@ -60,6 +60,7 @@
 }
 
 .closeBtn {
+  z-index: var(--level-top);
   position: absolute;
   top: 5vh;
   right: 5vh;
