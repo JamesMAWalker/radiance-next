@@ -2,7 +2,13 @@ import React, { Fragment, useEffect, useState } from 'react'
 import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
 
-import { server } from '../../config/index'
+import { eventBlurbs } from '../../public/events'
+import {
+  search,
+  genPathsFromResources,
+  mapResourcesToPaths,
+  mapImageResources
+} from '../../lib/cloudinary'
 
 import { HeroImg } from '../../components/blocks/hero-img'
 import { Blurb } from '../../components/blocks/blurb'
@@ -10,42 +16,21 @@ import { PortraitGrid } from '../../components/blocks/portrait-grid'
 
 import {
   eventPage,
-  galleryHeader,
 } from '../../styles/event/event.module.scss'
 
-// + /////////////// + //
-// TODO TODO TODO TODO //
-// + /////////////// + //
-/*
-  ^ Build commmand is erroring out. This may be due to: ^
-  * 1. Adding and element to events JSON:
-  Though it was after adding this that I first encountered the error, I suspect that this is because doing so triggered the need for a rebuild of all the paths, which brought out an error.
-  * 2. Adding cloudinary API functionality:
-  This seems like the more likely cause, since it was here that I changed the most without entirely understanding the implications of those changes.
-  Perhaps moving the event/wedding data to the API folder as well will fix this issue.
-*/
-
 export const getStaticPaths = async () => {
-  const res = await fetch(`${server}/api/events`)
+  const { resources } =
+    await search({
+      expression:
+        'folder=mitzvah/* || folder=engagement/* || folder=event/*',
+    })
 
-  if (res.status !== 200) {
-    console.log('res from GSPaths in [id] of events: ', res)
-    throw new Error(
-      `There was an error! Status code is ${res.status}`
-    )
-  }
-
-  const data = await res.json()
-  console.log('data from gsPaths in [id] of events: ', data);
-
-  const eventPaths = data.map((evt) => {
-    return {
-      params: { id: evt.title },
-    }
-  })
+  const paths = genPathsFromResources(resources).map(
+    (alb) => ({ params: { id: alb } })
+  )
 
   return {
-    paths: eventPaths,
+    paths: paths,
     fallback: false,
   }
 }
@@ -53,25 +38,47 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const { id } = context.params
 
-  const res = await fetch(`${server}/api/events`)
+  const { resources, next_cursor: nextCursor } =
+    await search({
+      expression: `folder=${id}/*`,
+      max_results: 5,
+    })
 
-  if (res.status !== 200) {
-    throw new Error(
-      `There was an error! Status code is ${res.status}`
-    )
-  }
+  const data = mapResourcesToPaths([id], resources)[0]
 
-  const data = await res.json()
-  const pageData = data.filter((d) => d.title === id)[0]
+  data.nextCursor = nextCursor || false
 
   return {
-    props: { event: pageData },
+    props: { event: data },
   }
 }
 
 const Event = ({ event: evt }) => {
-  const handleLoadMorePhotos = () => {
-    console.log('loaded more photos!')
+  const [images, setImages] = useState(evt.albumPhotoUrls)
+  const [nextCursor, setNextCursor] = useState(evt.nextCursor)
+
+  const handleLoadMorePhotos = async (e) => {
+    e.preventDefault()
+
+    const results = await fetch('../api/search', {
+      method: 'POST',
+      body: JSON.stringify({
+        nextCursor: nextCursor,
+        expression: `folder=${evt.path}/*`,
+        max_results: 4,
+      }),
+    }).then((r) => r.json())
+
+    const { resources, next_cursor: updatedNextCursor } =
+      results
+
+    const images = mapImageResources(resources)
+    console.log('images from loadMore: ', images);
+
+    setImages((prv) => {
+      return [...prv, ...images]
+    })
+    setNextCursor(updatedNextCursor)
   }
 
   return (
@@ -86,21 +93,23 @@ const Event = ({ event: evt }) => {
       </Head>
       <main>
         <HeroImg
-          imageUrlFrag={evt.heroImgUrl}
-          altText={'engagement couple at waters edge'}
+          imageUrlFrag={evt.albumPhotoUrls[0]}
+          altText={`${evt.path} photo`}
         />
         <Blurb
-          blurbTitle={evt.header}
-          blurbText={evt.blurbs.map((txt, idx) => (
-            <span key={idx}>{txt}</span>
-          ))}
-          blurbBtn={evt.button}
+          blurbTitle={`${evt.path} Photography`}
+          blurbText={eventBlurbs[evt.path].map(
+            (txt, idx) => (
+              <span key={idx}>{txt}</span>
+            )
+          )}
+          blurbBtn={`Book Your ${evt.path}`}
           singleLineTitle
         />
         <AnimatePresence>
           <PortraitGrid
-            imageContents={evt.photos}
-            // loadMore={handleLoadMorePhotos}
+            imageContents={images.slice(1)}
+            loadMore={handleLoadMorePhotos}
           />
         </AnimatePresence>
       </main>

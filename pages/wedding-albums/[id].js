@@ -56,7 +56,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const { id } = context.params
-
   const { resources } = await search({
     expression: `folder=wedding/albums/*`,
   })
@@ -95,7 +94,7 @@ const WeddingAlbum = (props) => {
   const { album: alb, next: nxt, prev: prv } = props
 
   const [needsEven, setNeedsEven] = useState(false)
-  
+
   // Even out an odd number of photos in gallery
   useEffect(() => {
     if (alb.albumPhotoUrls.slice(1).length % 2 !== 0) {
