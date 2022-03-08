@@ -7,7 +7,7 @@ import {
   search,
   genPathsFromResources,
   mapResourcesToPaths,
-  mapImageResources
+  mapImageResources,
 } from '../../lib/cloudinary'
 
 import { HeroImg } from '../../components/blocks/hero-img'
@@ -19,10 +19,6 @@ import {
 } from '../../styles/event/event.module.scss'
 
 export const getStaticPaths = async () => {
-  // TODO
-  // Figure out where build error is coming from.
-
-
   const { resources } =
     await search({
       expression:
@@ -45,12 +41,19 @@ export const getStaticProps = async (context) => {
   const { resources, next_cursor: nextCursor } =
     await search({
       expression: `folder=${id}/*`,
-      max_results: 5,
+      max_results: 9,
     })
-
+    
+  const { resources: heroImage } =
+  await search({
+    expression: `folder=${id}/* && tags=hero`,
+    max_results: 1,
+  })
+  
   const data = mapResourcesToPaths([id], resources)[0]
 
   data.nextCursor = nextCursor || false
+  data.heroPhotoUrl = heroImage[0].public_id
 
   return {
     props: { event: data },
@@ -58,6 +61,7 @@ export const getStaticProps = async (context) => {
 }
 
 const Event = ({ event: evt }) => {
+  console.log('evt: ', evt);
   const [images, setImages] = useState(evt.albumPhotoUrls)
   const [nextCursor, setNextCursor] = useState(evt.nextCursor)
 
@@ -69,7 +73,7 @@ const Event = ({ event: evt }) => {
       body: JSON.stringify({
         nextCursor: nextCursor,
         expression: `folder=${evt.path}/*`,
-        max_results: 4,
+        max_results: 8,
       }),
     }).then((r) => r.json())
 
@@ -97,7 +101,7 @@ const Event = ({ event: evt }) => {
       </Head>
       <main>
         <HeroImg
-          imageUrlFrag={evt.albumPhotoUrls[0]}
+          imageUrlFrag={evt.heroPhotoUrl || evt.albumPhotoUrls[0]}
           altText={`${evt.path} photo`}
         />
         <Blurb
