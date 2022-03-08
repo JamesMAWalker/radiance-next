@@ -19,6 +19,10 @@ import {
 } from '../../styles/event/event.module.scss'
 
 export const getStaticPaths = async () => {
+  // TODO
+  // Figure out where build error is coming from.
+
+
   const { resources } =
     await search({
       expression:

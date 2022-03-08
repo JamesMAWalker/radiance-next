@@ -25,23 +25,23 @@ const links = [
   },
   {
     name: 'Wedding',
-    slug: '/',
+    slug: '/wedding-albums',
   },
   {
     name: 'Event',
-    slug: '/event',
+    slug: '/events',
   },
   {
     name: 'Studio',
-    slug: '/',
+    slug: '/studio',
   },
   {
     name: 'Instagram',
-    slug: '/',
+    slug: 'https://www.instagram.com/radiancephotostudio/',
   },
   {
     name: 'Facebook',
-    slug: '/',
+    slug: 'https://www.facebook.com/RadiancePhotographyStudio',
   },
 ]
 
