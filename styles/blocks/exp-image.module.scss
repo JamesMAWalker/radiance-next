@@ -9,6 +9,20 @@
   }
 }
 
+.loadingShade {
+  position: absolute;
+  z-index: var(--level-two);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+ background: linear-gradient(-45deg, #f1f1f1, #5d80af42, #23a5d518, #ffffffa1);
+  background-size: 400% 400%;
+  background-blend-mode: difference;
+	animation: gradient 5s ease infinite;
+  background-size: 8000px 100%;
+}
+
 .expImage {
   position: relative;
   cursor: pointer;
@@ -35,4 +49,16 @@
   @media (max-width: 1024px) {
     text-align: center;
   }
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

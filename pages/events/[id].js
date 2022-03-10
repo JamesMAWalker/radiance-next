@@ -61,7 +61,7 @@ export const getStaticProps = async (context) => {
 }
 
 const Event = ({ event: evt }) => {
-  console.log('evt: ', evt);
+  
   const [images, setImages] = useState(evt.albumPhotoUrls)
   const [nextCursor, setNextCursor] = useState(evt.nextCursor)
 
@@ -81,7 +81,7 @@ const Event = ({ event: evt }) => {
       results
 
     const images = mapImageResources(resources)
-    console.log('images from loadMore: ', images);
+    
 
     setImages((prv) => {
       return [...prv, ...images]

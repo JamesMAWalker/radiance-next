@@ -45,20 +45,6 @@ export const PortraitGrid = ({ imageContents, loadMore, altTag }) => {
               urlFrag={image}
               altTag={altTag}
             />
-            {/* <motion.img
-              src={baseUrlPng(image, 'eco')}
-              alt={altTag}
-              loading='eager'
-              variants={fadeIn}
-              transition={{
-                type: 'tween',
-                ease: 'easeOut',
-                duration: 0.8,
-              }}
-              initial='hidden'
-              animate='visible'
-              exit='hidden'
-            /> */}
           </motion.div>
         )
       })}
