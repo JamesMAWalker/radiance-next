@@ -65,7 +65,7 @@ const initialQuestion = {
 export const ContactContext = createContext(defaultValues)
 
 export const ContactProvider = ({ children }) => {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(true)
   const [initQuestion, setInitQuestion] =
     useState(initialQuestion)
 

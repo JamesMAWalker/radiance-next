@@ -4,58 +4,85 @@ import React, {
   useState,
 } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { buildUrl } from 'cloudinary-build-url'
 
 import { FSPhotoContext } from '../../contexts/fsphoto-context'
 import { baseUrlPng } from '../../utils/baseUrl'
 
 import { fadeIn } from '../../animations/fade'
+import { smooth } from '../../animations/transitions'
 import {
   expWrap,
   loadingShade,
+  invalidMsg,
   expImage,
   expBtn,
 } from '../../styles/blocks/exp-image.module.scss'
+import { BrokenImageIcon } from '../svg/broken-img'
+import { urlBuilder } from '../../lib/cloudinary'
 
-export const ExpandableImage = ({ urlFrag, altTag }) => {
+
+// * COMPONENT * //
+export const ExpandableImage = ({
+  urlFrag,
+  altTag,
+  loadBehavior = 'lazy',
+}) => {
   const { setPhotoModalOpen, setCurrentImgUrl, setAltTag } =
     useContext(FSPhotoContext)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [invalidSrc, setInvalidSrc] = useState(false)
 
   const handlePhotoSelect = () => {
     setCurrentImgUrl(urlFrag)
     setAltTag(altTag)
     setTimeout(() => {
-      setPhotoModalOpen(true) 
+      setPhotoModalOpen(true)
     }, 250)
   }
 
-  useEffect(() => {
-    console.log('isLoaded changed: ', isLoaded)
-  }, [isLoaded])
+
 
   return (
     <motion.div
       className={expWrap}
       variants={fadeIn}
-      transition={{
-        type: 'tween',
-        ease: 'easeOut',
-        duration: 0.8,
-      }}
+      transition={smooth(.8)}
       initial='hidden'
       animate='visible'
       exit='hidden'
     >
-      {!isLoaded && <div className={loadingShade}></div>}
-      <motion.img
+      {!isLoaded && <div className='loading-shade' />}
+      {invalidSrc && (
+        <div className={invalidMsg}>
+          <span>
+            <BrokenImageIcon />
+          </span>
+          <p>{altTag}</p>
+        </div>
+      )}
+      <Image
         className={expImage}
-        src={baseUrlPng(urlFrag, 'eco')}
+        src={urlBuilder(urlFrag)}
+        alt={altTag}
+        layout='fill'
+        onClick={handlePhotoSelect}
+        onLoadingComplete={() => setIsLoaded(true)}
+        loading='eager'
+      />
+      {/* <motion.img
+        className={expImage}
+        // src={baseUrlPng(urlFrag, 'eco')}
+        src={url}
         onClick={handlePhotoSelect}
         alt={altTag}
-        loading='eager'
+        loading={loadBehavior}
         onLoad={() => setIsLoaded(true)}
-      />
-      <p className={`${expBtn} text-btn`}>Expand ↗</p>
+      /> */}
+      {isLoaded && !invalidSrc && (
+        <p className={`${expBtn} text-btn`}>Expand ↗</p>
+      )}
     </motion.div>
   )
 }

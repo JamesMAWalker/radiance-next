@@ -6,7 +6,7 @@ import { fadeUp } from '../../animations/fade';
 
 import { blurb, bordered, title, text, lgTitleText } from '../../styles/blocks/blurb.module.scss'
 
-export const Blurb = ({ blurbTitle, blurbText, blurbBtn, withBorder, singleLineTitle }) => {
+export const Blurb = ({ blurbTitle, blurbText, blurbBtn, withBorder, singleLineTitle, btnLink=null, btnAction=() => {}}) => {
   const controls = useAnimation();
   const { ref: blurbRef, inView: blurbInView } =
     useInView()
@@ -37,7 +37,7 @@ export const Blurb = ({ blurbTitle, blurbText, blurbBtn, withBorder, singleLineT
             {blurbTitle}
           </h4>
           <p className={text}>{blurbText}</p>
-          <button className='text-btn'>{blurbBtn}</button>
+          <a className='text-btn' href={btnLink} onClick={btnAction}>{blurbBtn}</a>
         </motion.div>
     </>
   )

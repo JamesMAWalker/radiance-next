@@ -101,7 +101,9 @@ const Event = ({ event: evt }) => {
       </Head>
       <main>
         <HeroImg
-          imageUrlFrag={evt.heroPhotoUrl || evt.albumPhotoUrls[0]}
+          imageUrlFrag={
+            evt.heroPhotoUrl || evt.albumPhotoUrls[0]
+          }
           altText={`${evt.path} photo`}
         />
         <Blurb
@@ -112,6 +114,7 @@ const Event = ({ event: evt }) => {
             )
           )}
           blurbBtn={`Book Your ${evt.path}`}
+          btnLink={process.env.SQUARE_APPT_URL}
           singleLineTitle
         />
         <AnimatePresence>

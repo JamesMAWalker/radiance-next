@@ -56,7 +56,7 @@ const servicesList = [
     title: 'Event',
     path: 'events',
     photoUrls: [
-      'event-pair/  event-left_bpofcn',
+      'event-pair/event-left_bpofcn',
       'event-pair/event-right_izf8sw',
     ],
     blurb: (
@@ -116,6 +116,7 @@ export const Services = () => {
     })
   }, [activeOption])
 
+
   return (
     <section className={serviceSection}>
       <div className={`${serviceImg} ${left}`}>
@@ -163,12 +164,18 @@ export const Services = () => {
                   >
                     <p className={info}>{srvc.blurb}</p>
                     <button className={binaryBtn}>
-                      <div
+                      <a
                         className={btnSegment}
-                        onClick={() => setModalOpen(true)}
+                        // onClick={() => setModalOpen(true)}
+                        target='_blank'
+                        rel='noopener'
+                        href={
+                          process.env
+                            .SQUARE_APPT_URL
+                        }
                       >
                         Book Now
-                      </div>
+                      </a>
                       <span className={divider} />
                       <Link href={`/${srvc.path}`}>
                         <a className={btnSegment}>

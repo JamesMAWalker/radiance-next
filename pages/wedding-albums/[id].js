@@ -92,6 +92,7 @@ export const getStaticProps = async (context) => {
 
 const WeddingAlbum = (props) => {
   const { album: alb, next: nxt, prev: prv } = props
+  console.log('alb: ', alb);
 
   const [needsEven, setNeedsEven] = useState(false)
 
@@ -126,6 +127,7 @@ const WeddingAlbum = (props) => {
             .toUpperCase()}
           blurbText={albumBlurbs[alb.path]}
           blurbBtn={'Book Your Wedding'}
+          btnLink={process.env.SQUARE_APPT_URL}
           singleLineTitle
         />
         <section className={masonryGallery}>
@@ -139,12 +141,8 @@ const WeddingAlbum = (props) => {
               >
                 <ExpandableImage
                   urlFrag={photo}
-                  alt={`${alb.path} wedding photo`}
+                  altTag={`${alb.path.replace('-', ' & ')} wedding photo`}
                 />
-                {/* <img
-                  src={baseUrlPng(photo, 'eco')}
-                  alt='wedding album photo'
-                /> */}
               </div>
             )
           })}

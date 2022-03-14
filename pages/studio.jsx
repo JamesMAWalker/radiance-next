@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import Head from 'next/head'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -60,16 +60,22 @@ const studioBlurb = {
   title: `Studio Photography`,
   text: (
     <>
-      Lorem ipsum dolor sit amet, consectetur adipiscing
+      {/* Lorem ipsum dolor sit amet, consectetur adipiscing
       elit. Vestibulum accumsan mollis lectus sed mollis.
       Sed consequat lorem quis est pellentesque, ut ornare
       velit lobortis. Suspendisse volutpat, metus placerat
       luctus condimentum, dui nibh tempus ligula, blandit
-      pharetra augue lectus vel lacus.
+      pharetra augue lectus vel lacus. */}
+      Our state-of-the-art studio has been carefully crafted
+      to accommodate a range of different photography
+      styles. Headshots, artistic editorial sets, family
+      portraits - our studio and professional photographers
+      bring art to life.
       <br />
       <br />
-      Lorem ipsum dolor sit amet, consectetur adipiscing
-      elit. Nullam et metus arcu.
+      Our Westwood location is conveniently accessible from
+      anywhere in Los Angeles. Contact us, or get started
+      below to schedule an appointment.
     </>
   ),
   button: 'Book Your Shoot',
@@ -178,6 +184,7 @@ const Studio = ({ folders }) => {
           blurbTitle={studioBlurb.title}
           blurbText={studioBlurb.text}
           blurbBtn={studioBlurb.button}
+          btnLink={process.env.SQUARE_APPT_URL}
           singleLineTitle
         />
         <div
@@ -185,55 +192,55 @@ const Studio = ({ folders }) => {
             photoSet
           )}`}
         >
-          <AnimatePresence>
-            {!isMobile ? (
-              <>
-                {studioImages.categories.map((cat, idx) => {
-                  return (
-                    <button
-                      key={cat.id}
-                      className='text-btn'
-                      onClick={() => setPhotoSet(idx)}
-                    >
-                      {cat.title}
-                    </button>
-                  )
-                })}
-              </>
-            ) : (
-              <>
-                <motion.button
-                  className='text-btn'
-                  initial={{ x: 0 }}
-                  animate={{ x: 0 }}
-                  exit={{ x: '-100vw' }}
-                  transition={{ duration: 0.5 }}
-                  onClick={() => setPhotoSet(idx)}
-                >
-                  {studioImages.categories[photoSet].title}
-                </motion.button>
-                <ArrowNav
-                  list={studioImages.categories}
-                  handleArrow={handleOptionNav}
-                  activeOption={photoSet}
-                />
-              </>
-            )}
-          </AnimatePresence>
+          {!isMobile ? (
+            <>
+              {studioImages.categories.map((cat, idx) => {
+                return (
+                  <button
+                    key={cat.id}
+                    className='text-btn'
+                    onClick={() => setPhotoSet(idx)}
+                  >
+                    {cat.title}
+                  </button>
+                )
+              })}
+            </>
+          ) : (
+            <AnimatePresence>
+              <motion.button
+                className='text-btn'
+                initial={{ x: 0 }}
+                animate={{ x: 0 }}
+                exit={{ x: '-100vw' }}
+                transition={{ duration: 0.5 }}
+                onClick={() => setPhotoSet(idx)}
+              >
+                {studioImages.categories[photoSet].title}
+              </motion.button>
+              <ArrowNav
+                list={studioImages.categories}
+                handleArrow={handleOptionNav}
+                activeOption={photoSet}
+              />
+            </AnimatePresence>
+          )}
         </div>
-        {studioImages.categories.map((cat, idx) => {
-          if (idx === photoSet) {
-            return (
-              <AnimatePresence>
-                <PortraitGrid
-                  imageContents={images}
-                  altTag={folders[photoSet].title}
-                  loadMore={handleLoadMorePhotos}
-                />
-              </AnimatePresence>
-            )
-          }
-        })}
+        <AnimatePresence>
+          {studioImages.categories.map((cat, idx) => {
+            if (idx === photoSet) {
+              return (
+                <Fragment key={idx}>
+                  <PortraitGrid
+                    imageContents={images}
+                    altTag={folders[photoSet].title}
+                    loadMore={handleLoadMorePhotos}
+                  />
+                </Fragment>
+              )
+            }
+          })}
+        </AnimatePresence>
       </main>
     </div>
   )

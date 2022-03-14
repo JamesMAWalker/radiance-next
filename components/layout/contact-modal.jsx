@@ -5,6 +5,7 @@ import React, {
 } from 'react'
 import FocusTrap from 'focus-trap-react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { send } from 'emailjs-com'
 
 import { ContactContext } from '../../contexts/contact-context'
 import { fadeIn, fadeUp } from '../../animations/fade.js'
@@ -14,12 +15,12 @@ import {
   modal,
   closeBtn,
   form as formStyle,
-  pageNum,
   question,
-  answers,
-  grid5,
-  answerBtn,
-  backBtn,
+  inputs,
+  fullname,
+  email,
+  message,
+  submitBtn,
 } from '../../styles/layout/contact-modal.module.scss'
 
 export const ContactModal = () => {
@@ -29,17 +30,14 @@ export const ContactModal = () => {
     eventQuestions,
     studioQuestions,
   } = useContext(ContactContext)
-  const [modalContent, setModalContent] = useState({
-    q: 'What can we help you with?',
-    a: [
-      'wedding',
-      'headshots',
-      'engagement',
-      'mitzvah',
-      'corporate',
-    ],
-  })
   const [modalPageNum, setModalPageNum] = useState(0)
+
+  const [toSend, setToSend] = useState({
+    from_name: '',
+    to_name: 'Radiance Photography',
+    message: '',
+    reply_to: '',
+  })
 
   // stop scrolling when contact modal is open
   useEffect(() => {
@@ -66,33 +64,40 @@ export const ContactModal = () => {
     setModalOpen(false)
   }
 
-  const handleSetModalContent = (selection) => {
-    if (selection === 'studio') {
-      setModalContent(studioQuestions[modalPageNum])
-      setTimeout(() => {
-        setModalPageNum((prvSt) => prvSt + 1)
-      }, 250)
-    } else {
-      setModalContent(eventQuestions[modalPageNum])
-      setTimeout(() => {
-        setModalPageNum((prvSt) => prvSt + 1)
-      }, 250)
-    }
-    /*
-      TODO: 
-      Set modal content to form when user has reached the 
-      end of the questions array.
-    */
+  // Email form functions
+
+  useEffect(() => {
+    console.log('toSend changed: ', toSend)
+  }, [toSend])
+
+  const handleChange = (e) => {
+    setToSend((prv) => {
+      return {
+        ...prv,
+        [e.target.name]: e.target.value,
+      }
+    })
   }
 
-  const handleBackBtn = () => {
-    setModalPageNum((prvSt) => prvSt - 1).then(() =>
-      handleSetModalContent(modalPageNum)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    send(
+      `${process.env.EMAILJS_SERVICE_ID}`,
+      `${process.env.EMAILJS_TEMPLATE_ID}`,
+      toSend,
+      `${process.env.EMAILJS_USER_ID}`,
     )
-    /*
-      TODO: 
-      Add a back button to make use of this function.
-    */
+      .then((response) => {
+        console.log(
+          'SUCCESS!',
+          response.status,
+          response.text
+        )
+      })
+      .catch((err) => {
+        console.log('FAILED...', err)
+      })
   }
 
   return (
@@ -121,29 +126,44 @@ export const ContactModal = () => {
               >
                 &times;
               </div>
-              <form className={formStyle} tabIndex={0}>
-                <p className={pageNum}>
-                  {modalPageNum + 1}/6
-                </p>
+              <form className={formStyle}>
                 <h2 className={question}>
-                  {modalContent.q}
+                  Have questions before scheduling a
+                  consult? Submit the form below and
+                  we&apos;ll provide some answers.
                 </h2>
-                <div className={`${answers} ${grid5}`}>
-                  {modalContent.a.map((ans, idx) => {
-                    return (
-                      <span
-                        key={ans}
-                        className={`${answerBtn} text-btn`}
-                        onClick={() =>
-                          handleSetModalContent(ans)
-                        }
-                        style={{ gridArea: `op${idx + 1}` }}
-                      >
-                        {ans}
-                      </span>
-                    )
-                  })}
+                <div className={inputs} tabIndex={0}>
+                  <input
+                    name='from_name'
+                    className={fullname}
+                    type='text'
+                    placeholder='Full Name'
+                    value={toSend.from}
+                    onChange={handleChange}
+                  />
+                  <input
+                    name='reply_to'
+                    email={email}
+                    type='email'
+                    placeholder='Email Address'
+                    value={toSend.email}
+                    onChange={handleChange}
+                  />
+                  <textarea
+                    name='message'
+                    className={message}
+                    placeholder='Enter your message...'
+                    value={toSend.message}
+                    onChange={handleChange}
+                  />
                 </div>
+                <button
+                  className={submitBtn}
+                  type='submit'
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
               </form>
             </motion.div>
           </motion.div>

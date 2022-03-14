@@ -66,10 +66,6 @@ export const getStaticProps = async () => {
     await search({
       expression: 'folder:wedding/albums/*',
     })
-  // const paths = genPathsFromResources(
-  //   resources,
-  //   'wedding/albums/'
-  // )
 
   const albumPreviews = mapResourcesToAlbumPreviews(
     resources,
@@ -102,6 +98,7 @@ const Wedding = ({ albums }) => {
           blurbTitle={weddingBlurb.title}
           blurbText={weddingBlurb.text}
           blurbBtn={weddingBlurb.button}
+          btnLink={process.env.SQUARE_APPT_URL}
           singleLineTitle
         />
         {albums.map((albm) => {

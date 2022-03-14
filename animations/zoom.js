@@ -6,3 +6,12 @@ export const zoomOut = {
     scale: 1.2,
   },
 }
+
+export const panRight = {
+  visible: {
+    objectPosition: '50% 50%'
+  },
+  hidden: {
+   objectPosition: '0% 50%'
+  }
+}

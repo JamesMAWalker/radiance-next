@@ -71,6 +71,7 @@ export const Hero = () => {
         blurbTitle={heroBlurb.title}
         blurbText={heroBlurb.text}
         blurbBtn={heroBlurb.button}
+        btnLink={'/about'}
         withBorder
       />
     </section>

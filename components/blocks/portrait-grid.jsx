@@ -44,6 +44,7 @@ export const PortraitGrid = ({ imageContents, loadMore, altTag }) => {
             <ExpandableImage 
               urlFrag={image}
               altTag={altTag}
+              loadBehavior={idx < 8 ? 'eager' : 'lazy'}
             />
           </motion.div>
         )

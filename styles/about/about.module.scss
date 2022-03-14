@@ -1,4 +1,4 @@
-@import '../mixins';
+@import "../mixins";
 
 .aboutPage {
   @include homeSection;
@@ -19,7 +19,7 @@
   justify-content: center;
   &::after {
     position: absolute;
-    content: '';
+    content: "";
     top: -1%;
     left: 50%;
     width: 1px;
@@ -29,4 +29,107 @@
       display: none;
     }
   }
+}
+
+.location {
+  width: 100%;
+  margin-bottom: var(--vp-2xl);
+  display: grid;
+  gap: var(--grid-space);
+  grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 1024px) {
+    overflow: hidden;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+      "map"
+      "info"
+    ;
+  }
+}
+
+.locationInfo {
+  grid-area: info;
+  height: 100%;
+  width: 100%;
+  padding-left: var(--vp-2xl);
+  font-size: var(--text-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  @media (max-width: 1024px) {
+    font-size: var(--text-xl);
+  }
+  h4 {
+    text-transform: uppercase;
+  }
+  .divider {
+    height: 1px;
+    width: 25%;
+    background-color: var(--studio-color);
+    margin-top: 2vh;
+  }
+  h4, 
+  p {
+    display: flex;
+    flex-direction: column;
+    a:not(:last-child) {
+      margin-bottom: var(--vp-ms);
+    }
+    a {
+      transition: var(--transition-primary);
+      &:hover {
+        color: var(--studio-color);
+      }
+    }
+    a {
+      cursor: alias;
+    }
+  }
+}
+
+.locationMap {
+  grid-area: map;
+  cursor: pointer;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+    &::after {
+      opacity: 1;
+    }
+  }
+  &::after {
+    z-index: var(--level-two);
+    position: absolute;
+    content: 'Open in Google Maps →';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 10%;
+    background-color: var(--black-fade-20);
+    color: var(--white);
+    opacity: 0;
+    transition: var(--transition-primary);
+  }
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: var(--transition-primary);
+  }
+}
+
+.locationPin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -64%);
 }

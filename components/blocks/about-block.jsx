@@ -12,15 +12,20 @@ import {
   about,
   aboutBtn,
 } from '../../styles/blocks/about-block.module.scss'
+import { baseUrlPng } from '../../utils/baseUrl'
 
 const BASE_IMG_URL = `https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_65/v1641527536/wedding/dev`
 
 export const AboutBlock = ({ member, reverse }) => {
   return (
-    <div className={`${block} ${reverse ? reversedBlock : null }`}>
+    <div
+      className={`${block} ${
+        reverse ? reversedBlock : null
+      }`}
+    >
       <div className={imageContainer}>
         <img
-          src={`${BASE_IMG_URL}/${member.imgUrlFrag}`}
+          src={baseUrlPng(member.imgUrlFrag)}
           alt='radiance team member'
         />
       </div>
@@ -30,10 +35,14 @@ export const AboutBlock = ({ member, reverse }) => {
           <span className={blk}>{member.name.last}</span>
         </h3>
         <h5 className={role}>{member.role}</h5>
-        <p className={about}>{member.about}</p>
-        <button className={aboutBtn}>
-          {member.button}
-        </button>
+        {member.name.first === 'Peyman' && (
+          <>
+            <p className={about}>{member.about}</p>
+            <button className={aboutBtn}>
+              {member.button}
+            </button>
+          </>
+        )}
       </div>
     </div>
   )
