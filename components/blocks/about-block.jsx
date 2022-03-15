@@ -1,4 +1,7 @@
 import React from 'react'
+import Image from 'next/image'
+
+import { urlBuilder } from '../../lib/cloudinary';
 
 import {
   block,
@@ -12,9 +15,7 @@ import {
   about,
   aboutBtn,
 } from '../../styles/blocks/about-block.module.scss'
-import { baseUrlPng } from '../../utils/baseUrl'
 
-const BASE_IMG_URL = `https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_65/v1641527536/wedding/dev`
 
 export const AboutBlock = ({ member, reverse }) => {
   return (
@@ -24,10 +25,16 @@ export const AboutBlock = ({ member, reverse }) => {
       }`}
     >
       <div className={imageContainer}>
-        <img
-          src={baseUrlPng(member.imgUrlFrag)}
-          alt='radiance team member'
+        <Image
+          src={urlBuilder(member.imgUrlFrag)}
+          layout='fill'
+          alt={`Radiance team member ${member.name.first} ${member.name.last}`}
         />
+        {/* <img
+          src={urlBuilder(member.imgUrlFrag)}
+          // src={baseUrlPng(member.imgUrlFrag)}
+          alt={`Radiance team member ${member.name.first} ${member.name.last}`}
+        /> */}
       </div>
       <div className={descContainer}>
         <h3 className={memberName}>

@@ -8,6 +8,8 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas: "img desc";
   margin-bottom: var(--vp-2xl);
+  align-items: center;
+  justify-content: center;
   @media (max-width: 1024px) {
     height: auto;
     margin-bottom: var(--vp-3xl);
@@ -36,10 +38,21 @@
 }
 
 .imageContainer {
+  position: relative;
   grid-area: img;
   height: 100%;
+  height: 40vh;
   width: 100%;
-  overflow: hidden;
+  span {
+    max-height: 40vh;
+  }
+  img {
+    width: 80vw;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
 }
 
 .descContainer {
@@ -63,6 +76,9 @@
   justify-content: center;
   font-family: var(--font-title);
   text-transform: uppercase;
+  @media (max-width: 1024px) {
+    margin: 0;
+  }
   .red {
     margin-bottom: -2vh;
     font-size: var(--text-7xl);

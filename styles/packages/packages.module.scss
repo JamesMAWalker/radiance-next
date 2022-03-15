@@ -1,0 +1,99 @@
+.packages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  @media (max-width: 1024px) {
+    width: 90vw;
+  }
+}
+
+.wedding {
+  margin: var(--vp-2xl) 0;  
+  @media (max-width: 1024px) {
+
+    margin: var(--vp-3xl) 0;  
+  }
+}
+
+.packageBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: var(--vp-lg);
+  margin-bottom: var(--vp-3xl);
+  border: 1px solid var(--grey-10);
+  @media (max-width: 1024px) {
+    border: none;
+  }
+}
+
+.packageImg {
+  position: relative;
+  height: 20vw;
+  width: 70vw;
+  border: 1px solid var(--text-color);
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  @media (max-width: 1024px) {
+    height: 40vh;
+    width: 80vw;
+  }
+}
+
+.title {
+  position: relative;
+  font-family: var(--font-title);
+  font-size: var(--text-display);
+  letter-spacing: var(--push-md);
+  text-transform: uppercase;
+  margin-bottom: var(--vp-md);
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    bottom: -15%;
+    left: -10%;
+    height: 1px;
+    width: 120%;
+    background-color: var(--grey-10);
+    @media (max-width: 1024px) {
+      bottom: -5%;
+      width: 80%;
+      left: 10%;
+    }
+  }
+}
+
+.price {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-header-sm);
+  color: var(--text-accent);
+}
+
+.desc {
+  width: 50vw;
+  font-family: var(--font-body);
+  font-size: var(--text-prose-lg);
+  text-align: center;
+  @media (max-width: 1024px) {
+    width: 70%;
+  }
+}
+
+.packageBtn {
+  font-size: var(--text-header-sm);
+  &::after {
+    background-color: currentcolor !important;
+  }
+}

@@ -27,7 +27,7 @@ const pageLinks = [
   },
   {
     mmOrder: 5,
-    path: '/',
+    path: '/packages',
     text: 'Packages' 
   },
   {

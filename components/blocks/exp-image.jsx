@@ -23,12 +23,14 @@ import { BrokenImageIcon } from '../svg/broken-img'
 import { urlBuilder } from '../../lib/cloudinary'
 
 
-// * COMPONENT * //
+
+
 export const ExpandableImage = ({
   urlFrag,
   altTag,
   loadBehavior = 'lazy',
 }) => {
+  
   const { setPhotoModalOpen, setCurrentImgUrl, setAltTag } =
     useContext(FSPhotoContext)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -63,7 +65,7 @@ export const ExpandableImage = ({
         </div>
       )}
       <Image
-        className={expImage}
+        className={`${expImage}`}
         src={urlBuilder(urlFrag)}
         alt={altTag}
         layout='fill'

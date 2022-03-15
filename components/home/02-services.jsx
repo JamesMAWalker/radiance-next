@@ -11,6 +11,7 @@ import {
 } from 'framer-motion'
 import Link from 'next/link'
 
+import { urlBuilder } from '../../lib/cloudinary'
 import { ContactContext } from '../../contexts/contact-context'
 
 import {
@@ -169,10 +170,7 @@ export const Services = () => {
                         // onClick={() => setModalOpen(true)}
                         target='_blank'
                         rel='noopener'
-                        href={
-                          process.env
-                            .SQUARE_APPT_URL
-                        }
+                        href={process.env.SQUARE_APPT_URL}
                       >
                         Book Now
                       </a>
@@ -199,7 +197,10 @@ export const Services = () => {
       )}
       <div className={`${serviceImg} ${right}`}>
         <motion.img
-          src={baseUrlPng(
+          // src={baseUrlPng(
+          //   `index/${servicesList[activeOption].photoUrls[1]}`
+          // )}
+          src={urlBuilder(
             `index/${servicesList[activeOption].photoUrls[1]}`
           )}
         />

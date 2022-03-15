@@ -63,9 +63,12 @@ export const Footer = () => {
         })}
       </nav>
       <div className={businessInfo}>
-        <span className={email}>info@radiance.studio</span>
-        <span className={address}>12345 Address place</span>
-        <span className={phone}>223 . 445 . 9372</span>
+        <span className={email}>info@radiancephotographystudio.com</span>
+        <span className={address}>
+          {' '}
+          1643 Westwood Boulevard
+        </span>
+        <span className={phone}>310 . 268 . 8222</span>
       </div>
     </footer>
   )

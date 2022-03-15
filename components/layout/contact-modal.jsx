@@ -41,11 +41,11 @@ export const ContactModal = () => {
 
   // stop scrolling when contact modal is open
   useEffect(() => {
-    if (modalOpen) {
-      document.documentElement.style.overflow = 'hidden'
-    } else {
-      document.documentElement.style.overflow = ''
-    }
+    // if (modalOpen) {
+    //   document.documentElement.style.overflow = 'hidden'
+    // } else {
+    //   document.documentElement.style.overflow = ''
+    // }
   }, [modalOpen])
 
   // close modal with esc key

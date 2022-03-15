@@ -34,6 +34,7 @@
   --ocean-blue: #36525e;
   --rose-clay: #f2d0b6;
   --red-dress: #c90707;
+  --candelabra: #BB9200;
   --the-good-silver: #a1a1a1;
 
   /* z-indeces */
@@ -147,6 +148,7 @@
   --home-color: var(--the-good-silver);
   --wedding-color: var(--rose-clay);
   --studio-color: var(--red-dress);
+  --gold-color: var(--candelabra);
 
   --text-color: var(--black);
   --text-accent: var(--the-good-silver);
@@ -155,17 +157,18 @@
 
   /* text size */
   --text-hero: var(--text-10xl);
+  --text-display-sm: var(--text-6xl);
   --text-display: var(--text-7xl);
   --text-header-sm: var(--text-3xl-plus);
   --text-header: var(--text-4xl);
   --text-header-lg: var(--text-7xl);
   --text-prose: var(--text-2xl);
-  --text-prose-lg: var(--text-3xl);
-
+  --text-prose-lg: var(--text-2xl-plus);
+  
   /* transitions */
   --transition-primary: var(--transition-1-smooth);
   --transition-faster: var(--transition-3-smooth);
-
+  
   /* spacing */
   --grid-space: var(--vp-xl);
 
@@ -182,10 +185,12 @@
 
     /* text size */
     --text-hero: var(--text-10xl);
-    --text-display: var(--text-7xl);
+    --text-display: var(--text-5xl);
+    --text-header-sm: var(--text-2xl-plus);
     --text-header: var(--text-3xl); 
     --text-header-lg: var(--text-3xl-plus);
     --text-prose: var(--text-xl);
+    --text-prose-lg: var(--text-2xl);
 
     /* spacing */
     --grid-space: var(--vp-md);
@@ -289,7 +294,7 @@ button {
 
 .loading-shade {
   position: absolute;
-  z-index: var(--level-two);
+  z-index: -1;
   top: 0;
   left: 0;
   height: 100%;

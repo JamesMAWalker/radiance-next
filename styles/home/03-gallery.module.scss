@@ -1,4 +1,4 @@
-@import '../mixins.scss';
+@import "../mixins.scss";
 
 .gallerySection {
   @include homeSection;
@@ -56,6 +56,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    div {
+      width: 70vw;
+    }
+    span img {
+      height: 100%;
+      width: 100%;
+      object-position: center;
+      object-fit: cover;
+      @media (max-width: 1024px) {
+        flex-shrink: 0;
+        width: 70vw !important;
+      }
+    }
   }
 }
 

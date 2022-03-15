@@ -9,6 +9,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 1024px) {
+    align-items: flex-start;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 }
 
 .modal {
@@ -22,8 +27,12 @@
   align-items: center;
   justify-content: center;
   @media (max-width: 1024px) {
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
     width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    align-items: flex-start;
   }
   &::after {
     pointer-events: none;
@@ -62,8 +71,10 @@
   align-items: center;
   justify-content: space-evenly;
   @media (max-width: 1024px) {
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     width: 80%;
+    justify-content: flex-start;
   }
   .pageNum {
     font-style: italic;
@@ -74,6 +85,11 @@
     padding-bottom: var(--vp-md);
     font-size: var(--text-prose-lg);
     text-align: center;
+    @media (max-width: 1024px) {
+      font-size: var(--text-prose);
+      padding: var(--vp-md);
+      padding-top: var(--vp-2xl);
+    }
   }
   .inputs {
     height: 40vh;
@@ -86,6 +102,8 @@
       "name email"
       "msg  msg";
     @media (max-width: 1024px) {
+      height: 50vh;
+      min-height: 40vh;
       grid-template-columns: 1fr;
       grid-template-rows: .15fr .15fr .7fr;
       grid-template-areas: 
@@ -124,6 +142,9 @@
       grid-area: msg;
       resize: none;
       padding-top: 2.5%;
+      @media (max-width: 1024px) {
+        min-height: 250px;
+      }
     }
   }
   .answers {
@@ -152,6 +173,9 @@
     transition: var(--transition-faster);
     &:hover {
       background-color: var(--grey-40);
+    }
+    @media (max-width: 1024px) {
+      margin: var(--vp-lg);
     }
   }
   .answerBtn {
