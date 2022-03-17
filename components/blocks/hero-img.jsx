@@ -23,7 +23,7 @@ export const HeroImg = ({
       initial='hidden'
       animate='visible'
       exit='hidden'
-      transition={{ duration: 1.5 }}
+      transition={smooth(3)}
     >
       <motion.img
         src={baseUrlPng(imageUrlFrag, quality)}

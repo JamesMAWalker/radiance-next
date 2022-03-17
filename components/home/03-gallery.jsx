@@ -6,11 +6,13 @@ import {
   useAnimation,
 } from 'framer-motion'
 
-import {
-  mapImageResources,
-} from '../../lib/cloudinary'
+import { mapImageResources } from '../../lib/cloudinary'
 
-import { fadeUp } from '../../animations/fade'
+import {
+  fadeUp,
+  fadeFromRight,
+} from '../../animations/fade'
+import { smooth }  from '../../animations/transitions'
 
 import {
   gallerySection,
@@ -26,22 +28,6 @@ import {
 import { CircleText } from '../svg/circle-text'
 import { ExpandableImage } from '../blocks/exp-image'
 import { Fragment } from 'react/cjs/react.production.min'
-
-
-const galleryImgUrls = [
-  'Photo_Oct_12_2_23_19_PM_ixan4l.jpg',
-  'Photo_Jun_24_9_45_24_AM_tu3a1p.jpg',
-  'Photo_Oct_16_7_29_13_AM_ek0g9u.jpg',
-  'Photo_Oct_12_2_23_21_PM_t13efu.jpg',
-  'Photo_Oct_16_7_55_29_AM_vk1vra.jpg',
-  'Photo_Oct_16_6_37_08_AM_el3mji.jpg',
-  'Photo_Oct_12_2_23_19_PM_ixan4l.jpg',
-  'Photo_Jun_24_9_45_24_AM_tu3a1p.jpg',
-  'Photo_Oct_16_7_29_13_AM_ek0g9u.jpg',
-  'Photo_Oct_12_2_23_21_PM_t13efu.jpg',
-  'Photo_Oct_16_7_55_29_AM_vk1vra.jpg',
-  'Photo_Oct_16_6_37_08_AM_el3mji.jpg',
-]
 
 export const Gallery = ({
   images: defaultImages,
@@ -132,10 +118,17 @@ export const Gallery = ({
     >
       <h2 className={title}>Gallery</h2>
       <p className={description}>
-        Browse this collection of our favorite photography 
+        Browse this collection of our favorite photography
         <br /> from across all categories.{' '}
       </p>
-      <div className={slideBase}>
+      <motion.div
+        className={slideBase}
+        variants={fadeFromRight}
+        initial='hidden'
+        animate='visible'
+        exit='hidden'
+        transition={smooth(2.5)}
+      >
         <div
           className={galleryCursor}
           ref={cursorRef}
@@ -175,7 +168,7 @@ export const Gallery = ({
             </span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.section>
   )
 }

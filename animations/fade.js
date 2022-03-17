@@ -20,6 +20,17 @@ export const fadeRight = {
   },
 }
 
+export const fadeFromRight = {
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+  hidden: {
+    opacity: 0,
+    x: '5vw',
+  },
+}
+
 export const fadeSlideUp = {
   visible: {
     opacity: 1,

@@ -42,14 +42,14 @@
     text-transform: uppercase;
     transition: var(--transition-primary);
     &:hover {
-      color: var(--text-color);
+      color: var(--grey-40);
       &::after {
         opacity: 1;
         width: 45%;
       }
     }
     &::after {
-      @include pseudoLine(0%, var(--text-color));
+      @include pseudoLine(0%, var(--grey-40));
       opacity: 0;
     }
   }

@@ -30,7 +30,7 @@ const PackageBlock = ({
 }) => {
   return (
     <div className={packageBlock}>
-      <div className={packageImg}>
+      <div className={packageImg} style={{ background: color }}>
         <img src={urlBuilder(imgUrl)} alt={name} />
       </div>
       <h3 className={titleStyle}>
