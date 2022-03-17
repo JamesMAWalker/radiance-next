@@ -1,14 +1,15 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import Head from 'next/head'
-
+import { AnimatePresence, motion, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 
 import { urlBuilder } from '../lib/cloudinary'
+import { packageData } from '../public/pacakge-data'
 
 import { Blurb } from '../components/blocks/blurb'
 
-
-import { packageData } from '../public/pacakge-data'
-
+import { fadeUp } from '../animations/fade'
+import { smooth } from '../animations/transitions'
 import {
   packages,
   packageBlock,
@@ -28,9 +29,29 @@ const PackageBlock = ({
   color = '#000',
   imgUrl = 'hero_gclne3',
 }) => {
+  const { ref: pkgRef, inView: pkgInView } = useInView()
+  const controls = useAnimation()
+
+  useEffect(() => {
+    if (pkgInView) {
+      controls.start('visible')
+    }
+  }, [controls, pkgInView])
+
   return (
-    <div className={packageBlock}>
-      <div className={packageImg} style={{ background: color }}>
+    <motion.div
+      className={packageBlock}
+      variants={fadeUp}
+      initial='hidden'
+      animate={controls}
+      exit='hidden'
+      transition={smooth(2)}
+    >
+      <span className='vp-marker' ref={pkgRef}></span>
+      <div
+        className={packageImg}
+        style={{ background: color }}
+      >
         <img src={urlBuilder(imgUrl)} alt={name} />
       </div>
       <h3 className={titleStyle}>
@@ -46,7 +67,7 @@ const PackageBlock = ({
       >
         Get Started
       </a>
-    </div>
+    </motion.div>
   )
 }
 
@@ -71,18 +92,20 @@ const Packages = () => {
         btnLink={process.env.SQUARE_APPT_URL}
       />
       <section className={weddingStyle}>
-        {wedding.map((wd) => {
-          return (
-            <PackageBlock
-              key={wd.name}
-              name={wd.name}
-              imgUrl={wd.imgUrl}
-              price={wd.price}
-              color={wd.color}
-              description={wd.description}
-            />
-          )
-        })}
+        <AnimatePresence>
+          {wedding.map((wd) => {
+            return (
+              <PackageBlock
+                key={wd.name}
+                name={wd.name}
+                imgUrl={wd.imgUrl}
+                price={wd.price}
+                color={wd.color}
+                description={wd.description}
+              />
+            )
+          })}
+        </AnimatePresence>
       </section>
       <section className={studioStyle}>
         {/* {studio.map((st) => {
