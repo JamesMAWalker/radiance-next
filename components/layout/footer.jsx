@@ -29,7 +29,7 @@ const links = [
   },
   {
     name: 'Event',
-    slug: '/events',
+    slug: '/events/event',
   },
   {
     name: 'Studio',
