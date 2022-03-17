@@ -1,4 +1,4 @@
-@import '../mixins';
+@import "../mixins";
 
 .block {
   min-height: 75vh;
@@ -15,18 +15,16 @@
     margin-bottom: var(--vp-3xl);
     grid-template-rows: 40vh auto;
     grid-template-columns: 100%;
-    grid-template-areas: 
+    grid-template-areas:
       "img"
-      "desc"
-    ;
+      "desc";
   }
   &.reversedBlock {
     grid-template-areas: "desc img";
     @media (max-width: 1024px) {
-      grid-template-areas: 
-      "img"
-      "desc"
-    ;
+      grid-template-areas:
+        "img"
+        "desc";
     }
     .descContainer {
       transform: translateX(2vw);
@@ -41,10 +39,16 @@
   position: relative;
   grid-area: img;
   height: 100%;
-  height: 40vh;
   width: 100%;
+  height: 75vh;
   span {
-    max-height: 40vh;
+    height: 75vh;
+  }
+  @media (max-width: 1024px) {
+    height: 40vh;
+    span {
+      max-height: 40vh;
+    }
   }
   img {
     width: 80vw;

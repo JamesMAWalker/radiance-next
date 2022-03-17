@@ -4,16 +4,16 @@ import { Blurb } from '../blocks/blurb'
 import { ContactContext } from '../../contexts/contact-context'
 
 const contactBlurb = {
-  title: 'Enquiry',
+  title: 'Inquiry',
   text: (
     <>
-      Lorem ipsum dolor sit amet, consectetur adipiscing
-      elit. Suspendisse consequat lorem eget diam tincidunt,
-      eu suscipit purus ultricies. Aenean pellentesque.
+      If you're ready to move forward with your photoshoot,
+      but you're not sure where to begin, get the
+      conversation started by sending us a message with any
+      questions you have.
       <br />
       <br />
-      Lorem ipsum dolor sit amet, consectetur adipiscing
-      elit. Nullam et metus arcu.
+      Click the button below to get started.
     </>
   ),
   button: `Let's Begin`,
@@ -23,13 +23,13 @@ export const Contact = () => {
   const { setModalOpen } = useContext(ContactContext)
 
   return (
-    <div>
+    <div id="contact">
       <Blurb
         blurbTitle={contactBlurb.title}
         blurbText={contactBlurb.text}
         blurbBtn={contactBlurb.button}
         withBorder
-        btnAction={()=> setModalOpen(true)}
+        btnAction={() => setModalOpen(true)}
       />
     </div>
   )

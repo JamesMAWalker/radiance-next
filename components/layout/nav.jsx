@@ -32,7 +32,7 @@ const pageLinks = [
   },
   {
     mmOrder: 8,
-    path: '/',
+    path: '/#contact',
     text: 'Contact' 
   },
   {

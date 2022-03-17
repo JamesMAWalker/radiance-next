@@ -63,12 +63,24 @@ export const Footer = () => {
         })}
       </nav>
       <div className={businessInfo}>
-        <span className={email}>info@radiancephotographystudio.com</span>
-        <span className={address}>
+        <a
+          className={email}
+          href='mailto:info@radiancephotographystudio.com'
+        >
+          info@radiancephotographystudio.com
+        </a>
+        <a
+          className={address}
+          href={process.env.GOOGLE_MAPS_URL}
+          target='_blank'
+          rel='noreferrer'
+        >
           {' '}
           1643 Westwood Boulevard
-        </span>
-        <span className={phone}>310 . 268 . 8222</span>
+        </a>
+        <a className={phone} href={`tel://+13102688222`}>
+          310 . 268 . 8222
+        </a>
       </div>
     </footer>
   )

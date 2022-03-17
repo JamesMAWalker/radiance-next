@@ -213,11 +213,11 @@ body {
   scroll-behavior: smooth;
   caret-color: transparent;
   ::-webkit-scrollbar {
-    background-color: var(--grey-05);
+    background-color: transparent;
     width: 10px;
   }
   &::-webkit-scrollbar-thumb {
-    background: var(--primary-accent);
+    background: var(--text-color);
   }
   & > * {
     color: var(--text-color);

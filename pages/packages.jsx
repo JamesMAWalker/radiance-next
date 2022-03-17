@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react'
+import Head from 'next/head'
+
 
 import { urlBuilder } from '../lib/cloudinary'
 
@@ -53,6 +55,14 @@ const Packages = () => {
 
   return (
     <div className={packages}>
+      <Head>
+        <title>Radiance | Packages</title>
+        <meta
+          name='description'
+          content='About the Radiance Photography Team'
+        />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
       <Blurb
         blurbTitle={title}
         blurbText={blurb}

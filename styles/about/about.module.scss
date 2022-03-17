@@ -8,6 +8,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    span div p {
+      width: 85% !important;
+      opacity: 0.2;
+    }
   }
 }
 
@@ -17,6 +21,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: var(--vp-2xl);
   &::after {
     position: absolute;
     content: "";
@@ -35,8 +40,10 @@
   width: 100%;
   margin-bottom: var(--vp-2xl);
   display: grid;
-  gap: var(--grid-space);
   grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: 
+    "info map"
+  ;
   @media (max-width: 1024px) {
     overflow: hidden;
     grid-template-columns: 1fr;
@@ -59,6 +66,7 @@
   align-items: flex-start;
   justify-content: center;
   @media (max-width: 1024px) {
+    margin-top: var(--vp-md);
     font-size: var(--text-xl);
   }
   h4 {
@@ -132,4 +140,24 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -64%);
+}
+
+.teamHeader {
+  font-family: var(--font-title);
+  font-size: var(--text-header-lg);
+  text-transform: uppercase;
+  margin-top: var(--vp-xl);
+  text-align: center;
+}
+
+.backBtn {
+  justify-self: flex-end;
+  align-self: flex-end;
+  transition: var(---transition-primary);
+  &:hover {
+    color: var(--text-color);
+  }
+  &::after {
+    display: none;
+  }
 }

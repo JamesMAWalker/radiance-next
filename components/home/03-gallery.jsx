@@ -7,11 +7,10 @@ import {
 } from 'framer-motion'
 
 import {
-  search,
   mapImageResources,
 } from '../../lib/cloudinary'
 
-import { fadeIn, fadeUp } from '../../animations/fade'
+import { fadeUp } from '../../animations/fade'
 
 import {
   gallerySection,
@@ -20,18 +19,14 @@ import {
   slideBase,
   slideContainer,
   gallerySlider,
-  galleryImg,
   galleryCursor,
   point,
   loadMore,
 } from '../../styles/home/03-gallery.module.scss'
 import { CircleText } from '../svg/circle-text'
-import { baseUrlPng } from '../../utils/baseUrl'
 import { ExpandableImage } from '../blocks/exp-image'
 import { Fragment } from 'react/cjs/react.production.min'
 
-const BASE_URL =
-  'https://res.cloudinary.com/radiance-photography-studio/image/upload/f_auto,q_auto:good/v1640679114/wedding'
 
 const galleryImgUrls = [
   'Photo_Oct_12_2_23_19_PM_ixan4l.jpg',
@@ -137,8 +132,8 @@ export const Gallery = ({
     >
       <h2 className={title}>Gallery</h2>
       <p className={description}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing
-        elit. <br /> Etiam fermentum.{' '}
+        Browse this collection of our favorite photography 
+        <br /> from across all categories.{' '}
       </p>
       <div className={slideBase}>
         <div

@@ -5,12 +5,14 @@
   width: 100vw;
   margin-top: var(--vp-2xl);
   background-color: var(--grey-05);
+  color: var(--grey-05);
+  background-color: var(--text-color);
+  color: var(--grey-05);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   font-family: var(--font-title);
-  color: var(--grey-50);
   @media (max-width: 1024px) {
     justify-content: center;
   }

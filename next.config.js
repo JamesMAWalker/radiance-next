@@ -5,6 +5,8 @@ module.exports = {
     EMAILJS_SERVICE_ID: 'service_5id41co',
     EMAILJS_TEMPLATE_ID: 'template_mhld0i3',
     CLOUDINARY_NAME_CLIENT: 'radiance-photography-studio',
+    GOOGLE_MAPS_URL:
+      'https://www.google.com/maps/place/Radiance+Photography+Studio/@34.0520466,-118.4392824,17z/data=!3m1!4b1!4m5!3m4!1s0x80c2bbf11e2748bd:0x5da4428eec275e7a!8m2!3d34.0520466!4d-118.4392824?hl=en',
     SQUARE_APPT_URL:
       'https://squareup.com/appointments/book/xugpdngjeavngr/DYW3W5Y1XSMQM/start',
   },

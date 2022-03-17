@@ -169,7 +169,7 @@ export const Services = () => {
                         className={btnSegment}
                         // onClick={() => setModalOpen(true)}
                         target='_blank'
-                        rel='noopener'
+                        rel='noreferrer'
                         href={process.env.SQUARE_APPT_URL}
                       >
                         Book Now
