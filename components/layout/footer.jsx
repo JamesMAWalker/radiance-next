@@ -64,12 +64,6 @@ export const Footer = () => {
       </nav>
       <div className={businessInfo}>
         <a
-          className={email}
-          href='mailto:info@radiancephotographystudio.com'
-        >
-          info@radiancephotographystudio.com
-        </a>
-        <a
           className={address}
           href={process.env.GOOGLE_MAPS_URL}
           target='_blank'
@@ -77,6 +71,12 @@ export const Footer = () => {
         >
           {' '}
           1643 Westwood Boulevard
+        </a>
+        <a
+          className={email}
+          href='mailto:info@radiancephotographystudio.com'
+        >
+          info@radiancephotographystudio.com
         </a>
         <a className={phone} href={`tel://+13102688222`}>
           310 . 268 . 8222
