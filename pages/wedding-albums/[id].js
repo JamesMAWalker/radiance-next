@@ -147,7 +147,7 @@ const WeddingAlbum = (props) => {
             )
           })}
           {needsEven && <span> </span>}
-          <Link href={`/wedding-albums/${prv.path}`}>
+          <Link href={`wedding-albums${prv.path}`}>
             <a
               className={`${albumNavCard} ${prev} ${quart}`}
             >
