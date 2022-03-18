@@ -29,12 +29,9 @@ export const AboutBlock = ({ member, reverse }) => {
           src={urlBuilder(member.imgUrlFrag)}
           layout='fill'
           alt={`Radiance team member ${member.name.first} ${member.name.last}`}
+          placeholder='blur'
+          blurDataURL={process.env.NEXT_BLUR_URL}
         />
-        {/* <img
-          src={urlBuilder(member.imgUrlFrag)}
-          // src={baseUrlPng(member.imgUrlFrag)}
-          alt={`Radiance team member ${member.name.first} ${member.name.last}`}
-        /> */}
       </div>
       <div className={descContainer}>
         <h3 className={memberName}>
@@ -42,14 +39,14 @@ export const AboutBlock = ({ member, reverse }) => {
           <span className={blk}>{member.name.last}</span>
         </h3>
         <h5 className={role}>{member.role}</h5>
-        {member.name.first === 'Peyman' && (
+        {/* {member.name.first === 'Peyman' && (
           <>
             <p className={about}>{member.about}</p>
             <button className={aboutBtn}>
               {member.button}
             </button>
           </>
-        )}
+        )} */}
       </div>
     </div>
   )

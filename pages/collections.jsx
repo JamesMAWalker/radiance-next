@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 import { urlBuilder } from '../lib/cloudinary'
-import { packageData } from '../public/pacakge-data'
+import { collectionData } from '../public/collection-data'
 
 import { Blurb } from '../components/blocks/blurb'
 
@@ -58,7 +58,7 @@ const PackageBlock = ({
         <span style={{ color: color }}>{name}</span>
         <span>Label</span>
       </h3>
-      <p className={priceStyle}>${price}</p>
+      {/* <p className={priceStyle}>${price}</p> */}
       <p className={descStyle}>{description}</p>
       <a
         className={`text-btn ${packageBtn}`}
@@ -72,12 +72,12 @@ const PackageBlock = ({
 }
 
 const Packages = () => {
-  const { title, blurb, wedding, studio } = packageData
+  const { title, blurb, wedding, studio } = collectionData
 
   return (
     <div className={packages}>
       <Head>
-        <title>Radiance | Packages</title>
+        <title>Radiance | Photography Collections</title>
         <meta
           name='description'
           content='About the Radiance Photography Team'

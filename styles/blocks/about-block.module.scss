@@ -2,7 +2,7 @@
 
 .block {
   min-height: 75vh;
-  width: 80%;
+  width: 60vw;
   display: grid;
   gap: var(--grid-space);
   grid-template-columns: repeat(2, 1fr);
@@ -12,6 +12,7 @@
   justify-content: center;
   @media (max-width: 1024px) {
     height: auto;
+    width: 80%;
     margin-bottom: var(--vp-3xl);
     grid-template-rows: 40vh auto;
     grid-template-columns: 100%;
@@ -43,6 +44,7 @@
   height: 75vh;
   span {
     height: 75vh;
+    width: 25vw;
   }
   @media (max-width: 1024px) {
     height: 40vh;

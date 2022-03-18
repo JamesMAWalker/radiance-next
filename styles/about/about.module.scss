@@ -160,4 +160,9 @@
   &::after {
     display: none;
   }
+  @media (max-width: 1024px) {
+    align-self: center;
+    border: 1px solid var(--text-accent);
+    padding: var(--vp-md);
+  }
 }

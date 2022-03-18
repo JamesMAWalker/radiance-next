@@ -1,5 +1,5 @@
-export const packageData = {
-  title: 'Photography Packages',
+export const collectionData = {
+  title: 'Photography Collections',
   blurb: (
     <>
       Photographs are forever. A visual reminder of your

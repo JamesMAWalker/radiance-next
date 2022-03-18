@@ -50,12 +50,12 @@ export const ExpandableImage = ({
     <motion.div
       className={expWrap}
       variants={fadeIn}
-      transition={smooth(.8)}
+      transition={smooth(0.8)}
       initial='hidden'
       animate='visible'
       exit='hidden'
     >
-      {!isLoaded && <div className='loading-shade' />}
+      {/* {!isLoaded && <div className='loading-shade' />} */}
       {invalidSrc && (
         <div className={invalidMsg}>
           <span>
@@ -72,16 +72,9 @@ export const ExpandableImage = ({
         onClick={handlePhotoSelect}
         onLoadingComplete={() => setIsLoaded(true)}
         loading='eager'
+        placeholder='blur'
+        blurDataURL={process.env.NEXT_BLUR_URL}
       />
-      {/* <motion.img
-        className={expImage}
-        // src={baseUrlPng(urlFrag, 'eco')}
-        src={url}
-        onClick={handlePhotoSelect}
-        alt={altTag}
-        loading={loadBehavior}
-        onLoad={() => setIsLoaded(true)}
-      /> */}
       {isLoaded && !invalidSrc && (
         <p className={`${expBtn} text-btn`}>Expand ↗</p>
       )}

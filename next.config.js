@@ -1,6 +1,8 @@
 module.exports = {
   reactStrictMode: true,
   env: {
+    NEXT_BLUR_URL:
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
     EMAILJS_USER_ID: 'ZzLLqxjiDZ4dgUvSx',
     EMAILJS_SERVICE_ID: 'service_5id41co',
     EMAILJS_TEMPLATE_ID: 'template_mhld0i3',

@@ -34,8 +34,10 @@ export const HeroImg = ({
         exit='hidden'
         onLoad={() => setIsLoaded(true)}
         transition={smooth(3)}
+        placeholder='blur'
+        blurDataURL={process.env.NEXT_BLUR_URL}  
       />
-      {!isLoaded && <div className='loading-shade' />}
+      {/* {!isLoaded && <div className='loading-shade' />} */}
     </motion.div>
   )
 }

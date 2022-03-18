@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 import { AboutBlock } from '../components/blocks/about-block'
 import { HeroImg } from '../components/blocks/hero-img'
@@ -100,7 +101,11 @@ const About = () => {
             )
           })}
         </section>
-        <button className={`text-btn ${backBtn}`}>Back to Home →</button>
+        <Link href={'/'}>
+          <a className={`text-btn ${backBtn}`}>
+            Back to Home →
+          </a>
+        </Link>
       </main>
     </div>
   )
