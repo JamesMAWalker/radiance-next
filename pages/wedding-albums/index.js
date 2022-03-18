@@ -1,33 +1,32 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import Head from 'next/head'
 
 import { HeroImg } from '../../components/blocks/hero-img'
 import { Blurb } from '../../components/blocks/blurb'
-import { AlbumPair } from '../../components/blocks/album-pair'
+// import { AlbumPair } from '../../components/blocks/album-pair'
 
-import { server } from '../../config/index'
 import {
-  mapResourcesToAlbumPreviews,
-  genPathsFromResources,
+  // mapResourcesToAlbumPreviews,
+  // genPathsFromResources,
   search,
+  mapImageResources,
 } from '../../lib/cloudinary'
 
 import { weddingPage } from '../../styles/wedding/wedding.module.scss'
+import { PortraitGrid } from '../../components/blocks/portrait-grid'
 
 const weddingBlurb = {
   title: `Wedding Photography`,
   text: (
     <>
-      Lorem ipsum dolor sit amet, consectetur adipiscing
-      elit. Vestibulum accumsan mollis lectus sed mollis.
-      Sed consequat lorem quis est pellentesque, ut ornare
-      velit lobortis. Suspendisse volutpat, metus placerat
-      luctus condimentum, dui nibh tempus ligula, blandit
-      pharetra augue lectus vel lacus.
+      Romantic, authentic, and beautiful light. Those are
+      the elements we strive for most in our wedding photography.
+      Our studio's theme is a love of natural light, and we use this
+      passion to make the most of each photo. 
       <br />
       <br />
-      Lorem ipsum dolor sit amet, consectetur adipiscing
-      elit. Nullam et metus arcu.
+      We focus on the people, the moments, and the
+      small details that tell the story of your day.
     </>
   ),
   button: 'Book Your Wedding',
@@ -62,22 +61,70 @@ const albumsList = [
 ]
 
 export const getStaticProps = async () => {
-  const { resources, next_cursor: nextCursor } =
+  /*
+    ^^Albums version
+    const { resources, next_cursor: nextCursor } =
     await search({
       expression: 'folder:wedding/albums/*',
     })
 
-  const albumPreviews = mapResourcesToAlbumPreviews(
-    resources,
-    'wedding/albums/'
-  )
+    const albumPreviews = mapResourcesToAlbumPreviews(
+      resources,
+      'wedding/albums/'
+    )
+
+    return {
+      props: { albums: albumPreviews },
+    }
+  */
+
+  // ^^Gallery version
+  const { resources, next_cursor: nextCursor } =
+    await search({
+      expression: 'folder:wedding/*',
+      max_results: 8,
+    })
+
+  const gallery = mapImageResources(resources)
 
   return {
-    props: { albums: albumPreviews },
+    props: { gallery, nextCursor },
   }
 }
 
-const Wedding = ({ albums }) => {
+// const Wedding = ({ albums }) => {
+const Wedding = ({
+  gallery,
+  nextCursor: defaultNextCursor,
+}) => {
+  const [images, setImages] = useState(gallery)
+  const [nextCursor, setNextCursor] = useState(
+    defaultNextCursor
+  )
+
+  const handleLoadMorePhotos = async (e) => {
+    e.preventDefault()
+
+    const results = await fetch('../api/search', {
+      method: 'POST',
+      body: JSON.stringify({
+        nextCursor: nextCursor,
+        expression: `folder:wedding/*`,
+        max_results: 8,
+      }),
+    }).then((r) => r.json())
+
+    const { resources, next_cursor: updatedNextCursor } =
+      results
+
+    const images = mapImageResources(resources)
+
+    setImages((prv) => {
+      return [...prv, ...images]
+    })
+    setNextCursor(updatedNextCursor)
+  }
+
   return (
     <Fragment>
       <Head>
@@ -101,16 +148,24 @@ const Wedding = ({ albums }) => {
           btnLink={process.env.SQUARE_APPT_URL}
           singleLineTitle
         />
-        {albums.map((albm) => {
-          return (
-            <AlbumPair
-              key={albm.title}
-              coupleNames={albm.title}
-              imgUrlFrags={albm.pair}
-              path={albm.path}
-            />
-          )
-        })}
+        {/*
+         ^^Albums version
+           {albums.map((albm) => {
+              return (
+                <AlbumPair
+                  key={albm.title}
+                  coupleNames={albm.title}
+                  imgUrlFrags={albm.pair}
+                  path={albm.path}
+                />
+              )
+            })}
+        */}
+        <PortraitGrid
+          imageContents={images}
+          loadMore={handleLoadMorePhotos}
+          altTag={'wedding photo'}
+        />
       </main>
     </Fragment>
   )

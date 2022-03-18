@@ -68,12 +68,14 @@
     height: 30%;
     flex-direction: column-reverse;
     margin-bottom: 15vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
   }
   a {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-body);
+    // font-family: var(--font-body);
     font-weight: var(--light);
     letter-spacing: var(--push-md);
   }

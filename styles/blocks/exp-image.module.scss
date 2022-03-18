@@ -32,6 +32,7 @@
 }
 
 .expImage {
+  z-index: var(--level-five);
   position: relative;
   cursor: pointer;
   object-fit: cover;

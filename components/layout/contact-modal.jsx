@@ -22,7 +22,7 @@ import {
   email,
   message,
   submitBtn,
-  thanksMsg
+  thanksMsg,
 } from '../../styles/layout/contact-modal.module.scss'
 
 export const ContactModal = () => {
@@ -42,7 +42,6 @@ export const ContactModal = () => {
     reply_to: '',
   })
 
-
   // close modal with esc key
   useEffect(() => {
     const close = (e) => {
@@ -61,11 +60,6 @@ export const ContactModal = () => {
   }
 
   // Email form functions
-
-  useEffect(() => {
-    console.log('toSend changed: ', toSend)
-  }, [toSend])
-
   const handleChange = (e) => {
     setToSend((prv) => {
       return {
@@ -91,17 +85,14 @@ export const ContactModal = () => {
           response.text
         )
       })
-      .catch((err) => {
-        console.log('FAILED...', err)
-      })
+      .catch((err) => {})
   }
 
   const handleFormReset = () => {
     handleCloseModal()
     setTimeout(() => {
       setMsgSubmitted(false)
-    }, 200);
-
+    }, 200)
   }
 
   return (
