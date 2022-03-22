@@ -55,7 +55,7 @@ export const BannerBlock = ({ imgUrlFrag }) => {
               <br />
               Shots
             </span>
-            <span className={price}>$125</span>
+            <span className={price}>$99</span>
             <span className={disclaimer}>
               For a <br /> Limited <br /> Time*
             </span>

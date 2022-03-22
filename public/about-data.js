@@ -42,7 +42,7 @@ export const aboutInfo = {
         last: 'Khazan',
       },
       imgUrlFrag: 'about/member_2_toiisv',
-      role: 'Studio Director',
+      role: 'Owner & Lead Photographer',
       about: (
         <>
           Lorem ipsum dolor sit amet, consectetur adipiscing

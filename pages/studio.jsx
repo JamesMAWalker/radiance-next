@@ -60,12 +60,6 @@ const studioBlurb = {
   title: `Studio Photography`,
   text: (
     <>
-      {/* Lorem ipsum dolor sit amet, consectetur adipiscing
-      elit. Vestibulum accumsan mollis lectus sed mollis.
-      Sed consequat lorem quis est pellentesque, ut ornare
-      velit lobortis. Suspendisse volutpat, metus placerat
-      luctus condimentum, dui nibh tempus ligula, blandit
-      pharetra augue lectus vel lacus. */}
       Our state-of-the-art studio has been carefully crafted
       to accommodate a range of different photography
       styles. Headshots, artistic editorial sets, family
@@ -110,11 +104,11 @@ const studioImages = {
 }
 
 const Studio = ({ folders }) => {
-  const [photoSet, setPhotoSet] = useState(2)
+  const [photoSet, setPhotoSet] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
 
   const [images, setImages] = useState(
-    folders[photoSet].imgUrls
+    folders[photoSet].imgUrls.sort()
   )
   const [nextCursor, setNextCursor] = useState(
     folders[photoSet].nextCursor
@@ -128,14 +122,14 @@ const Studio = ({ folders }) => {
       body: JSON.stringify({
         nextCursor: folders[photoSet].nextCursor,
         expression: `folder:headshots/${folders[photoSet].title}`,
-        max_results: 5,
+        max_results: 6,
       }),
     }).then((r) => r.json())
 
     const { resources, next_cursor: updatedNextCursor } =
       results
 
-    const images = mapImageResources(resources)
+    const images = mapImageResources(resources).sort()
 
     setImages((prv) => {
       return [...prv, ...images]

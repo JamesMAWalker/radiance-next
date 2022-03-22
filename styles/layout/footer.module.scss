@@ -20,6 +20,7 @@
 
 .logoWrap {
   width: 100%;
+  padding-top: 7vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +30,7 @@
 }
 
 .linksContainer {
-  width: 50vw;
+  width: 90vw;
   padding-top: var(--vp-lg);
   display: flex;
   align-items: center;
@@ -57,6 +58,7 @@
 
 .businessInfo {
   width: 65vw;
+  margin-bottom: 5vh;
   display: flex;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

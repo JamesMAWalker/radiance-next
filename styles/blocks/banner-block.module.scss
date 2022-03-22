@@ -71,6 +71,7 @@
   }
   .product {
     // font-size: var(--text-8xl);
+    isolation: isolate;
     font-size: 9vmin;
     margin-bottom: -.5vmin;
     @media (max-width: 1024px) {
@@ -85,16 +86,16 @@
   }
   .price {
     position: relative;
-    // font-size: var(--text-11xl);
     font-size: 17vmin;
+    font-family: var(--font-body);
     color: var(--studio-color);
-    margin-top: -50px;
     margin-top: -6vmin;
     @media (max-width: 1024px) {
+      z-index: 2;
       height: 100%;
       margin: 0;
       margin-bottom: 5vmin;
-      padding-top: -5vmin;
+      padding-top: 3vmin;
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
@@ -103,6 +104,7 @@
       line-height: 80%;
       &::before,
       &::after {
+        z-index: -1;
         position: absolute;
         content: '';
         top: 110%;
