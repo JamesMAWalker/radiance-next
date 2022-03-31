@@ -28,8 +28,12 @@ const links = [
     slug: '/wedding-albums',
   },
   {
-    name: 'Event',
-    slug: '/events/event',
+    name: 'Mitzvah',
+    slug: '/events/mitzvah',
+  },
+  {
+    name: 'Engagement',
+    slug: '/events/engagement',
   },
   {
     name: 'Studio',

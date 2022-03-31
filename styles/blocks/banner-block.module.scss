@@ -88,8 +88,10 @@
     position: relative;
     font-size: 17vmin;
     font-family: var(--font-body);
+    font-weight: 200;
     color: var(--studio-color);
-    margin-top: -6vmin;
+    margin-top: -5vmin;
+    margin-bottom: -2vmin;
     @media (max-width: 1024px) {
       z-index: 2;
       height: 100%;

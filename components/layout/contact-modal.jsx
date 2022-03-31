@@ -33,7 +33,7 @@ export const ContactModal = () => {
     studioQuestions,
   } = useContext(ContactContext)
   const [modalPageNum, setModalPageNum] = useState(0)
-  const [msgSubmitted, setMsgSubmitted] = useState(true)
+  const [msgSubmitted, setMsgSubmitted] = useState(false)
 
   const [toSend, setToSend] = useState({
     from_name: '',
@@ -71,6 +71,8 @@ export const ContactModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+
     setMsgSubmitted(true)
     send(
       `${process.env.EMAILJS_SERVICE_ID}`,

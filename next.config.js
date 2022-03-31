@@ -4,7 +4,8 @@ module.exports = {
     NEXT_BLUR_URL:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
     EMAILJS_USER_ID: 'ZzLLqxjiDZ4dgUvSx',
-    EMAILJS_SERVICE_ID: 'service_5id41co',
+    // EMAILJS_SERVICE_ID: 'service_5id41co',
+    EMAILJS_SERVICE_ID: 'service_zcuga2l',
     EMAILJS_TEMPLATE_ID: 'template_mhld0i3',
     CLOUDINARY_NAME_CLIENT: 'radiance-photography-studio',
     GOOGLE_MAPS_URL:

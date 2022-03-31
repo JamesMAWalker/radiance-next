@@ -53,7 +53,7 @@ export const getStaticProps = async (context) => {
   const data = mapResourcesToPaths([id], resources)[0]
 
   data.nextCursor = nextCursor || false
-  data.heroPhotoUrl = heroImage[0].public_id || false
+  data.heroPhotoUrl = heroImage[0]?.public_id || false
 
   return {
     props: { event: data },
