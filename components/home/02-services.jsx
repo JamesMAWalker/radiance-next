@@ -55,7 +55,7 @@ const servicesList = [
   },
   {
     title: 'Event',
-    path: 'events',
+    path: 'events/event',
     photoUrls: [
       'event-pair/event-left_bpofcn',
       'event-pair/event-right_izf8sw',
