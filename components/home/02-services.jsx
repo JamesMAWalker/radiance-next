@@ -1,3 +1,4 @@
+// 3rd party imports
 import React, {
   useContext,
   useEffect,
@@ -11,9 +12,26 @@ import {
 } from 'framer-motion'
 import Link from 'next/link'
 
-import { urlBuilder } from '../../lib/cloudinary'
+// Internal Utils and Data
 import { ContactContext } from '../../contexts/contact-context'
+import { baseUrlPng } from '../../utils/baseUrl'
+import { urlBuilder } from '../../lib/cloudinary'
 
+// Components
+import { ArrowNav } from '../blocks/arrow-nav'
+
+// Animations
+import {
+  fadeHeight,
+  fadeIn,
+  fadeUp,
+} from '../../animations/fade.js'
+import {
+  phases,
+  smooth,
+} from '../../animations/transitions'
+
+// Styles
 import {
   serviceSection,
   servicesCol,
@@ -34,8 +52,6 @@ import {
   left,
   right,
 } from '../../styles/home/02-services.module.scss'
-import { ArrowNav } from '../blocks/arrow-nav'
-import { baseUrlPng } from '../../utils/baseUrl'
 
 const servicesList = [
   {
@@ -48,8 +64,6 @@ const servicesList = [
     blurb: (
       <>
         Let us help you curate and capture your special day.
-        {/* Nullam et metus arcu. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. */}
       </>
     ),
   },
@@ -64,8 +78,6 @@ const servicesList = [
       <>
         For those special days other than weddings that you
         cherish all the same.
-        {/* Nullam et metus arcu. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. */}
       </>
     ),
   },
@@ -80,12 +92,29 @@ const servicesList = [
       <>
         In house photography for professional headshots, as
         well as family portraits.
-        {/* Nullam et metus arcu. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. */}
       </>
     ),
   },
 ]
+
+const BinaryButton = ({ path }) => {
+  return (
+    <button className={binaryBtn}>
+      <a
+        className={btnSegment}
+        target='_blank'
+        rel='noreferrer'
+        href={process.env.SQUARE_APPT_URL}
+      >
+        Book Now
+      </a>
+      <span className={divider} />
+      <Link href={`/${path}`}>
+        <a className={btnSegment}>View Gallery</a>
+      </Link>
+    </button>
+  )
+}
 
 export const Services = () => {
   const [activeOption, setActiveOption] = useState(0)
@@ -117,77 +146,86 @@ export const Services = () => {
     })
   }, [activeOption])
 
+  const layoutAniProps = {
+    layout: true,
+    // ...phases,
+    // ...fadeIn
+  }
+  console.log('layoutAniProps: ', layoutAniProps)
 
   return (
-    <section className={serviceSection}>
+    <motion.section
+      className={serviceSection}
+      variants={fadeUp}
+      initial='hidden'
+      whileInView='visible'
+      exit='hidden'
+      transition={smooth(1)}
+    >
       <div className={`${serviceImg} ${left}`}>
-        <motion.img
-          src={baseUrlPng(
-            `index/${servicesList[activeOption].photoUrls[0]}`
-          )}
-        />
+        <AnimatePresence exitBeforeEnter>
+          {servicesList.map((srvc, idx) => {
+            if (idx !== activeOption) return
+            return (
+              <motion.img
+                key={`img-L-0${idx}`}
+                variants={fadeIn}
+                initial='hidden'
+                animate='visible'
+                exit='hidden'
+                transition={smooth(0.5)}
+                src={baseUrlPng(
+                  `index/${srvc.photoUrls[0]}`
+                )}
+              />
+            )
+          })}
+        </AnimatePresence>
       </div>
-      <ul
+      <motion.ul
         className={servicesCol}
+        layout
         style={isMobile ? translatePosition : null}
       >
         {servicesList.map((srvc, idx) => {
+          const selectStyle = {
+            color: `${
+              idx === activeOption
+                ? 'var(--text-color)'
+                : 'var(--the-good-silver)'
+            }`,
+          }
+
           return (
             <motion.li
-              key={srvc.title}
               className={option}
               onClick={() => setActiveOption(idx)}
             >
-              <motion.h4 layout className={title}>
+              <motion.h1
+                className={title}
+                style={selectStyle}
+              >
                 <span>+</span>
                 {srvc.title}
-              </motion.h4>
-              <AnimatePresence>
-                {/* desk: display only active | mobile: display all */}
-                {(idx === activeOption || isMobile) && (
-                  <motion.div
-                    className={infoContainer}
-                    key='info'
-                    variants={{
-                      expanded: {
-                        opacity: 1,
-                        height: 'auto',
-                      },
-                      collapsed: {
-                        opacity: 0,
-                        height: 0,
-                      },
-                    }}
-                    initial='expanded'
-                    animate='expanded'
-                    exit='collapsed'
-                    transition={{ duration: 0.1 }}
+              </motion.h1>
+              {(idx === activeOption || isMobile) && (
+                <div className={infoContainer}>
+                  <motion.p
+                    key={srvc.title}
+                    className={info}
+                    layout
+                    {...phases}
+                    variants={fadeIn}
                   >
-                    <p className={info}>{srvc.blurb}</p>
-                    <button className={binaryBtn}>
-                      <a
-                        className={btnSegment}
-                        // onClick={() => setModalOpen(true)}
-                        target='_blank'
-                        rel='noreferrer'
-                        href={process.env.SQUARE_APPT_URL}
-                      >
-                        Book Now
-                      </a>
-                      <span className={divider} />
-                      <Link href={`/${srvc.path}`}>
-                        <a className={btnSegment}>
-                          View Gallery
-                        </a>
-                      </Link>
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    {srvc.blurb}
+                  </motion.p>
+                  <BinaryButton path={srvc.path} />
+                </div>
+              )}
             </motion.li>
           )
         })}
-      </ul>
+      </motion.ul>
       {isMobile && (
         <ArrowNav
           handleArrow={handleServiceNav}
@@ -196,15 +234,25 @@ export const Services = () => {
         />
       )}
       <div className={`${serviceImg} ${right}`}>
-        <motion.img
-          // src={baseUrlPng(
-          //   `index/${servicesList[activeOption].photoUrls[1]}`
-          // )}
-          src={urlBuilder(
-            `index/${servicesList[activeOption].photoUrls[1]}`
-          )}
-        />
+        <AnimatePresence exitBeforeEnter>
+          {servicesList.map((srvc, idx) => {
+            if (idx !== activeOption) return
+            return (
+              <motion.img
+                key={`img-R-0${idx}`}
+                variants={fadeIn}
+                initial='hidden'
+                animate='visible'
+                exit='hidden'
+                transition={smooth(0.5)}
+                src={baseUrlPng(
+                  `index/${srvc.photoUrls[1]}`
+                )}
+              />
+            )
+          })}
+        </AnimatePresence>
       </div>
-    </section>
+    </motion.section>
   )
 }

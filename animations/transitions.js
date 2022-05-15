@@ -5,3 +5,9 @@ export const smooth = (duration=2.5) => {
     transition: 'var(--smooth-framer)',
   }
 }
+
+export const phases = {
+  initial: 'hidden',
+  animate: 'visible',
+  exit: 'hidden',
+}

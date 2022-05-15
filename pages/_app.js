@@ -74,7 +74,6 @@ export default function MyApp({
           >
             <Navigation isMobile={isMobile} />
             <Component {...pageProps} key={router.route} />
-            {/* {modalOpen && <ContactModal />} */}
             <ContactModal />
             <PhotoModal />
             <Footer />

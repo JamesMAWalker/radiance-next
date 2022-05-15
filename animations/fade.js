@@ -7,7 +7,7 @@ export const fadeUp = {
     opacity: 0,
     y: '2vh',
   },
-}
+} 
 
 export const fadeRight = {
   visible: {
@@ -48,5 +48,16 @@ export const fadeIn = {
   },
   hidden: {
     opacity: 0,
+  },
+}
+
+export const fadeHeight = {
+  visible: {
+    opacity: 1,
+    height: 'auto',
+  },
+  hidden: {
+    opacity: 0,
+    height: 0,
   },
 }

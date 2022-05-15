@@ -18,47 +18,7 @@ import {
   eventPage,
 } from '../../styles/event/event.module.scss'
 
-export const getStaticPaths = async () => {
-  const { resources } =
-    await search({
-      expression:
-        'folder=mitzvah/* || folder=engagement/* || folder=event/*',
-    })
 
-  const paths = genPathsFromResources(resources).map(
-    (alb) => ({ params: { id: alb } })
-  )
-
-  return {
-    paths: paths,
-    fallback: false,
-  }
-}
-
-export const getStaticProps = async (context) => {
-  const { id } = context.params
-
-  const { resources, next_cursor: nextCursor } =
-    await search({
-      expression: `folder=${id}/*`,
-      max_results: 9,
-    })
-    
-  const { resources: heroImage } =
-  await search({
-    expression: `folder=${id}/* && tags=hero`,
-    max_results: 1,
-  })
-  
-  const data = mapResourcesToPaths([id], resources)[0]
-
-  data.nextCursor = nextCursor || false
-  data.heroPhotoUrl = heroImage[0]?.public_id || false
-
-  return {
-    props: { event: data },
-  }
-}
 
 const Event = ({ event: evt }) => {
   
@@ -129,3 +89,47 @@ const Event = ({ event: evt }) => {
 }
 
 export default Event
+
+
+
+// Page Generation
+
+export const getStaticPaths = async () => {
+  const { resources } = await search({
+    expression:
+      'folder=mitzvah/* || folder=engagement/* || folder=event/*',
+  })
+
+  const paths = genPathsFromResources(resources).map(
+    (alb) => ({ params: { id: alb } })
+  )
+
+  return {
+    paths: paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps = async (context) => {
+  const { id } = context.params
+
+  const { resources, next_cursor: nextCursor } =
+    await search({
+      expression: `folder=${id}/*`,
+      max_results: 9,
+    })
+
+  const { resources: heroImage } = await search({
+    expression: `folder=${id}/* && tags=hero`,
+    max_results: 1,
+  })
+
+  const data = mapResourcesToPaths([id], resources)[0]
+
+  data.nextCursor = nextCursor || false
+  data.heroPhotoUrl = heroImage[0]?.public_id || false
+
+  return {
+    props: { event: data },
+  }
+}
