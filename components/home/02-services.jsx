@@ -198,6 +198,7 @@ export const Services = () => {
 
           return (
             <motion.li
+              key={srvc.title}
               className={option}
               onClick={() => setActiveOption(idx)}
             >
