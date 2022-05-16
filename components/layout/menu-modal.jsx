@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 import { mainMenuLinks } from '../../lib/ancillary-data'
@@ -53,16 +54,29 @@ export const MenuModal = ({
         variants={fadeUp}
         {...phases}
         transition={smooth(1.5, .8)}
+        onClick={() => {
+          setTimeout(() => {
+            setShowMenuModal(false)
+          }, 300);
+        }}
       >
         <ul className={primary}>
           {mainMenuLinks.primary.map((lnk) => {
-            return <li key={lnk.name}>{lnk.name}</li>
+            return (
+              <Link href={lnk.slug}>
+                <a key={lnk.name}>{lnk.name}</a>
+              </Link>
+            )
           })}
         </ul>
         <span className={divider} />
         <ul className={secondary}>
           {mainMenuLinks.secondary.map((lnk) => {
-            return <li key={lnk.name}>{lnk.name}</li>
+            return (
+              <Link href={lnk.slug}>
+                <a key={lnk.name}>{lnk.name}</a>
+              </Link>
+            )
           })}
         </ul>
       </motion.section>

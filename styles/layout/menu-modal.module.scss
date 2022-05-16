@@ -64,7 +64,7 @@ position: fixed;
     flex-direction: column;
     justify-content: space-evenly;
     text-transform: uppercase;
-    li {
+    a {
       position: relative;
       cursor: pointer !important;
       margin-bottom: var(--vp-ms);
