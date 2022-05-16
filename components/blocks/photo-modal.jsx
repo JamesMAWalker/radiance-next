@@ -45,7 +45,7 @@ export const PhotoModal = () => {
     window.addEventListener('keydown', close)
     return () =>
       window.removeEventListener('keydown', close)
-  }, [photoModalOpen, setPhotoModalOpen])
+  }, [photoModalOpen, setPhotoModalOpen, handleCloseModal])
 
 
 

@@ -56,13 +56,13 @@ export const MenuModal = ({
       >
         <ul className={primary}>
           {mainMenuLinks.primary.map((lnk) => {
-            return <li>{lnk.name}</li>
+            return <li key={lnk.name}>{lnk.name}</li>
           })}
         </ul>
         <span className={divider} />
         <ul className={secondary}>
           {mainMenuLinks.secondary.map((lnk) => {
-            return <li>{lnk.name}</li>
+            return <li key={lnk.name}>{lnk.name}</li>
           })}
         </ul>
       </motion.section>

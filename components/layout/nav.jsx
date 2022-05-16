@@ -8,7 +8,10 @@ import { MobileMenu } from './mobile-menu'
 
 import { pageLinks } from '../../lib/ancillary-data'
 
-import { phases, smooth } from '../../animations/transitions'
+import {
+  phases,
+  smooth,
+} from '../../animations/transitions'
 import { fadeRight } from '../../animations/fade'
 
 import {
@@ -21,21 +24,24 @@ import {
 
 const MenuLinkSet = ({ lnk }) => {
   return (
-    <Fragment key={lnk.text}>
-      <Link href={`${lnk.path}`} key={lnk.name}>
-        <motion.a
-          className={`${navLink}`}
-          variants={fadeRight}
-          {...phases}
-        >
-          {lnk.text}
-        </motion.a>
-      </Link>
-    </Fragment>
+    <Link href={`${lnk.path}`} key={lnk.name}>
+      <motion.a
+        className={`${navLink}`}
+        variants={fadeRight}
+        {...phases}
+      >
+        {lnk.text}
+      </motion.a>
+    </Link>
   )
 }
 
-export const TopNav = ({ isMobile, setShowColumnNav, showModalMenu, setShowMenuModal }) => {
+export const TopNav = ({
+  isMobile,
+  setShowColumnNav,
+  showModalMenu,
+  setShowMenuModal,
+}) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const { ref: navRef, inView: navInView } = useInView()
 
@@ -57,7 +63,7 @@ export const TopNav = ({ isMobile, setShowColumnNav, showModalMenu, setShowMenuM
     }
   }, [navInView])
 
-  // handle main menu 
+  // handle main menu
   const handleToggleMenuModal = () => {
     setShowMenuModal(!showModalMenu)
   }
@@ -74,15 +80,23 @@ export const TopNav = ({ isMobile, setShowColumnNav, showModalMenu, setShowMenuM
           {navInView ? (
             <AnimatePresence exitBeforeEnter>
               {pageLinks.slice(0, 4).map((lnk) => {
-                return <MenuLinkSet lnk={lnk} />
+                return (
+                  <Fragment key={lnk.name}>
+                    <MenuLinkSet lnk={lnk} />
+                  </Fragment>
+                )
               })}
-              <Link href='#'>
+              <Link href='/'>
                 <a className={logoWrap}>
                   <IconMark />
                 </a>
               </Link>
               {pageLinks.slice(4, 8).map((lnk, idx) => {
-                return <MenuLinkSet lnk={lnk} />
+                return (
+                  <Fragment key={lnk.name}>
+                    <MenuLinkSet lnk={lnk} />
+                  </Fragment>
+                )
               })}
             </AnimatePresence>
           ) : (
