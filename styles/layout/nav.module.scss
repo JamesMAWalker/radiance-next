@@ -1,6 +1,7 @@
 @import "../mixins.scss";
 
 .navigation {
+  z-index: var(--level-nine);
   height: 15vh;
   width: calc(100% - (var(--vp-sm) * 2));
   padding: 0 var(--vp-sm);
@@ -54,6 +55,44 @@
     path {
       fill: var(--primary-accent);
     }
+  }
+}
+
+.openMenuBtn {
+  z-index: var(--level-nine);
+  cursor: pointer;
+  position: fixed;
+  height: 15px;
+  width: 45px;
+  top: 7.5vh;
+  left: calc(var(--content-margin-center) - 22.5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  &:active {
+    &::before,
+    &::after {
+      background-color: var(--grey-05);
+    }
+  }
+  &:hover {
+    &::before,
+    &::after {
+      transform: scaleX(1.5);
+    }
+  }
+  &::before,
+  &::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background-color: var(--text-color);
+    transition: var(--transition-2-smooth);
+    transform-origin: left;
+  }
+  &::after {
+    width: 75%;
   }
 }
 

@@ -1,5 +1,10 @@
 import Link from 'next/link'
 import React from 'react'
+import { motion } from 'framer-motion'
+
+import { footerLinks as links } from '../../lib/ancillary-data'
+
+import { FullLogo } from '../svg/full-logo'
 
 import {
   footer,
@@ -9,49 +14,16 @@ import {
   businessInfo,
   email,
   address,
-  phone
+  phone,
 } from '../../styles/layout/footer.module.scss'
-import { FullLogo } from '../svg/full-logo'
-import { IconMark } from '../svg/iconmark'
 
-const links = [
-  {
-    name: 'Home',
-    slug: '/',
-  },
-  {
-    name: 'Contact',
-    slug: '/#contact',
-  },
-  {
-    name: 'Wedding',
-    slug: '/wedding-albums',
-  },
-  {
-    name: 'Mitzvah',
-    slug: '/events/mitzvah',
-  },
-  {
-    name: 'Engagement',
-    slug: '/events/engagement',
-  },
-  {
-    name: 'Studio',
-    slug: '/studio',
-  },
-  {
-    name: 'Instagram',
-    slug: 'https://www.instagram.com/radiancephotostudio/',
-  },
-  {
-    name: 'Facebook',
-    slug: 'https://www.facebook.com/RadiancePhotographyStudio',
-  },
-]
-
-export const Footer = () => {
+export const Footer = ({ setShowColumnNav }) => {
   return (
-    <footer className={footer}>
+    <motion.footer
+      className={footer}
+      onViewportEnter={() => setShowColumnNav(false)}
+      onViewportLeave={() => setShowColumnNav(true)}
+    >
       <Link href='/'>
         <a className={logoWrap}>
           <FullLogo />
@@ -86,6 +58,6 @@ export const Footer = () => {
           310 . 268 . 8222
         </a>
       </div>
-    </footer>
+    </motion.footer>
   )
 }

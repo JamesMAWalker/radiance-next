@@ -41,9 +41,6 @@
   width: 100%;
   transition: var(--transition-primary);
   box-sizing: content-box;
-  &:hover {
-    filter: blur(1px) brightness(.5);
-  }
 }
 
 .expBtn {

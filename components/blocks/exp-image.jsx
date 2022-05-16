@@ -1,14 +1,11 @@
 import React, {
   useContext,
-  useEffect,
   useState,
 } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { buildUrl } from 'cloudinary-build-url'
 
 import { FSPhotoContext } from '../../contexts/fsphoto-context'
-import { baseUrlPng } from '../../utils/baseUrl'
 
 import { fadeIn } from '../../animations/fade'
 import { smooth } from '../../animations/transitions'
@@ -28,7 +25,6 @@ import { urlBuilder } from '../../lib/cloudinary'
 export const ExpandableImage = ({
   urlFrag,
   altTag,
-  loadBehavior = 'lazy',
 }) => {
   
   const { setPhotoModalOpen, setCurrentImgUrl, setAltTag } =
@@ -55,7 +51,6 @@ export const ExpandableImage = ({
       animate='visible'
       exit='hidden'
     >
-      {/* {!isLoaded && <div className='loading-shade' />} */}
       {invalidSrc && (
         <div className={invalidMsg}>
           <span>
@@ -73,6 +68,7 @@ export const ExpandableImage = ({
         onLoadingComplete={() => setIsLoaded(true)}
         loading='eager'
         placeholder='blur'
+        onError={() => setInvalidSrc(true)}
         blurDataURL={process.env.NEXT_BLUR_URL}
       />
       {isLoaded && !invalidSrc && (

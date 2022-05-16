@@ -23,7 +23,7 @@
 .slideBase {
   position: relative;
   height: 60vh;
-  width: 80vw;
+  width: var(--content-width);
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;

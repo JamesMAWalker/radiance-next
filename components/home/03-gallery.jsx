@@ -86,6 +86,8 @@ export const Gallery = ({
     }
 
     const onMouse = (e) => {
+      if (!galleryInView) return;
+      
       const { clientX, clientY } = e
       const mouseX =
         clientX - cursorRef?.current?.clientWidth
@@ -129,14 +131,16 @@ export const Gallery = ({
         exit='hidden'
         transition={smooth(2.5)}
       >
-        <div
-          className={galleryCursor}
-          ref={cursorRef}
-          style={{ opacity: `${cursorVisible ? 1 : 0}` }}
-        >
-          <CircleText />
-          <span className={point} />
-        </div>
+        {galleryInView && (
+          <div
+            className={galleryCursor}
+            ref={cursorRef}
+            style={{ opacity: `${cursorVisible ? 1 : 0}` }}
+          >
+            <CircleText />
+            <span className={point} />
+          </div>
+        )}
         <div className={slideContainer} ref={sliderRef}>
           <div
             className={gallerySlider}

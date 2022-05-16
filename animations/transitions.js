@@ -1,8 +1,18 @@
-export const smooth = (duration=2.5) => {
+export const smooth = (duration=2.5, delay=0) => {
   return {
-    duration: duration,
+    delay,
+    duration,
     type: 'tween',
-    transition: 'var(--smooth-framer)',
+    ease: [0.115, 0.905, 0.32, 1],
+  }
+}
+
+export const punch = (duration=1, delay=0) => {
+  return {
+    delay,
+    duration,
+    type: 'tween',
+    ease: [1, 0, 0.115, 0.995],
   }
 }
 

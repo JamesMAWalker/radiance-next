@@ -1,64 +1,43 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 
 import { IconMark } from '../svg/iconmark'
+import { MobileMenu } from './mobile-menu'
+
+import { pageLinks } from '../../lib/ancillary-data'
+
+import { phases, smooth } from '../../animations/transitions'
+import { fadeRight } from '../../animations/fade'
 
 import {
   navigation,
-  left,
-  right,
   navLink,
   logoWrap,
-  mobileBtn
+  openMenuBtn,
+  mobileBtn,
 } from '../../styles/layout/nav.module.scss'
-import { MobileMenu } from './mobile-menu'
-import { AnimatePresence } from 'framer-motion'
 
-const pageLinks = [
-  {
-    mmOrder: 6,
-    path: '/',
-    text: 'Home' 
-  },
-  {
-    mmOrder: 7,
-    path: '/about',
-    text: 'About' 
-  },
-  {
-    mmOrder: 5,
-    path: '/collections',
-    text: 'Collections' 
-  },
-  {
-    mmOrder: 8,
-    path: '/#contact',
-    text: 'Contact' 
-  },
-  {
-    mmOrder: 1,
-    path: '/wedding-albums',
-    text: 'Wedding' 
-  },
-  {
-    mmOrder: 3,
-    path: '/events/engagement',
-    text: 'Engagement'
-  },
-  {
-    mmOrder: 4,
-    path: '/events/mitzvah',
-    text: 'Mitzvah' 
-  },
-  {
-    mmOrder: 2,
-    path: '/studio',
-    text: 'Studio' 
-  },
-]
+const MenuLinkSet = ({ lnk }) => {
+  return (
+    <Fragment key={lnk.text}>
+      <Link href={`${lnk.path}`} key={lnk.name}>
+        <motion.a
+          className={`${navLink}`}
+          variants={fadeRight}
+          {...phases}
+        >
+          {lnk.text}
+        </motion.a>
+      </Link>
+    </Fragment>
+  )
+}
 
-export const Navigation = ({ isMobile }) => {
+export const TopNav = ({ isMobile, setShowColumnNav, showModalMenu, setShowMenuModal }) => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { ref: navRef, inView: navInView } = useInView()
 
   // stop scrolling if menu open
   useEffect(() => {
@@ -69,33 +48,52 @@ export const Navigation = ({ isMobile }) => {
     }
   }, [menuOpen])
 
+  // set Column Nav visible when out of view
+  useEffect(() => {
+    if (!navInView) {
+      setShowColumnNav(true)
+    } else {
+      setShowColumnNav(false)
+    }
+  }, [navInView])
+
+  // handle main menu 
+  const handleToggleMenuModal = () => {
+    setShowMenuModal(!showModalMenu)
+  }
+
   return (
     <nav className={navigation}>
       {!isMobile ? (
         <>
-          {pageLinks.slice(0, 4).map((lnk) => {
-            return (
-              <Fragment key={lnk.text}>
-                <Link href={`${lnk.path}`} key={lnk.name}>
-                  <a className={`${navLink}`}>{lnk.text}</a>
-                </Link>
-              </Fragment>
-            )
-          })}
-          <Link href='#'>
-            <a className={logoWrap}>
-              <IconMark />
-            </a>
-          </Link>
-          {pageLinks.slice(4, 8).map((lnk, idx) => {
-            return (
-              <Fragment key={lnk.name}>
-                <Link href={`${lnk.path}`} key={lnk.name}>
-                  <a className={`${navLink}`}>{lnk.text}</a>
-                </Link>
-              </Fragment>
-            )
-          })}
+          <span
+            className='vp-marker'
+            style={{ position: 'absolute' }}
+            ref={navRef}
+          />
+          {navInView ? (
+            <AnimatePresence exitBeforeEnter>
+              {pageLinks.slice(0, 4).map((lnk) => {
+                return <MenuLinkSet lnk={lnk} />
+              })}
+              <Link href='#'>
+                <a className={logoWrap}>
+                  <IconMark />
+                </a>
+              </Link>
+              {pageLinks.slice(4, 8).map((lnk, idx) => {
+                return <MenuLinkSet lnk={lnk} />
+              })}
+            </AnimatePresence>
+          ) : (
+            <motion.div
+              className={openMenuBtn}
+              variants={fadeRight}
+              {...phases}
+              transition={smooth(1)}
+              onClick={handleToggleMenuModal}
+            />
+          )}
         </>
       ) : (
         <>
@@ -111,7 +109,10 @@ export const Navigation = ({ isMobile }) => {
           </div>
           <AnimatePresence>
             {menuOpen && (
-              <MobileMenu pageLinks={pageLinks} closeMenu={() => setMenuOpen(false)}/>
+              <MobileMenu
+                pageLinks={pageLinks}
+                closeMenu={() => setMenuOpen(false)}
+              />
             )}
           </AnimatePresence>
         </>

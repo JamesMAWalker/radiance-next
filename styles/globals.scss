@@ -175,9 +175,10 @@
   --grid-space: var(--vp-xl);
 
   /* Container */
-  --layout-width: 86vw;
+  // --layout-width: 86vw;
   --content-width: 70vw;
   --content-margin-width: calc((100vw - var(--content-width)) / 2);
+  --content-margin-center: calc((100vw - var(--content-width)) / 4);
 }
 
 @media (max-width: 1024px) {
@@ -292,6 +293,7 @@ button {
   width: 100%;
   height: 1px;
   background-color: none;
+  // background-color: blue;
 }
 
 .loading-shade {

@@ -23,6 +23,7 @@ import { PhotoModal } from '../components/blocks/photo-modal'
 
 import { fadeIn } from '../animations/fade'
 import '../styles/globals.scss'
+import { Layout } from '../components/layout/layout'
 
 export default function MyApp({
   Component,
@@ -64,7 +65,10 @@ export default function MyApp({
     <FSPhotoProvider>
       <ContactProvider>
         <AnimatePresence exitBeforeEnter>
-          <motion.div
+          <Layout aniKey={router.route} isMobile={isMobile}>
+            <Component {...pageProps} key={router.route} />
+          </Layout>
+          {/* <motion.div
             key={router.route}
             className={layout}
             variants={fadeIn}
@@ -73,11 +77,11 @@ export default function MyApp({
             exit='hidden'
           >
             <Navigation isMobile={isMobile} />
-            <Component {...pageProps} key={router.route} />
+
             <ContactModal />
             <PhotoModal />
             <Footer />
-          </motion.div>
+          </motion.div> */}
         </AnimatePresence>
       </ContactProvider>
     </FSPhotoProvider>

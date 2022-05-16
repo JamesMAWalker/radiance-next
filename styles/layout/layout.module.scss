@@ -1,14 +1,135 @@
+@import "../mixins";
+
 .layout {
+  position: relative;
   height: auto;
   width: var(--content-width);
-  max-width: 1600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  &::after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    content: "";
+    background-image: url("/noise-bg.png");
+    opacity: 0.4;
+    filter: brightness(150%);
+  }
+  main {
+    z-index: var(--level-eight);
+  }
   @media (max-width: 1024px) {
     main {
       width: 100%;
     }
+  }
+}
+
+.columnNav {
+  z-index: var(--level-eight);
+  pointer-events: all;
+  position: fixed;
+  height: 100vh;
+  width: var(--content-margin-width);
+  top: 0;
+  left: 0;
+  padding: 7.5vh 0;
+  // background-color: rgba(173, 216, 230, 0.434);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.scrollProgress {
+  position: relative;
+  height: 40vh;
+  width: 1px;
+  margin-top: 13.5vh;
+  background-color: var(--grey-20);
+  .thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 2px;
+    background-color: var(--text-color);
+    transition: var(--transition-primary);
+  }
+}
+
+.social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  span {
+    position: relative;
+    cursor: pointer;
+    font-family: var(--font-title);
+    padding: 1vh;
+    margin-bottom: 2vh;
+    transition: var(--transition-primary);
+    &:hover {
+      color: var(--grey-20);
+      &::after {
+        width: 50%;
+      }
+    }
+    &::after {
+      @include pseudoLine(0, var(--grey-20));
+      top: 100%;
+    }
+  }
+}
+
+.logoBtn {
+  cursor: pointer;
+  position: fixed;
+  top: 10vh;
+  opacity: 0.25;
+  right: calc(-1 * var(--content-width) - (var(--content-margin-center) * 1.25));
+  transition: var(--transition-3-smooth);
+  &:hover {
+    opacity: 0.75;
+
+  }
+  &::after {
+    // content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -60vh;
+    height: 50vh;
+    width: 1px;
+    transform: translateX(-50%);
+    background-color: var(--grey-20);
+  }
+}
+
+.contactBtn {
+  cursor: pointer;
+  position: fixed;
+  bottom: 10vh;
+  isolation: isolate;
+  right: calc(-1 * var(--content-width) - (var(--content-margin-center) * 1.25));
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  transition: var(--transition-primary);
+  letter-spacing: var(--push-lg);
+  &:hover {
+    color: var(--grey-20);
+    &::after {
+      width: 80%;
+    }
+  }
+  &::after {
+    @include pseudoLine(0, var(--grey-20));
   }
 }

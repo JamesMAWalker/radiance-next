@@ -15,6 +15,8 @@ import {
   divider,
   contact
 } from '../../styles/layout/mobile-menu.module.scss'
+import { slideUp } from '../../animations/slide'
+import { punch, smooth } from '../../animations/transitions'
 
 export const MobileMenu = ({ pageLinks, closeMenu }) => {
   const sortedPageLinks = pageLinks.sort((a, b) => a.mmOrder - b.mmOrder)
@@ -23,15 +25,11 @@ export const MobileMenu = ({ pageLinks, closeMenu }) => {
   return (
     <motion.div
       className={mobileMenu}
-      variants={fadeSlideUp}
+      variants={slideUp}
       initial='hidden'
       animate='visible'
       exit='hidden'
-      transition={{
-        duration: 1,
-        type: 'tween',
-        ease: [1, 0, 0.115, 0.995],
-      }}
+      transition={smooth(1)}
     >
       <ul className={navLinks}>
         {sortedPageLinks.slice(0, 5).map((lnk) => {

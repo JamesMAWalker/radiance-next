@@ -24,9 +24,10 @@
   height: .5px;
   width: $width;
   background-color: $color;
-  transform-origin: center;
+  // transform-origin: center;
   transition: var(--transition-primary);
 }
+
 
 
 // typography
