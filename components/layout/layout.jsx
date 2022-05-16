@@ -98,10 +98,17 @@ export const Layout = ({ children, aniKey, isMobile }) => {
             />
           </div>
           <div className={social}>
-            <span>IG</span>
-            <span>FB</span>
+            <a href='https://www.instagram.com/radiancephotostudio/'>
+              IG
+            </a>
+            <a href='https://www.facebook.com/RadiancePhotographyStudio'>
+              FB
+            </a>
           </div>
-          <div className={logoBtn} onClick={() => push('/')}>
+          <div
+            className={logoBtn}
+            onClick={() => push('/')}
+          >
             <IconMark />
           </div>
           <div className={contactBtn}>contact</div>
