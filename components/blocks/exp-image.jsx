@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 import { FSPhotoContext } from '../../contexts/fsphoto-context'
 
-import { fadeIn } from '../../animations/fade'
+import { fadeIn, fadeUp } from '../../animations/fade'
 import { smooth } from '../../animations/transitions'
 import {
   expWrap,
@@ -45,10 +45,10 @@ export const ExpandableImage = ({
   return (
     <motion.div
       className={expWrap}
-      variants={fadeIn}
-      transition={smooth(0.8)}
+      variants={fadeUp}
+      transition={smooth()}
+      whileInView='visible'
       initial='hidden'
-      animate='visible'
       exit='hidden'
     >
       {invalidSrc && (

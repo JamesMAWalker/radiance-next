@@ -37,58 +37,7 @@ const sizeMatrix = {
   h: half,
 }
 
-export const getStaticPaths = async () => {
-  const { resources, next_cursor: nextCursor } =
-    await search({
-      expression: 'folder=wedding/albums/*',
-    })
 
-  const paths = genPathsFromResources(
-    resources,
-    'wedding/albums/'
-  ).map((alb) => ({ params: { id: alb } }))
-
-  return {
-    paths,
-    fallback: false,
-  }
-}
-
-export const getStaticProps = async (context) => {
-  const { id } = context.params
-  const { resources } = await search({
-    expression: `folder=wedding/albums/*`,
-  })
-
-  const pathNames = genPathsFromResources(
-    resources,
-    'wedding/albums/'
-  )
-
-  const data = mapResourcesToPaths(pathNames, resources)
-  const pageIdx = data.findIndex((d) => d.path === id)
-  const finalIdx = data.length - 1
-
-  const pageData = data.filter((d) => d.path === id)[0]
-  const nextPageData = data.filter((_, idx) => {
-    return pageIdx === finalIdx
-      ? idx === 0
-      : idx === pageIdx + 1
-  })[0]
-  const prevPageData = data.filter((_, idx) => {
-    return pageIdx === 0
-      ? idx === finalIdx
-      : idx === pageIdx - 1
-  })[0]
-
-  return {
-    props: {
-      album: pageData,
-      next: nextPageData,
-      prev: prevPageData,
-    },
-  }
-}
 
 const WeddingAlbum = (props) => {
   const { album: alb, next: nxt, prev: prv } = props
@@ -207,3 +156,60 @@ const WeddingAlbum = (props) => {
 }
 
 export default WeddingAlbum
+
+
+
+
+// api
+export const getStaticPaths = async () => {
+  const { resources, next_cursor: nextCursor } =
+    await search({
+      expression: 'folder=wedding/albums/*',
+    })
+
+  const paths = genPathsFromResources(
+    resources,
+    'wedding/albums/'
+  ).map((alb) => ({ params: { id: alb } }))
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps = async (context) => {
+  const { id } = context.params
+  const { resources } = await search({
+    expression: `folder=wedding/albums/*`,
+  })
+
+  const pathNames = genPathsFromResources(
+    resources,
+    'wedding/albums/'
+  )
+
+  const data = mapResourcesToPaths(pathNames, resources)
+  const pageIdx = data.findIndex((d) => d.path === id)
+  const finalIdx = data.length - 1
+
+  const pageData = data.filter((d) => d.path === id)[0]
+  const nextPageData = data.filter((_, idx) => {
+    return pageIdx === finalIdx
+      ? idx === 0
+      : idx === pageIdx + 1
+  })[0]
+  const prevPageData = data.filter((_, idx) => {
+    return pageIdx === 0
+      ? idx === finalIdx
+      : idx === pageIdx - 1
+  })[0]
+
+  return {
+    props: {
+      album: pageData,
+      next: nextPageData,
+      prev: prevPageData,
+    },
+  }
+}

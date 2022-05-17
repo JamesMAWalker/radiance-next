@@ -10,6 +10,10 @@ export default function Document() {
         />
         <link
           rel='preconnect'
+          href='/fonts/FuturaPTLight.otf'
+        />
+        <link
+          rel='preconnect'
           href='https://fonts.gstatic.com'
           crossOrigin='true'
         />

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import Router, { useRouter } from 'next/router'
 import { useInView } from 'react-intersection-observer'
 import {
   AnimatePresence,
@@ -12,7 +13,7 @@ import {
   fadeUp,
   fadeFromRight,
 } from '../../animations/fade'
-import { smooth }  from '../../animations/transitions'
+import { smooth } from '../../animations/transitions'
 
 import {
   gallerySection,
@@ -33,6 +34,7 @@ export const Gallery = ({
   images: defaultImages,
   nextCursor: defaultNextCursor,
 }) => {
+  const router = useRouter()
   const [images, setImages] = useState(defaultImages)
   const [nextCursor, setNextCursor] = useState(
     defaultNextCursor
@@ -41,6 +43,11 @@ export const Gallery = ({
 
   const handleLoadMore = async (e) => {
     e.preventDefault()
+
+    // for some reason this prevents nextjs's unwanted scrollRestoration behavior
+    if (history) {
+      console.log('history: ', history.scrollRestoration)
+    }
 
     const results = await fetch('api/search', {
       method: 'POST',
@@ -86,8 +93,8 @@ export const Gallery = ({
     }
 
     const onMouse = (e) => {
-      if (!galleryInView) return;
-      
+      if (!galleryInView) return
+
       const { clientX, clientY } = e
       const mouseX =
         clientX - cursorRef?.current?.clientWidth

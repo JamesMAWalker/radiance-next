@@ -14,19 +14,20 @@ import { HeroImg } from '../../components/blocks/hero-img'
 import { Blurb } from '../../components/blocks/blurb'
 import { PortraitGrid } from '../../components/blocks/portrait-grid'
 
-import {
-  eventPage,
-} from '../../styles/event/event.module.scss'
-
-
+import { eventPage } from '../../styles/event/event.module.scss'
 
 const Event = ({ event: evt }) => {
-  
   const [images, setImages] = useState(evt.albumPhotoUrls)
-  const [nextCursor, setNextCursor] = useState(evt.nextCursor)
+  const [nextCursor, setNextCursor] = useState(
+    evt.nextCursor
+  )
 
   const handleLoadMorePhotos = async (e) => {
     e.preventDefault()
+    // for some reason this prevents nextjs's unwanted scrollRestoration behavior
+    if (history) {
+      console.log('history: ', history)
+    }
 
     const results = await fetch('../api/search', {
       method: 'POST',
@@ -41,7 +42,6 @@ const Event = ({ event: evt }) => {
       results
 
     const images = mapImageResources(resources)
-    
 
     setImages((prv) => {
       return [...prv, ...images]
@@ -89,8 +89,6 @@ const Event = ({ event: evt }) => {
 }
 
 export default Event
-
-
 
 // Page Generation
 

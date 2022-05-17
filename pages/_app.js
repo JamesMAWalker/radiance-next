@@ -61,6 +61,7 @@ export default function MyApp({
     setIsMobile(window.innerWidth < 1024)
   }, [])
 
+
   return (
     <FSPhotoProvider>
       <ContactProvider>

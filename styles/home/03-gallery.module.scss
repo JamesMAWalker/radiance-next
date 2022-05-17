@@ -88,8 +88,8 @@
   z-index: var(--level-top);
   mix-blend-mode: difference;
   position: fixed;
-  top: 15vh;
-  left: -15vh;
+  top: -10vh;
+  left: -20vh;
   opacity: 0;
   transition: var(--transition-primary);
   @media (max-width: 1024px) {
