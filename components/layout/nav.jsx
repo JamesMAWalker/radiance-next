@@ -24,7 +24,7 @@ import {
 
 const MenuLinkSet = ({ lnk }) => {
   return (
-    <Link href={`${lnk.path}`} key={lnk.name}>
+    <Link href={lnk.path} key={lnk.name}>
       <motion.a
         className={`${navLink}`}
         variants={fadeRight}
@@ -61,7 +61,7 @@ export const TopNav = ({
     } else {
       setShowColumnNav(false)
     }
-  }, [navInView])
+  }, [navInView, setShowColumnNav])
 
   // handle main menu
   const handleToggleMenuModal = () => {

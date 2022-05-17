@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 import { mainMenuLinks } from '../../lib/ancillary-data'
 
 import { slideDown } from '../../animations/slide'
-import { phases, punch, smooth } from '../../animations/transitions'
+import {
+  phases,
+  punch,
+  smooth,
+} from '../../animations/transitions'
 
 import {
   modal,
@@ -22,6 +26,7 @@ export const MenuModal = ({
   showModal,
   setShowMenuModal,
 }) => {
+  // esc key closes modal
   useEffect(() => {
     const close = (e) => {
       if (e.keyCode === 27) {
@@ -31,7 +36,7 @@ export const MenuModal = ({
     window.addEventListener('keydown', close)
     return () =>
       window.removeEventListener('keydown', close)
-  }, [showModal])
+  }, [showModal, setShowMenuModal])
 
   return (
     <motion.div
@@ -40,7 +45,6 @@ export const MenuModal = ({
       variants={slideDown}
       {...phases}
       transition={punch(0.8)}
-      // onClick={() => setShowMenuModal(false)}
     >
       <div
         className={closeBtn}
@@ -53,19 +57,21 @@ export const MenuModal = ({
         className={linksContainer}
         variants={fadeUp}
         {...phases}
-        transition={smooth(1.5, .8)}
+        transition={smooth(1.5, 0.8)}
         onClick={() => {
           setTimeout(() => {
             setShowMenuModal(false)
-          }, 300);
+          }, 300)
         }}
       >
         <ul className={primary}>
           {mainMenuLinks.primary.map((lnk) => {
             return (
-              <Link href={lnk.slug}>
-                <a key={lnk.name}>{lnk.name}</a>
-              </Link>
+              <Fragment key={lnk.name}>
+                <Link href={lnk.slug}>
+                  <a>{lnk.name}</a>
+                </Link>
+              </Fragment>
             )
           })}
         </ul>
@@ -73,9 +79,11 @@ export const MenuModal = ({
         <ul className={secondary}>
           {mainMenuLinks.secondary.map((lnk) => {
             return (
-              <Link href={lnk.slug}>
-                <a key={lnk.name}>{lnk.name}</a>
-              </Link>
+              <Fragment key={lnk.name}>
+                <Link href={lnk.slug}>
+                  <a>{lnk.name}</a>
+                </Link>
+              </Fragment>
             )
           })}
         </ul>
@@ -89,16 +97,10 @@ export const MenuModal = ({
           {' '}
           1643 Westwood Boulevard
         </a>
-        <a
-          href='mailto:info@radiancephotographystudio.com'
-        >
+        <a href='mailto:info@radiancephotographystudio.com'>
           info@radiancephotographystudio.com
         </a>
-        <a
-          href={`tel://+13102688222`}
-        >
-          310 . 268 . 8222
-        </a>
+        <a href={`tel://+13102688222`}>310 . 268 . 8222</a>
       </div>
     </motion.div>
   )

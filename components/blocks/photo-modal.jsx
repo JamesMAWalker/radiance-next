@@ -1,30 +1,39 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion';
-import FocusTrap from 'focus-trap-react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import FocusTrap from 'focus-trap-react'
 
 import { baseUrlPng } from '../../utils/baseUrl'
 import { FSPhotoContext } from '../../contexts/fsphoto-context'
 
-import { IconMark } from '../svg/iconmark';
+import { IconMark } from '../svg/iconmark'
 
-import { fadeIn } from '../../animations/fade';
+import { fadeIn } from '../../animations/fade'
 
 import {
   shade,
   modal,
   imgWrap,
   closeBtn,
-  loading
+  loading,
 } from '../../styles/blocks/photo-modal.module.scss'
 
 export const PhotoModal = () => {
-  const { photoModalOpen, setPhotoModalOpen, currentImgUrl, altTag } = useContext(FSPhotoContext)
+  const {
+    photoModalOpen,
+    setPhotoModalOpen,
+    currentImgUrl,
+    altTag,
+  } = useContext(FSPhotoContext)
   const [imgLoaded, setImgLoaded] = useState(false)
 
-  const handleCloseModal = () => { 
+  const handleCloseModal = useCallback(() => {
     setPhotoModalOpen(false)
     setImgLoaded(false)
-   }
+  }, [second])
 
   // stop scrolling when contact modal is open
   useEffect(() => {
@@ -45,9 +54,7 @@ export const PhotoModal = () => {
     window.addEventListener('keydown', close)
     return () =>
       window.removeEventListener('keydown', close)
-  }, [photoModalOpen, setPhotoModalOpen, handleCloseModal])
-
-
+  }, [handleCloseModal])
 
   return (
     <AnimatePresence>
@@ -62,9 +69,7 @@ export const PhotoModal = () => {
             transition={{ duration: 0.5 }}
           >
             <span className={closeBtn}>
-              <button
-                onClick={handleCloseModal}
-              >
+              <button onClick={handleCloseModal}>
                 &times;
               </button>
             </span>
@@ -79,7 +84,9 @@ export const PhotoModal = () => {
                   src={baseUrlPng(currentImgUrl, 'best')}
                   alt={altTag}
                   onLoad={() => setImgLoaded(true)}
-                  style={{ opacity: `${imgLoaded ? 1 : 0}` }}
+                  style={{
+                    opacity: `${imgLoaded ? 1 : 0}`,
+                  }}
                 />
               </div>
             </div>
