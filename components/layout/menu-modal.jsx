@@ -2,9 +2,12 @@ import React, { Fragment, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
+import { IconMark } from '../svg/iconmark'
+
 import { mainMenuLinks } from '../../lib/ancillary-data'
 
 import { slideDown } from '../../animations/slide'
+import { fadeUp } from '../../animations/fade'
 import {
   phases,
   punch,
@@ -13,6 +16,7 @@ import {
 
 import {
   modal,
+  logoBtn,
   closeBtn,
   linksContainer,
   divider,
@@ -20,7 +24,6 @@ import {
   secondary,
   menuFooter,
 } from '../../styles/layout/menu-modal.module.scss'
-import { fadeIn, fadeUp } from '../../animations/fade'
 
 export const MenuModal = ({
   showModal,
@@ -46,6 +49,11 @@ export const MenuModal = ({
       {...phases}
       transition={punch(0.8)}
     >
+      <Link href={'/'}>
+        <a className={logoBtn} onClick={() => setShowMenuModal(false)}>
+          <IconMark />
+        </a>
+      </Link>
       <div
         className={closeBtn}
         onClick={() => setShowMenuModal(false)}

@@ -24,7 +24,7 @@ import {
 
 const MenuLinkSet = ({ lnk }) => {
   return (
-    <Link href={lnk.path} key={lnk.name}>
+    <Link href={lnk.path} passHref key={lnk.name}>
       <motion.a
         className={`${navLink}`}
         variants={fadeRight}
