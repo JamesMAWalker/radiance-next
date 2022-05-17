@@ -1,4 +1,5 @@
 import React, {
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -33,7 +34,7 @@ export const PhotoModal = () => {
   const handleCloseModal = useCallback(() => {
     setPhotoModalOpen(false)
     setImgLoaded(false)
-  }, [second])
+  }, [setImgLoaded, setPhotoModalOpen])
 
   // stop scrolling when contact modal is open
   useEffect(() => {
