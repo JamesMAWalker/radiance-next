@@ -23,6 +23,7 @@
   width: 80%;
   background-color: var(--white);
   border-radius: var(--radius-sm);
+  border-bottom: 3px solid var(--text-color); 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +45,7 @@
     height: calc(100% + 8vh);
     width: calc(100% + 8vh);
     background-color: transparent;
-    border: 2px solid white;
+    // border: 2px solid white;
     // border-radius: var(--radius-sm);
   }
 }

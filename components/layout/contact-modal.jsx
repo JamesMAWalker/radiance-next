@@ -7,9 +7,13 @@ import FocusTrap from 'focus-trap-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { send } from 'emailjs-com'
 
-import { ContactContext } from '../../contexts/contact-context'
+import { LayoutContext } from '../../contexts/layout-context'
 import { fadeIn, fadeUp } from '../../animations/fade.js'
-import { smooth } from '../../animations/transitions'
+import {
+  phases,
+  punch,
+  smooth,
+} from '../../animations/transitions'
 
 import {
   shade,
@@ -26,13 +30,8 @@ import {
 } from '../../styles/layout/contact-modal.module.scss'
 
 export const ContactModal = () => {
-  const {
-    modalOpen,
-    setModalOpen,
-    eventQuestions,
-    studioQuestions,
-  } = useContext(ContactContext)
-  const [modalPageNum, setModalPageNum] = useState(0)
+  const { contactModalOpen, setContactModalOpen } =
+    useContext(LayoutContext)
   const [msgSubmitted, setMsgSubmitted] = useState(false)
 
   const [toSend, setToSend] = useState({
@@ -46,17 +45,17 @@ export const ContactModal = () => {
   useEffect(() => {
     const close = (e) => {
       if (e.keyCode === 27) {
-        setModalOpen(false)
+        setContactModalOpen(false)
         setMsgSubmitted(false)
       }
     }
     window.addEventListener('keydown', close)
     return () =>
       window.removeEventListener('keydown', close)
-  }, [modalOpen, setModalOpen])
+  }, [contactModalOpen, setContactModalOpen])
 
   const handleCloseModal = () => {
-    setModalOpen(false)
+    setContactModalOpen(false)
   }
 
   // Email form functions
@@ -71,7 +70,6 @@ export const ContactModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
 
     setMsgSubmitted(true)
     send(
@@ -99,23 +97,19 @@ export const ContactModal = () => {
 
   return (
     <AnimatePresence>
-      {modalOpen && (
-        <FocusTrap active={modalOpen}>
+      {contactModalOpen && (
+        <FocusTrap active={contactModalOpen}>
           <motion.div
             className={shade}
             variants={fadeIn}
-            initial='hidden'
-            animate='visible'
-            exit='hidden'
+            {...phases}
             transition={smooth(0.5)}
           >
             <motion.div
               className={modal}
               variants={fadeUp}
-              initial='hidden'
-              animate='visible'
-              exit='hidden'
-              transition={{ duration: 0.5, delay: 0.25 }}
+              {...phases}
+              transition={punch(1, 0.5)}
             >
               <div
                 className={closeBtn}
@@ -127,9 +121,7 @@ export const ContactModal = () => {
                 <motion.form
                   className={formStyle}
                   variants={fadeIn}
-                  initial='hidden'
-                  animate='visible'
-                  exit='hidden'
+                  {...phases}
                   transition={smooth(0.5)}
                 >
                   <h2 className={question}>
@@ -174,9 +166,7 @@ export const ContactModal = () => {
                 <motion.div
                   className={thanksMsg}
                   variants={fadeUp}
-                  initial='hidden'
-                  animate='visible'
-                  exit='hidden'
+                  {...phases}
                   transition={smooth(1)}
                 >
                   <h2>Thanks for your message!</h2>

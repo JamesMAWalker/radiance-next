@@ -9,13 +9,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Navigation } from '../components/layout/nav'
 import { Footer } from '../components/layout/footer'
 import {
-  ContactContext,
-  ContactProvider,
-} from '../contexts/contact-context'
-import {
-  FSPhotoContext,
-  FSPhotoProvider,
-} from '../contexts/fsphoto-context'
+  LayoutContext,
+  LayoutProvider,
+} from '../contexts/layout-context'
 
 import { layout } from '../styles/layout/layout.module.scss'
 import { ContactModal } from '../components/layout/contact-modal'
@@ -32,8 +28,6 @@ export default function MyApp({
 }) {
   const { asPath } = useRouter()
   const [isMobile, setIsMobile] = useState(false)
-  const { modalOpen } = useContext(ContactContext)
-  const { photoModalOpen } = useContext(FSPhotoContext)
 
   // check path and set theme color accordingly
   useEffect(() => {
@@ -63,8 +57,7 @@ export default function MyApp({
 
 
   return (
-    <FSPhotoProvider>
-      <ContactProvider>
+      <LayoutProvider>
         <AnimatePresence exitBeforeEnter>
           <Layout aniKey={router.route} isMobile={isMobile}>
             <Component {...pageProps} key={router.route} />
@@ -84,7 +77,6 @@ export default function MyApp({
             <Footer />
           </motion.div> */}
         </AnimatePresence>
-      </ContactProvider>
-    </FSPhotoProvider>
+      </LayoutProvider>
   )
 }

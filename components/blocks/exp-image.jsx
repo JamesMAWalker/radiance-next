@@ -5,7 +5,7 @@ import React, {
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-import { FSPhotoContext } from '../../contexts/fsphoto-context'
+import { LayoutContext } from '../../contexts/layout-context'
 
 import { fadeIn, fadeUp } from '../../animations/fade'
 import { smooth } from '../../animations/transitions'
@@ -28,7 +28,7 @@ export const ExpandableImage = ({
 }) => {
   
   const { setPhotoModalOpen, setCurrentImgUrl, setAltTag } =
-    useContext(FSPhotoContext)
+    useContext(LayoutContext)
   const [isLoaded, setIsLoaded] = useState(false)
   const [invalidSrc, setInvalidSrc] = useState(false)
 

@@ -41,12 +41,18 @@ export const Gallery = ({
   )
   const controls = useAnimation()
 
-  const handleLoadMore = async (e) => {
-    e.preventDefault()
-
+  useEffect(() => {
     // for some reason this prevents nextjs's unwanted scrollRestoration behavior
     if (history) {
-      console.log('history: ', history.scrollRestoration)
+      history.scrollRestoration = 'manual'
+    }
+  }, [])
+
+  const handleLoadMore = async (e) => {
+    e.preventDefault()
+    // for some reason this prevents nextjs's unwanted scrollRestoration behavior
+    if (history) {
+      history.scrollRestoration = 'manual'
     }
 
     const results = await fetch('api/search', {

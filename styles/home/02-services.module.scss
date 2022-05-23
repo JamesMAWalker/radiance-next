@@ -31,6 +31,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  background-color: var(--background);
+  isolation: isolate;
+  @include noiseBg(0);
   @media (max-width: 1024px) {
     border: none;
     width: var(--content-width);

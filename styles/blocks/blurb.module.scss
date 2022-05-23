@@ -1,13 +1,15 @@
 @import '../mixins';
 
 .blurb {
+  position: relative;
   margin: 0 var(--vp-xl);
   padding: var(--vp-xl) var(--vp-xl);
   padding-top: var(--vp-ms);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  background-color: var(--background);
+  @include noiseBg(1);
   @media (max-width: 1024px) {
     margin: 0;
   }

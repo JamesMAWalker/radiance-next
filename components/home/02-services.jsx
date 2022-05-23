@@ -1,6 +1,5 @@
 // 3rd party imports
 import React, {
-  useContext,
   useEffect,
   useState,
 } from 'react'
@@ -13,16 +12,14 @@ import {
 import Link from 'next/link'
 
 // Internal Utils and Data
-import { ContactContext } from '../../contexts/contact-context'
 import { baseUrlPng } from '../../utils/baseUrl'
-import { urlBuilder } from '../../lib/cloudinary'
+import { servicesList } from '../../lib/ancillary-data'
 
 // Components
 import { ArrowNav } from '../blocks/arrow-nav'
 
 // Animations
 import {
-  fadeHeight,
   fadeIn,
   fadeUp,
 } from '../../animations/fade.js'
@@ -35,13 +32,7 @@ import {
 import {
   serviceSection,
   servicesCol,
-  mobileServicesNav,
-  arrow,
-  indicatorBullets,
-  bullet,
-  activeBulletStyle,
   option,
-  active,
   info,
   infoContainer,
   title,
@@ -53,49 +44,7 @@ import {
   right,
 } from '../../styles/home/02-services.module.scss'
 
-const servicesList = [
-  {
-    title: 'Wedding',
-    path: '/wedding-albums',
-    photoUrls: [
-      'wedding-pair/wedding-left_hmlvo6',
-      'wedding-pair/wedding-right_yntqaz',
-    ],
-    blurb: (
-      <>
-        Let us help you curate and capture your special day.
-      </>
-    ),
-  },
-  {
-    title: 'Event',
-    path: 'events/event',
-    photoUrls: [
-      'event-pair/event-left_bpofcn',
-      'event-pair/event-right_izf8sw',
-    ],
-    blurb: (
-      <>
-        For those special days other than weddings that you
-        cherish all the same.
-      </>
-    ),
-  },
-  {
-    title: 'Studio',
-    path: 'studio',
-    photoUrls: [
-      'headshots-pair/Gallery_Image-2_da0mrv',
-      'headshots-pair/Gallery_Image-3_dztesw',
-    ],
-    blurb: (
-      <>
-        In house photography for professional headshots, as
-        well as family portraits.
-      </>
-    ),
-  },
-]
+
 
 const BinaryButton = ({ path }) => {
   return (
@@ -116,12 +65,13 @@ const BinaryButton = ({ path }) => {
   )
 }
 
+
+
 export const Services = () => {
   const [activeOption, setActiveOption] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [translatePosition, setTranslatePosition] =
     useState(activeOption)
-  const { setModalOpen } = useContext(ContactContext)
 
   const handleServiceNav = (crement) => {
     if ((activeOption <= 0) & (crement < 1)) return
@@ -151,7 +101,7 @@ export const Services = () => {
     // ...phases,
     // ...fadeIn
   }
-  console.log('layoutAniProps: ', layoutAniProps)
+  
 
   return (
     <motion.section
@@ -170,7 +120,6 @@ export const Services = () => {
               <motion.img
                 key={`img-L-0${idx}`}
                 variants={fadeIn}
-                initial='hidden'
                 animate='visible'
                 exit='hidden'
                 transition={smooth(0.5)}
@@ -214,9 +163,9 @@ export const Services = () => {
                   <motion.p
                     key={srvc.title}
                     className={info}
+                    variants={fadeIn}
                     layout
                     {...phases}
-                    variants={fadeIn}
                   >
                     {srvc.blurb}
                   </motion.p>

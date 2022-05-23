@@ -78,10 +78,10 @@ export const TopNav = ({
             ref={navRef}
           />
           {navInView ? (
-            <AnimatePresence exitBeforeEnter>
-              {pageLinks.slice(0, 4).map((lnk) => {
+            <AnimatePresence >
+              {pageLinks.slice(0, 4).map((lnk, idx) => {
                 return (
-                  <Fragment key={lnk.name}>
+                  <Fragment key={lnk.text}>
                     <MenuLinkSet lnk={lnk} />
                   </Fragment>
                 )
@@ -92,8 +92,9 @@ export const TopNav = ({
                 </a>
               </Link>
               {pageLinks.slice(4, 8).map((lnk, idx) => {
+                
                 return (
-                  <Fragment key={lnk.name}>
+                  <Fragment key={lnk.text}>
                     <MenuLinkSet lnk={lnk} />
                   </Fragment>
                 )

@@ -72,15 +72,13 @@ export const Layout = ({ children, aniKey, isMobile }) => {
         setShowMenuModal={setShowMenuModal}
         showMenuModal={showMenuModal}
       />
-      <AnimatePresence>
-        {showMenuModal && !isMobile && (
-          <MenuModal
-            showModal={showMenuModal}
-            setShowMenuModal={setShowMenuModal}
-          />
-        )}
-      </AnimatePresence>
+
       {children}
+
+      <MenuModal
+        showModal={showMenuModal}
+        setShowMenuModal={setShowMenuModal}
+      />
       <ContactModal />
       <PhotoModal />
       <Footer setShowColumnNav={setShowColumnNav} />

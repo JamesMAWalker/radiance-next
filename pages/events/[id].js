@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
 
-import { eventBlurbs } from '../../public/events'
+import { eventBlurbs } from '../../lib/ancillary-data';
 import {
   search,
   genPathsFromResources,
@@ -90,6 +90,8 @@ const Event = ({ event: evt }) => {
 
 export default Event
 
+
+z``
 // Page Generation
 
 export const getStaticPaths = async () => {

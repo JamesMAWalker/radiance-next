@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Blurb } from '../blocks/blurb'
 
-import { ContactContext } from '../../contexts/contact-context'
+import { LayoutContext } from '../../contexts/layout-context'
 
 const contactBlurb = {
   title: 'Inquiry',
@@ -20,7 +20,7 @@ const contactBlurb = {
 }
 
 export const Contact = () => {
-  const { setModalOpen } = useContext(ContactContext)
+  const { setContactModalOpen } = useContext(LayoutContext)
 
   return (
     <div id="contact">
@@ -29,7 +29,7 @@ export const Contact = () => {
         blurbText={contactBlurb.text}
         blurbBtn={contactBlurb.button}
         withBorder
-        btnAction={() => setModalOpen(true)}
+        btnAction={() => setContactModalOpen(true)}
       />
     </div>
   )

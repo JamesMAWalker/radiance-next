@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
 
 import { baseUrlPng } from '../../utils/baseUrl'
-import { FSPhotoContext } from '../../contexts/fsphoto-context'
+import { LayoutContext } from '../../contexts/layout-context'
 
 import { IconMark } from '../svg/iconmark'
 
@@ -28,7 +28,8 @@ export const PhotoModal = () => {
     setPhotoModalOpen,
     currentImgUrl,
     altTag,
-  } = useContext(FSPhotoContext)
+  } = useContext(LayoutContext)
+
   const [imgLoaded, setImgLoaded] = useState(false)
 
   const handleCloseModal = useCallback(() => {
