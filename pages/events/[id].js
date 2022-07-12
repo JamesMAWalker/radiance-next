@@ -91,7 +91,8 @@ const Event = ({ event: evt }) => {
 export default Event
 
 
-z``
+
+
 // Page Generation
 
 export const getStaticPaths = async () => {
