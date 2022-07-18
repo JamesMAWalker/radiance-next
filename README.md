@@ -1,4 +1,3 @@
-<h2></h2>
 <div align="center" style="height: 800px;">
   <img src="https://res.cloudinary.com/jameswalker-work/image/upload/v1658148438/Portfolio/logo__fl_tyobtt.png" alt='radiance photography logo'>
   <h2></h2>
