@@ -3,7 +3,7 @@
   <h2></h2>
 </div>
 
-## Radiance Photography Studio
+# Radiance Photography Studio
 
 Portfolio/Booking application built for Radiance Photography in Los Angeles, CA. The site leverages Cloudinary's image API as its primary function. Using a system of tags and folders, Cloudinary is effectively used as a CMS through which less tech oriented users can make changes and additions to the photo content of the site.
 
