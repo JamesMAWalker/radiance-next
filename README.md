@@ -1,9 +1,11 @@
-<pre align="center" height='100px'>
- 
-
+<div align="center" >
+<br>
+<br>
 <img src="https://res.cloudinary.com/jameswalker-work/image/upload/v1658148438/Portfolio/logo__fl_tyobtt.png" alt='radiance photography logo'>
-
-</pre>
+<br>
+<br>
+<br>
+</div>
 
 # Radiance Photography Studio
 
