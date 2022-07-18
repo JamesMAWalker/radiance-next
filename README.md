@@ -1,4 +1,6 @@
-<img src="https://res.cloudinary.com/jameswalker-work/image/upload/v1658148438/Portfolio/logo__fl_tyobtt.png" alt='radiance photography logo'>
+<div style="display:flex; justify-content:center; align-items:center">
+  <img src="https://res.cloudinary.com/jameswalker-work/image/upload/v1658148438/Portfolio/logo__fl_tyobtt.png" alt='radiance photography logo'>
+</div>
 
 ## Radiance Photography Studio
 
