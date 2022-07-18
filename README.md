@@ -1,4 +1,4 @@
-<div align="center" style="width:100%; display:flex; justify-content:center; align-items:center">
+<div align="center" style="width:100%; padding: 5rem; display:flex; justify-content:center; align-items:center">
   <img src="https://res.cloudinary.com/jameswalker-work/image/upload/v1658148438/Portfolio/logo__fl_tyobtt.png" alt='radiance photography logo'>
 </div>
 
