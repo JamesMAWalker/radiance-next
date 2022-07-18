@@ -1,4 +1,4 @@
-<div align="center" padding="5rem">
+<div align="center" height="600px">
   <img src="https://res.cloudinary.com/jameswalker-work/image/upload/v1658148438/Portfolio/logo__fl_tyobtt.png" alt='radiance photography logo'>
 </div>
 
